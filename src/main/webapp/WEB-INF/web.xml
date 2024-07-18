@@ -9,4 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ManagementController</display-name>
+    <servlet-name>ManagementController</servlet-name>
+    <servlet-class>university.green.staff.controller.ManagementController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagementController</servlet-name>
+    <url-pattern>/ManagementController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradeController</display-name>
+    <servlet-name>GradeController</servlet-name>
+    <servlet-class>university.green.student.controller.GradeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradeController</servlet-name>
+    <url-pattern>/GradeController</url-pattern>
+  </servlet-mapping>
 </web-app>
