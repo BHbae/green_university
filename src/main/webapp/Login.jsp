@@ -36,7 +36,7 @@ input[type=number] {
 		<div class="main--logo">
 			<a href="#"><img class="logo" alt="" src="resources/ima/logo.png"></a>
 		</div>
-		<form action="/login" method="post" class="main--container">
+		<form action="${pageContext.request.contextPath}/user/login" method="post" class="main--container">
 		<div class="login--container">
 		<div class="id--container">
 		<div class="login--id">

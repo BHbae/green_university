@@ -1,9 +1,5 @@
 package university.green.student.repository;
 
-<<<<<<< HEAD
-public interface StudentRepository {
-
-=======
 import java.util.List;
 
 import university.green.student.model.StudentDTO;
@@ -22,5 +18,4 @@ public interface StudentRepository {
 	void updateStudent(StudentDTO studentDTO);
 	// 학생 - 정보 삭제
 	void deleteStudent(int id, int principalId);
->>>>>>> b0e7350265a04c19bedf044ab27f2db7e1711e15
 }

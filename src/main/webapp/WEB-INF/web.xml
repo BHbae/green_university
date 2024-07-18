@@ -11,7 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>User</display-name>
     <servlet-name>User</servlet-name>
     <servlet-class>university.green.User</servlet-class>
@@ -19,24 +18,5 @@
   <servlet-mapping>
     <servlet-name>User</servlet-name>
     <url-pattern>/User</url-pattern>
-=======
-    <display-name>ManagementController</display-name>
-    <servlet-name>ManagementController</servlet-name>
-    <servlet-class>university.green.staff.controller.ManagementController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ManagementController</servlet-name>
-    <url-pattern>/ManagementController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GradeController</display-name>
-    <servlet-name>GradeController</servlet-name>
-    <servlet-class>university.green.student.controller.GradeController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GradeController</servlet-name>
-    <url-pattern>/GradeController</url-pattern>
->>>>>>> b0e7350265a04c19bedf044ab27f2db7e1711e15
   </servlet-mapping>
 </web-app>

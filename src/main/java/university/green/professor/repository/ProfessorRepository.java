@@ -1,15 +1,9 @@
 package university.green.professor.repository;
 
-<<<<<<< HEAD
-import university.green.LoginDto;
-
-public interface ProfessorRepository {
-	int userId(LoginDto professorId);
-
-=======
 import java.util.List;
 
-import university.green.staff.model.StaffDTO.ProfessorDTO;
+import university.green.professor.model.ProfessorDTO;
+
 
 public interface ProfessorRepository {
 	// 교수 추가
@@ -24,5 +18,4 @@ public interface ProfessorRepository {
 	void updateProfessor(ProfessorDTO professorDTO);
 	// 교수 - 정보 삭제
 	void deleteProfessor(int id,int principalId);
->>>>>>> b0e7350265a04c19bedf044ab27f2db7e1711e15
 }

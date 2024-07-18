@@ -1,9 +1,8 @@
 package university.green.staff.model;
 
-<<<<<<< HEAD
-public class StaffDTO {
 
-=======
+
+
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +18,9 @@ import lombok.ToString;
 @ToString
 @Builder
 @AllArgsConstructor
-public class StaffDTO {
+@NoArgsConstructor
 
-	public class ProfessorDTO {
+	public class StaffDTO {
 		private int id;
 		private String name;
 		private Date birth_date;
@@ -32,5 +31,3 @@ public class StaffDTO {
 		private Date hire_date;
 	}
 
->>>>>>> b0e7350265a04c19bedf044ab27f2db7e1711e15
-}

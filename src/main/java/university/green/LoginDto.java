@@ -16,6 +16,6 @@ public class LoginDto {
 	
 	private Integer id;
 	private String password;
-	private String rememberId;
+	private String user_role;
 	
 }
