@@ -7,7 +7,7 @@
 <title>Login</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Login.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Login.css">
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
@@ -34,7 +34,7 @@ input[type=number] {
 <body>
 	<div class="login--div">
 		<div class="main--logo">
-			<a href="#"><img class="logo" alt="" src="images/logo.png"></a>
+			<a href="#"><img class="logo" alt="" src="resources/ima/logo.png"></a>
 		</div>
 		<form action="/login" method="post" class="main--container">
 		<div class="login--container">
