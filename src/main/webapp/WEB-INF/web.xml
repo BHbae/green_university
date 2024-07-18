@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>SugangController</display-name>
+    <servlet-name>SugangController</servlet-name>
+    <servlet-class>university.green.student.controller.SugangController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SugangController</servlet-name>
+    <url-pattern>/SugangController</url-pattern>
+  </servlet-mapping>
 </web-app>
