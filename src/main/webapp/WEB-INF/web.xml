@@ -11,6 +11,7 @@
   </welcome-file-list>
   <servlet>
     <description></description>
+<<<<<<< HEAD
     <display-name>SugangController</display-name>
     <servlet-name>SugangController</servlet-name>
     <servlet-class>university.green.student.controller.SugangController</servlet-class>
@@ -18,5 +19,14 @@
   <servlet-mapping>
     <servlet-name>SugangController</servlet-name>
     <url-pattern>/SugangController</url-pattern>
+=======
+    <display-name>User</display-name>
+    <servlet-name>User</servlet-name>
+    <servlet-class>university.green.User</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>User</servlet-name>
+    <url-pattern>/User</url-pattern>
+>>>>>>> main
   </servlet-mapping>
 </web-app>

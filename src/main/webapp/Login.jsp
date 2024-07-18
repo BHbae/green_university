@@ -36,7 +36,7 @@ input[type=number] {
 		<div class="main--logo">
 			<a href="#"><img class="logo" alt="" src="resources/ima/logo.png"></a>
 		</div>
-		<form action="/login" method="post" class="main--container">
+		<form action="${pageContext.request.contextPath}/user/login" method="post" class="main--container">
 		<div class="login--container">
 		<div class="id--container">
 		<div class="login--id">
@@ -67,6 +67,7 @@ input[type=number] {
 		<div>
 			<input type="submit" value="로그인" id="input--submit">
 		</div>
+		
 			<ul class="login--info">
 				<li><a href="/find/id"
 					onclick="window.open(this.href, '_blank', 'width=500, height=300'); return false;">
