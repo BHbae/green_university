@@ -7,20 +7,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@ToString
-public class ProfessorDTO {
 
-	private Integer id;
+// 교수 DTO
+
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ProfessorDTO {
+	private int id;
 	private String name;
-	private Date birthDate;
+	private Date birth_date;
 	private String gender;
 	private String address;
 	private String tel;
 	private String email;
 	private Integer deptId;
 	private Date hireDate;
+	private int dept_int;
+	private Date hire_date;
 }
