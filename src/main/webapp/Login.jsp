@@ -67,6 +67,7 @@ input[type=number] {
 		<div>
 			<input type="submit" value="로그인" id="input--submit">
 		</div>
+		
 			<ul class="login--info">
 				<li><a href="/find/id"
 					onclick="window.open(this.href, '_blank', 'width=500, height=300'); return false;">
