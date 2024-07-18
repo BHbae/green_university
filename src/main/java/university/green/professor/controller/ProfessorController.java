@@ -1,5 +1,5 @@
 package university.green.professor.controller;
 
-public class test {
+public class ProfessorController {
 
 }

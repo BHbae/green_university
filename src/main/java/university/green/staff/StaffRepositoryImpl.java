@@ -1,5 +1,5 @@
 package university.green.staff;
 
-public class test {
+public class StaffRepositoryImpl {
 
 }

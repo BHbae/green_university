@@ -1,5 +1,5 @@
 package university.green.student.repository;
 
-public class test {
+public interface StudentRepository {
 
 }
