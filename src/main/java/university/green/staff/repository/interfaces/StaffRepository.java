@@ -1,4 +1,4 @@
-package university.green.staff.repository;
+package university.green.staff.repository.interfaces;
 
 import university.green.staff.model.StaffDTO;
 
