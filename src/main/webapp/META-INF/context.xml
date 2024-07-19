@@ -13,6 +13,8 @@
 		maxLifetime="1800000"
 		jdbcUrl="jdbc:mysql://192.168.0.129:3306/universitydb?serverTimezone=Asia/Seoul"
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		username="user4"
+		username="user3"
 		password="0000"/>
+
 </Context>
+
