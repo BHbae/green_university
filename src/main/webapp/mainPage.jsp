@@ -3,14 +3,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
 <html>
-<!-- head 부분 따로 include 만들어서 학생 스탭한테 넣어줘야함  -->
+<!-- header 부분 따로 include 만들어서 학생 스탭한테 넣어줘야함  -->
 <head>
 <meta charset="UTF-8">
 <title>그린대학교 학사관리시스템</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <style>
 </style>
-<!--  -->
 </head>
 <body>
 	<header class="d-flex flex-column">
@@ -20,30 +19,22 @@
 				<li>김근호님 (23000001)
 				<li style="margin: 0 15px;">
 				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined"><i class="material-icons">logout</i></span>
-				<li><a href="/logout">로그아웃</a>
+				<li><a href="login.jsp">로그아웃</a>
 			</ul>
 		</div>
 
 		<nav class="main--menu">
 			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
-			<!-- userRole에 따라 메뉴 다르게 표시 -->
-			
-				
-
-				
+			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
 						<li><a href="/">홈</a>
 						<li><a href="/info/professor">MY</a>
 						<li><a href="/subject/list/1">수업</a>
 						<li><a href="/notice">학사정보</a>
 					</ul>
-				
-
-				
-			
-
 		</nav>
 	</header>
+<!--  -->
 	
 	
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
