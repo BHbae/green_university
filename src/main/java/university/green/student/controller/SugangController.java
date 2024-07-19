@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	// cyj
 	
     public SugangController() {
         super();
