@@ -18,9 +18,5 @@
   <servlet-mapping>
     <servlet-name>User</servlet-name>
     <url-pattern>/User</url-pattern>
-<<<<<<< HEAD
-=======
-
->>>>>>> main
   </servlet-mapping>
 </web-app>
