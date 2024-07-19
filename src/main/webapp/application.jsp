@@ -42,20 +42,20 @@
 				<form action="/sugang/application/search" method="get">
 					<div>
 						<!-- 강의구분 콤보박스 -->
-						<label for="type">강의구분</label> <select name="type" id="type">
+						<label for="majorType">강의구분</label> <select name="majorType" id="majorType">
 							<option value="전체">전체</option>
 							<option value="전공">전공</option>
 							<option value="교양">교양</option>
 						</select>
 						<!-- 대상학과 콤보박스 -->
-						<label for="deptId">개설학과</label> <select name="deptId" id="deptId">
+						<label for="department">개설학과</label> <select name="department" id="department">
 							<option value="-1">전체</option>
-							<c:forEach var="dept" items="${deptList}">
+							<c:forEach var="department" items="${deptList}">
 								<option value="${dept.id}">${dept.name}</option>
 							</c:forEach>
 						</select>
 						<!-- 강의 검색 -->
-						<label for="subName">강의명</label> <input type="text" name="name" list="subName">
+						<label for="subjectName">강의명</label> <input type="text" name="name" list="subName">
 						<datalist id="subName">
 							<c:forEach var="subName" items="${subNameList}">
 								<option value="${subName}">

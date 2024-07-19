@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import university.green.student.SugangRepositoryImpl;
 import university.green.student.repository.SugangRepository;
-@WebServlet ("/Sugang/*")
+@WebServlet ("/sugang/*")
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SugangRepository sugangRepository;
@@ -25,7 +25,7 @@ public class SugangController extends HttpServlet {
 		String action = request.getPathInfo();
 		
 		switch (action) {
-		case "/sugangInfo":
+		case "/search":
 			SearchSugangBoard(request, response);
 			break;
 
