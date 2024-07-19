@@ -19,7 +19,7 @@
 				<li>김근호님 (23000001)
 				<li style="margin: 0 15px;">
 				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined"><i class="material-icons">logout</i></span>
-				<li><a href="login.jsp">로그아웃</a>
+				<li><a href="/green/Login.jsp">로그아웃</a>
 			</ul>
 		</div>
 
