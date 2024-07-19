@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>green_university</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -11,7 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>User</display-name>
     <servlet-name>User</servlet-name>
     <servlet-class>university.green.User</servlet-class>
@@ -19,14 +18,6 @@
   <servlet-mapping>
     <servlet-name>User</servlet-name>
     <url-pattern>/User</url-pattern>
-=======
-    <display-name>NoticeController</display-name>
-    <servlet-name>NoticeController</servlet-name>
-    <servlet-class>university.green.staff.controller.NoticeController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NoticeController</servlet-name>
-    <url-pattern>/NoticeController</url-pattern>
->>>>>>> kim
+
   </servlet-mapping>
 </web-app>
