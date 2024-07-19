@@ -3,20 +3,46 @@ package university.green.student.controller;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
+import university.green.student.SugangRepositoryImpl;
+import university.green.student.repository.SugangRepository;
+@WebServlet ("/Sugang/*")
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private SugangRepository sugangRepository;
 	
-	
-    public SugangController() {
-        super();
+    @Override
+    public void init() throws ServletException {
+    	sugangRepository = new SugangRepositoryImpl();
+    	
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getPathInfo();
+		
+		switch (action) {
+		case "/sugangInfo":
+			SearchSugangBoard(request, response);
+			break;
+
+		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			break;
+		}
+		
+	}
 	
+	/**
+	 * 수강신청 조회 기능
+	 * @param request
+	 * @param response
+	 */
+	private void SearchSugangBoard(HttpServletRequest request, HttpServletResponse response) {
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
