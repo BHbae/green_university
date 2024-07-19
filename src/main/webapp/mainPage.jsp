@@ -35,14 +35,7 @@
 		</nav>
 	</header>
 <!--  -->
-	
-	
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
-
-<script>
-	
-</script>
-
 </head>
 <body>
 
