@@ -1,24 +1,20 @@
 package university.green.staff.model;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-//학사정보DTO
+// 등록 -> 학과 DTO
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @ToString
-public class Notice {
+@Builder
+public class Department_tb {
 	private int id;
-	private String category;
-	private String title;
-	private String content;
-	private Timestamp creatdTime;
-	private int views;
+	private String name;
+	private int collegeId;
+
 }

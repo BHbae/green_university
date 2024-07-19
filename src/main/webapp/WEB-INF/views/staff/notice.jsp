@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 페이지</title>
+<title>공지사항</title>
 </head>
 <body>
+
+	
 	
 		<h1>공지사항</h1>
 		<div class="split--div"></div>
@@ -17,6 +19,8 @@
 
 
 		<!-- 공지 조회 -->
+		
+
 		
 			<form action="/notice/search" method="get" class="form--container">
 				<select class="input--box" name="type">
@@ -68,7 +72,7 @@
 								<td>[학사]</td>
 								<td>2023학년도 1학기 학생예비군 전입 신고 안내</td>
 								<td>2024-07-18 14:14:25</td>
-								<td>3</td>
+								<td></td>
 							</tr>
 						
 					

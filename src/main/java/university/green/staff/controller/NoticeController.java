@@ -5,11 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import university.green.staff.repository.NoticeRepository;
 import university.green.staff.repository.NoticeRepositoryImpl;
 
 import java.io.IOException;
 
+// URL 매핑 수정
 @WebServlet("/notice/*")
 public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +26,19 @@ public class NoticeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String action = request.getPathInfo();
+		HttpSession session = request.getSession(false);
+		
+		switch (action) {
+		case "":
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
 	}
 
 
