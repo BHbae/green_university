@@ -6,9 +6,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 </style>
 </head>
@@ -18,14 +15,14 @@
 			<ul>
 				<li class="material--li"><span class="material-symbols-outlined">account_circle</span>
 				<li>김근호님 (23000001)
-				<li style="margin: 0 15px;">ㅣ
+				<li style="margin: 0 15px;">
 				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined">logout</span>
 				<li><a href="/logout">로그아웃</a>
 			</ul>
 		</div>
 
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="/images/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			
 				
@@ -58,7 +55,7 @@
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 
 	<div>
-		<img alt="" src="/images/main_photo.jpg" class="main--page--img">
+		<img alt="" src="/ima/main_photo.jpg" class="main--page--img">
 		<div class="d-flex justify-content-center align-items-start">
 			<div class="main--page--div">
 				<div class="d-flex">
@@ -179,7 +176,7 @@
 </div>
 
   		<footer>
-			COPYRIGHT(C) 2023 <a href="https://github.com/seoyounglee0105/university_management_project">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
+			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>
 
 </div>
