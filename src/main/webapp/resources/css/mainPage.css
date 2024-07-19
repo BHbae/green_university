@@ -25,6 +25,24 @@
 	font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 40 !important;
 }
 
+.d-flex {
+    display: flex;
+    border-collapse: collapse;
+    
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-start {
+    align-items: flex-start;
+}
+
 .main--page--notice {
 	margin-right: 120px;
 }
@@ -35,7 +53,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .main--page--notice tr td a {
@@ -66,6 +84,14 @@
 .main--page--div h3 a {
 	font-weight: 600;
 	color: #132A50;
+}
+
+h3{
+	font-size: 1.75rem;
+	line-height: 1.2;
+	margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .main--page--profile {
