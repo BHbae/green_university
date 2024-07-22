@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 교직원 - 학생 등록 페이지 -->
-<title>직원 등록</title>
+<title>교수 등록</title>
 </head>
 <body>
-	<h1>직원 등록</h1>
-		<form class="register-student-from" action="${pageContext.request.contextPath}/management/registerStaff" method="POST">
+<h1>교수 등록</h1>
+		<form class="register-student-from" action="${pageContext.request.contextPath}/management/registerProfessor" method="POST">
 			<label for="student-name">이름</label>
 			<input type="text" id="student-name" name="student-name" value=""><br>
 			
@@ -27,6 +26,9 @@
 			
 			<label for="student-email">이메일</label>
 			<input type="text" id="student-email" name="student-email" value=""><br>
+			
+			<label for="student-dept-id">과 ID</label>
+			<input type="text" id="student-dept-id" name="student-dept-id" value=""><br>
 			
 			<input type="submit" value="입력" class="submit-btn">
 		</form>

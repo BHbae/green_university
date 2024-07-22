@@ -28,9 +28,6 @@
 			<label for="student-email">이메일</label>
 			<input type="text" id="student-email" name="student-email" value="">
 			
-			<label for="student-dept-id">과 ID</label>
-			<input type="text" id="student-dept-id" name="student-dept-id" value="">
-			
 			<input type="submit" value="입력" class="submit-btn">
 		</form>
 </body>

@@ -70,27 +70,28 @@ public class ManagementController extends HttpServlet {
 			selectAllProfessor(request,response,session);
 			break;
 		}
-		case "/registerSt": {
+		case "/registerStudent": {
+			request.getRequestDispatcher("/WEB-INF/views/staff/registerStudent.jsp").forward(request, response);
 			break;
 		}
-		case "/registerPr": {
-			// TODO - 교수 등록 기능 만들기
+		case "/registerProfessor": {
+			request.getRequestDispatcher("/WEB-INF/views/staff/registerProfessor.jsp").forward(request, response);
 			break;
 		}
-		case "/registerSf": {
-			// TODO - 교직원 등록 기능 만들기
+		case "/registerStaff": {
+			request.getRequestDispatcher("/WEB-INF/views/staff/registerStaff.jsp").forward(request, response);
 			break;
 		}
 		case "/sendBill": {
-			// TODO - 등록금 고지서 발송
+			request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
 			break;
 		}
 		case "/absence": {
-			// TODO - 휴학 처리 
+			request.getRequestDispatcher("/WEB-INF/views/staff/breakApp.jsp").forward(request, response);
 			break;
 		}
 		case "/setPeriod": {
-			// TODO - 수강 신청 기간 설정
+			request.getRequestDispatcher("/WEB-INF/views/staff/setStuSubPeriod.jsp").forward(request, response);
 			break;
 		}
 		default: {
