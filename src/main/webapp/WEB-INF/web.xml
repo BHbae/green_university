@@ -11,12 +11,12 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>NoticeController</display-name>
-    <servlet-name>NoticeController</servlet-name>
-    <servlet-class>university.green.staff.controller.NoticeController</servlet-class>
+    <display-name>User</display-name>
+    <servlet-name>User</servlet-name>
+    <servlet-class>university.green.User</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NoticeController</servlet-name>
-    <url-pattern>/NoticeController</url-pattern>
+    <servlet-name>User</servlet-name>
+    <url-pattern>/User</url-pattern>
   </servlet-mapping>
 </web-app>
