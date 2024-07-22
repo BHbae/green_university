@@ -10,6 +10,7 @@
 <body>
 	<h1>학생 명단 조회</h1>
 	
+	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
 	<form action="" method="GET">
 		<label for="dept_id">학과 번호</label>
@@ -38,7 +39,7 @@
 				<tr>
 					<td><c:out value="${studentDTO.id}"/></td>
 					<td><c:out value="${studentDTO.name}"/></td>
-					<td><c:out value="{studentDTO.birth_date}"/></td>
+					<td><c:out value="${studentDTO.birth_date}"/></td>
 					<td><c:out value="${studentDTO.gender}"/></td>
 					<td><c:out value="${studentDTO.address}"/></td>
 					<td><c:out value="${studentDTO.tel}"/></td>

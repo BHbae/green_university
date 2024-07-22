@@ -1,8 +1,8 @@
-package university.green.professor.repository;
+package university.green.professor.repositoryinterfaces;
 
 import java.util.List;
 
-import university.green.staff.model.StaffDTO.ProfessorDTO;
+import university.green.professor.model.ProfessorDTO;
 
 public interface ProfessorRepository {
 	// 교수 추가
