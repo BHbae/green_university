@@ -13,12 +13,19 @@ import university.green.student.repository.SugangRepository;
 @WebServlet ("/sugang/*")
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
 	private SugangRepository sugangRepository;
 	
     @Override
     public void init() throws ServletException {
     	sugangRepository = new SugangRepositoryImpl();
     	
+=======
+	// cyj
+	
+    public SugangController() {
+        super();
+>>>>>>> main
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
