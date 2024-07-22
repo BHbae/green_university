@@ -14,12 +14,13 @@ import lombok.ToString;
 @Builder
 @ToString
 public class SugangDTO {
+	private int id; // pk
 	private String college; //단과 대학
 	private String department; // 개설학과
 	private String majorType; // 강의구분
 	private int departNum;	// 학수번호 
 	private String subjectName;	// 강의명
-	private String professorNmae;	// 담당교수 
+	private String professorName;	// 담당교수 
 	private int grades;	// 이수학점
 	
 	private String subjectDay; // 요일 시간
