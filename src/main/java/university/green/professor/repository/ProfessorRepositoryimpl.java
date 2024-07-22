@@ -2,6 +2,8 @@ package university.green.professor.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import university.green.professor.model.ProfessorDTO;
@@ -17,12 +19,22 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
 			try (PreparedStatement pstmt=conn.prepareStatement(ADD_PROFESSOR)){
-				
+				pstmt.setString(1, professorDTO.getName());
+				pstmt.setDate(2,professorDTO.getBirth_date());
+				pstmt.setString(3, professorDTO.getGender());
+				pstmt.setString(4,professorDTO.getAddress());
+				pstmt.setString(5,professorDTO.getTel());
+				pstmt.setString(6, professorDTO.getEmail());
+				pstmt.setInt(7, professorDTO.getDept_id());
+				pstmt.setDate(8, professorDTO.getHire_date());
+				pstmt.executeUpdate();
+				conn.commit();
 			} catch (Exception e) {
-				// TODO: handle exception
+				conn.rollback();
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -40,8 +52,23 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 
 	@Override
 	public List<ProfessorDTO> getAllProfessor() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProfessorDTO> professorList=new ArrayList<>();
+		final String SELECT_ALL_PROFESSOR=" SELECT * FROM professor_tb ORDER BY id limit ? offset ?";
+		try (Connection conn=DBUtil.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(SELECT_ALL_PROFESSOR)){
+			pstmt.setInt(1,10);
+			pstmt.setInt(2, 5);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ProfessorDTO professor=ProfessorDTO.builder().name(rs.getString("name")).birth_date(rs.getDate("Birth_date"))
+						.gender(rs.getString("gender")).address(rs.getString("address")).tel(rs.getString("tel"))
+						.email(rs.getString("email")).dept_id(rs.getInt("dept_id")).hire_date(rs.getDate("hire_date")).build();
+				professorList.add(professor);
+			}
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+		return professorList;
 	}
 
 	@Override

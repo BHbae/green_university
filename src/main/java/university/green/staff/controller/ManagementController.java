@@ -2,6 +2,9 @@ package university.green.staff.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpSession;
+import university.green.professor.model.ProfessorDTO;
+import university.green.professor.repository.ProfessorRepositoryimpl;
+import university.green.professor.repositoryinterfaces.ProfessorRepository;
 import university.green.staff.repository.BreakAppRepositoryImpl;
 import university.green.staff.repository.StaffRepositoryImpl;
 import university.green.staff.repository.StuSubRepositoryImpl;
@@ -18,6 +21,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +33,7 @@ public class ManagementController extends HttpServlet {
 	// TODO - 사용할 DAO 생성하기
 	private BreakAppRepository breakAppRepository; // 휴학처리 인터페이스
 	private StaffRepository staffRepository; // 교직원 인터페이스
+	private ProfessorRepository professorRepository; // 교수 인터페이스
 	private StudentRepository studentRepository; // 학생 인터페이스
 	private StuSubRepository stuSubRepository; // 수강신청기간 인터페이스
 	private TuitionRepository tuitionRepository; // 등록금 고지서 인터페이스
@@ -39,6 +44,7 @@ public class ManagementController extends HttpServlet {
         // TODO - 사용할 DAO 초기화 처리 
         breakAppRepository=new BreakAppRepositoryImpl();
         staffRepository=new StaffRepositoryImpl();
+        professorRepository=new ProfessorRepositoryimpl();
         studentRepository=new StudentRepositoryImpl();
         stuSubRepository=new StuSubRepositoryImpl();
         tuitionRepository=new TuitionRepositoryImpl();
@@ -61,11 +67,10 @@ public class ManagementController extends HttpServlet {
 			break;
 		}
 		case "/selectProfessor": {
-			// TODO - 교수 명단 조회 기능 만들기
+			selectAllProfessor(request,response,session);
 			break;
 		}
 		case "/registerSt": {
-			// TODO - 학생 등록 기능 만들기
 			break;
 		}
 		case "/registerPr": {
@@ -91,6 +96,36 @@ public class ManagementController extends HttpServlet {
 		default: {
 			break;
 		}}
+	}
+
+	private void selectAllProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		int page=1;
+		int pageSize=20;
+		
+		try {
+			String pageStr=request.getParameter("page");
+			if(pageStr!=null) {
+				page=Integer.parseInt(pageStr);
+			}
+		} catch (Exception e) {
+			page=1;
+			e.printStackTrace();
+		}
+		
+		int offset=(page-1)*pageSize;
+		List<ProfessorDTO> professorList=professorRepository.getAllProfessor();
+		System.out.println(professorList);
+		
+		// 전체 학생 수 조회
+		int totalStudentNumber=professorList.size();
+		//총 페이지 수 계산
+		int totalPages=(int)Math.ceil((double)totalStudentNumber/pageSize);
+		
+		request.setAttribute("professorList", professorList);
+		request.setAttribute("totalProfessorNumber", totalStudentNumber);
+		request.setAttribute("currentPage", page);
+		
+		request.getRequestDispatcher("/WEB-INF/views/staff/selectProfessor.jsp").forward(request, response);
 	}
 
 	/**
@@ -131,7 +166,8 @@ public class ManagementController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action=request.getPathInfo();
+		String action=request.getPathInfo(); // 페이지 처리
+		HttpSession session=request.getSession(); // 세션 받아오기
 		
 		switch (action) {
 		case "/selectStudent": {
@@ -143,7 +179,7 @@ public class ManagementController extends HttpServlet {
 			break;
 		}
 		case "/registerSt": {
-			// TODO - 학생 등록 기능 만들기
+			regiterStudent(request,response,session);
 			break;
 		}
 		case "/registerPr": {
@@ -169,6 +205,11 @@ public class ManagementController extends HttpServlet {
 		default:
 			break;
 		}
+	}
+
+	private void regiterStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

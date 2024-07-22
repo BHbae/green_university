@@ -23,6 +23,6 @@ public class ProfessorDTO {
 	private String address;
 	private String tel;
 	private String email;
-	private int dept_int;
+	private int dept_id;
 	private Date hire_date;
 }
