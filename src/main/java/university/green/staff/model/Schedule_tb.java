@@ -1,6 +1,6 @@
 package university.green.staff.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-//학사정보DTO
+// 학사일정(직원?)
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @ToString
-public class Notice {
+@Builder
+public class Schedule_tb {
+
 	private int id;
-	private String category;
-	private String title;
-	private String content;
-	private Timestamp creatdTime;
-	private int views;
+	private int staffId;
+	private Date startDay;
+	private Date endDay;
+	private String information;
+	
+	
 }
