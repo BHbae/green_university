@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-//학사정보 - 공지사항
-
+//학사정보DTO
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

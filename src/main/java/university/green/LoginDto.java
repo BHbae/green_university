@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class LoginDto {
 	
-	private Integer id;
+	private int id;
 	private String password;
 	private String user_role;
 	

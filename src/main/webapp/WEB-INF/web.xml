@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>green_university</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -12,6 +12,9 @@
   <servlet>
     <description></description>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dev1
     <display-name>User</display-name>
     <servlet-name>User</servlet-name>
     <servlet-class>university.green.User</servlet-class>
@@ -19,6 +22,7 @@
   <servlet-mapping>
     <servlet-name>User</servlet-name>
     <url-pattern>/User</url-pattern>
+<<<<<<< HEAD
 =======
     <display-name>NoticeController</display-name>
     <servlet-name>NoticeController</servlet-name>
@@ -28,5 +32,10 @@
     <servlet-name>NoticeController</servlet-name>
     <url-pattern>/NoticeController</url-pattern>
 >>>>>>> 415fd50d823861d47f0f63f97588caf86307e849
+=======
+>>>>>>> dev1
   </servlet-mapping>
+  
+  
+  
 </web-app>
