@@ -11,6 +11,8 @@ import university.green.staff.repository.NoticeRepository;
 import university.green.staff.repository.NoticeRepositoryImpl;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 // URL 매핑 수정
 @WebServlet("/notice/*")
@@ -47,6 +49,10 @@ public class NoticeController extends HttpServlet {
 			handleList(request, response, session);
 
 			break;
+		case "/": // 등록 누르면 이동 -> 등록 페이지로 
+			handleList(request, response, session);
+
+			break;
 
 		default:
 			break;
@@ -57,6 +63,7 @@ public class NoticeController extends HttpServlet {
 	// 공지사항 조회
 	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
+		
 //		request.getRequestDispatcher("").forward(request, response);
 	}
 
@@ -99,6 +106,14 @@ public class NoticeController extends HttpServlet {
 	// 공지사항 등록 처리
 	private void handleCreateNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// TODO Auto-generated method stub
+		// id??
+		String category = request.getParameter("category");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		if(category != null || title != null || content != null ) {
+			
+		}
 		
 	}
 
@@ -106,13 +121,11 @@ public class NoticeController extends HttpServlet {
 	private void handleCreateSchedule(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// TODO 유효성 검사 (모든 값이 not null)
 		
-		String category = request.getParameter("category");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		// 시작 날짜, 종료 날짜, 내용 
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
 		
 		
-//		Notice notice = Notice.builder().
-//		
+			
 		
 	}
 
