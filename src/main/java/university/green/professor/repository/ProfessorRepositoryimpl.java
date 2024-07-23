@@ -82,5 +82,5 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 		// TODO Auto-generated method stub
 		
 	}
-
+// 깃 안들어가서 확인용
 }
