@@ -52,7 +52,7 @@ public class SugangController extends HttpServlet {
 		
 	}
 	
-	
+
 	/**
 	 * 페이징 처리
 	 * @param request
@@ -85,7 +85,9 @@ public class SugangController extends HttpServlet {
 		request.setAttribute("totalPages", totalPages);
 		request.setAttribute("currentPage", page);
 		
-		request.getRequestDispatcher("/WEB-INF/application.jsp").forward(request, response);
+		System.out.println(boardList);
+		
+		request.getRequestDispatcher("/application.jsp").forward(request, response);
 	}
 
 	/**
@@ -98,25 +100,6 @@ public class SugangController extends HttpServlet {
 		
 	}
 
-	/**
-	 * 수강신청
-	 * @param request
-	 * @param response
-	 */
-	private void SugangApply(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * 예비 수강신청
-	 * @param request
-	 * @param response
-	 */
-	private void PreSugangApply(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
 	 * 수강신청 조회 기능
@@ -130,7 +113,40 @@ public class SugangController extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getPathInfo();
+		
+		switch (action) {
+		case "/preApply":
+			PreSugangApply(request, response);
+			break;
+		case "/SugangApply":
+			SugangApply(request, response);
+			break;
 
+		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			break;
+		}
+		
+	}
+	/**
+	 * 수강신청
+	 * @param request
+	 * @param response
+	 */
+	private void SugangApply(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * 예비 수강신청
+	 * @param request
+	 * @param response
+	 */
+	private void PreSugangApply(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

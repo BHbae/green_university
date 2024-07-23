@@ -11,17 +11,17 @@ import university.green.student.repository.SugangRepository;
 import university.green.util.DBUtil;
 
 public class SugangRepositoryImpl implements SugangRepository {
-	private static final String SELECT_SUGANG = "select sub.id coll.name as college , dep.name as department, sub.id as departNum , sub.type as majorType, \r\n"
-			+ "sub.name as subjectName, pro.name as professorName, sub.grades as grades, sub.sub_day as subjectDay, \r\n"
-			+ "sub.start_time as subjectStart, sub.end_time as subjectEnd, sub. room_id as room, sub.num_of_student as currentStudent, sub.capacity as capacity\r\n"
-			+ "from subject_tb as sub\r\n"
-			+ "join professor_tb as pro\r\n"
-			+ "on pro.id = sub.professor_id\r\n"
-			+ "join department_tb as dep\r\n"
-			+ "on dep.id = sub.dept_id\r\n"
-			+ "join college_tb as coll\r\n"
-			+ "on dep.college_id = coll.id\r\n"
-			+ "where sub.type like %% and dep.name like %% and sub.name like %% ORDER BY id asc limit ? offset ? ";
+	private static final String SELECT_SUGANG = "select sub.id, coll.name as college, dep.name as department, sub.id as departNum, sub.type as majorType, "
+			+ " sub.name as subjectName, pro.name as professorName, sub.grades as grades, sub.sub_day as subjectDay, "
+			+ " sub.start_time as subjectStart, sub.end_time as subjectEnd, sub. room_id as room, sub.num_of_student as currentStudent, sub.capacity as capacity "
+			+ " from subject_tb as sub "
+			+ " join professor_tb as pro "
+			+ " on pro.id = sub.professor_id "
+			+ " join department_tb as dep "
+			+ " on dep.id = sub.dept_id "
+			+ " join college_tb as coll "
+			+ " on dep.college_id = coll.id "
+			+ " ORDER BY id asc limit ? offset ?";
 	private static final String COUNT_ALL_BOARDS = " SELECT COUNT(*) as count FROM subject_tb ";
 	@Override
 	public List<SugangDTO> listBoard(int limit, int offset) {
@@ -74,6 +74,24 @@ int count = 0;
 		}
 		System.out.println("로깅 totoalCount : " + count);
 		return count;
+	}
+	
+	
+	
+	@Override
+	public List<SugangDTO> preApply(int limit, int offset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<SugangDTO> SugangApply(int limit, int offset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<SugangDTO> ApplyInfo(int limit, int offset) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
