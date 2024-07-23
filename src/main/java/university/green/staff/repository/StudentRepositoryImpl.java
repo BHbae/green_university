@@ -23,16 +23,16 @@ public class StudentRepositoryImpl implements StudentRepository{
 			conn.setAutoCommit(false);
 			try (PreparedStatement pstmt=conn.prepareStatement(ADD_STUDENT)){
 				pstmt.setString(1,student.getName());
-				pstmt.setDate(2, student.getBirth_date());
+				pstmt.setDate(2, student.getBirthDate());
 				pstmt.setString(3, student.getGender());
 				pstmt.setString(4, student.getAddress());
 				pstmt.setString(5, student.getTel());
 				pstmt.setString(6, student.getEmail());
-				pstmt.setInt(7, student.getDept_id());
+				pstmt.setInt(7, student.getDeptId());
 				pstmt.setInt(8, student.getGrade());
 				pstmt.setInt(9, student.getSemester());
-				pstmt.setDate(10, student.getEntrance_date());
-				pstmt.setDate(11, student.getGraduation_date());
+				pstmt.setDate(10, student.getEntranceDate());
+				pstmt.setDate(11, student.getGraduationDate());
 				pstmt.executeUpdate();
 				conn.commit();
 			} catch (Exception e) {
@@ -78,9 +78,9 @@ public class StudentRepositoryImpl implements StudentRepository{
 			pstmt.setInt(2, 5);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				StudentDTO student=StudentDTO.builder().name(rs.getString("name")).birth_date(rs.getDate("birth_date")).gender(rs.getString("gender"))
-				.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email")).dept_id(rs.getInt("dept_id"))
-				.grade(rs.getInt("grade")).semester(rs.getInt("semester")).entrance_date(rs.getDate("entrance_date")).graduation_date(rs.getDate("graduation_date")).build();
+				StudentDTO student=StudentDTO.builder().name(rs.getString("name")).birthDate(rs.getDate("birth_date")).gender(rs.getString("gender"))
+				.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email")).deptId(rs.getInt("dept_id"))
+				.grade(rs.getInt("grade")).semester(rs.getInt("semester")).entranceDate(rs.getDate("entrance_date")).graduationDate(rs.getDate("graduation_date")).build();
 				studentList.add(student);
 				System.out.println(student);
 			}

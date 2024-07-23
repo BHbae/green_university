@@ -23,11 +23,8 @@ public class ProfessorDTO {
 	private String address;
 	private String tel;
 	private String email;
-<<<<<<< HEAD
 	private Integer deptId;
 	private int dept_int;
-=======
 	private int dept_id;
->>>>>>> song
 	private Date hire_date;
 }
