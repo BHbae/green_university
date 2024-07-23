@@ -2,9 +2,8 @@ package university.green.professor;
 
 import java.util.List;
 
-import university.green.LoginDto;
 import university.green.professor.model.ProfessorDTO;
-import university.green.professor.repository.ProfessorRepository;
+import university.green.professor.repositoryinterfaces.ProfessorRepository;
 
 public class ProfessorRepositoryImpl implements ProfessorRepository{
 

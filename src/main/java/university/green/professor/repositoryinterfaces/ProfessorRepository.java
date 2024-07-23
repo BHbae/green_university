@@ -3,10 +3,7 @@ package university.green.professor.repositoryinterfaces;
 import java.util.List;
 
 import university.green.professor.model.ProfessorDTO;
-<<<<<<< HEAD:src/main/java/university/green/professor/repository/ProfessorRepository.java
 
-=======
->>>>>>> song:src/main/java/university/green/professor/repositoryinterfaces/ProfessorRepository.java
 
 public interface ProfessorRepository {
 	// 교수 추가

@@ -21,7 +21,6 @@ import lombok.ToString;
 @ToString
 @Builder
 @AllArgsConstructor
-<<<<<<< HEAD
 @NoArgsConstructor
 
 	public class StaffDTO {
@@ -34,15 +33,5 @@ import lombok.ToString;
 		private String email;
 		private Date hire_date;
 	}
-=======
-public class StaffDTO {
-	private int id;
-	private String name;
-	private Date birth_date;
-	private String gender;
-	private String address;
-	private String tel;
-	private String email;
-	private Date hire_date;
->>>>>>> song
+
 
