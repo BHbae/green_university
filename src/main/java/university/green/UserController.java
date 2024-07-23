@@ -70,7 +70,7 @@ public class UserController extends HttpServlet {
 						session.setAttribute("principal", staffDitail);
 
 						// TODO - 수정 교직원 전용 메인 페이지로 이동처리
-						System.out.println("Principal 데이터: " + session.getAttribute("principal")); // 디버그용 출력
+						System.out.println("Principal 데이터: " + session.getAttribute("principal")); 
 						response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
 
 					} else {
