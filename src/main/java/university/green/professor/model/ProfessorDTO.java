@@ -28,3 +28,5 @@ public class ProfessorDTO {
 	private int dept_id;
 	private Date hire_date;
 }
+
+//찐

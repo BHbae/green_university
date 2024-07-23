@@ -19,3 +19,5 @@ public interface ProfessorRepository {
 	// 교수 - 정보 삭제
 	void deleteProfessor(int id,int principalId);
 }
+
+// 푸쉬가 안됨
