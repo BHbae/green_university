@@ -1,6 +1,13 @@
 package university.green.staff.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import university.green.professor.model.ProfessorDTO;
 import university.green.professor.repository.ProfessorRepositoryimpl;
@@ -16,13 +23,6 @@ import university.green.staff.repository.interfaces.StuSubRepository;
 import university.green.staff.repository.interfaces.StudentRepository;
 import university.green.staff.repository.interfaces.TuitionRepository;
 import university.green.student.model.StudentDTO;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 직원 - 학사 관리 콘트롤러
