@@ -5,7 +5,7 @@ import java.util.List;
 import university.green.staff.model.Notice;
 
 
-
+// 공지사항DTO
 public interface NoticeRepository {
 
 	// 등록

@@ -1,3 +1,4 @@
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,14 +24,14 @@ border-bottom: 2px solid gray;
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/notice" class="selected--menu">공지사항</a></td>
+					<td><a href="${pageContext.request.contextPath}/notice.jsp" class="selected--menu" >공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/schedule">학사일정</a></td>				
+					<td><a href="${pageContext.request.contextPath}/schedule_tb.jsp">학사일정</a></td>				
 				</tr>
 				
 					<tr>
-						<td><a href="/schedule/list"> 학사일정 등록</a></td>
+						<td><a href="${pageContext.request.contextPath}/scheduleCreate.jsp"> 학사일정 등록</a></td>
 					</tr>
 				
 			</table>
@@ -59,8 +60,9 @@ border-bottom: 2px solid gray;
 		</select> <input type="text" name="keyword" class="input--box" placeholder="검색어를 입력하세요"> <input type="submit" class="button" value="검색">
 	</form>
 	<br>
-	<table class="table" border="1">
-
+	
+	
+	<table class="table2" border="1">
 
 		<tr class="first--tr">
 			<td>번호</td>
@@ -70,8 +72,41 @@ border-bottom: 2px solid gray;
 			<td>조회수</td>
 		</tr>
 
+		<%
+		ResultSet rs = (ResultSet) request.getAttribute("resultSet");
+		if ( rs != null) {
+		%>
+	<table class="table" border="1">
 
-
+		<tr class="first--tr">
+			<td>번호</td>
+			<td>말머리</td>
+			<td>제목</td>
+			<td>작성일</td>
+			<td>조회수</td>
+		</tr>
+         <%
+         while (rs.next()) {
+         %>   
+         
+         <tr>
+         
+         <td><%=rs.getInt("id")%></td>
+         <td><a href="view-post?id=<%=rs.getInt("id") %>"><%=rs.getString("title") %></a></td>
+         <td><%=rs.getString("content") %></td>
+         <td><%=rs.getString("created_time") %></td>
+         
+         </tr>
+         
+         <%
+         }
+         %>
+         
+          <%
+         }
+         %>
+  
+    
 		<tr class="second--tr">
 			<td>4</td>
 			<td>[일반]</td>
@@ -110,7 +145,8 @@ border-bottom: 2px solid gray;
 	</table>
 	<div class="paging--container">
 
-		<a href="/notice/list/1"> 1</a> &nbsp;&nbsp; <a href="/notice?crud=write" class="button">등록</a>
+		<a href="/notice/list/1"> 1</a> &nbsp;&nbsp; 
+		<a href="${pageContext.request.contextPath}/noticeCreate.jsp" class="button">등록</a>
 
 	</div>
 

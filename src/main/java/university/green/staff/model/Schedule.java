@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Schedule_tb {
+public class Schedule {
 
 	private int id;
 	private int staffId;
