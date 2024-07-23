@@ -24,7 +24,6 @@ public class ProfessorDTO {
 	private String tel;
 	private String email;
 	private Integer deptId;
-	private Date hireDate;
 	private int dept_int;
 	private Date hire_date;
 }
