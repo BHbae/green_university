@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import university.green.professor.model.ProfessorDTO;
 import university.green.professor.repository.ProfessorRepositoryimpl;
 import university.green.professor.repositoryinterfaces.ProfessorRepository;
+import university.green.staff.model.StaffDTO;
 import university.green.staff.repository.BreakAppRepositoryImpl;
 import university.green.staff.repository.StaffRepositoryImpl;
 import university.green.staff.repository.StuSubRepositoryImpl;
@@ -256,11 +259,7 @@ public class ManagementController extends HttpServlet {
 		}
 		// 학생 등록하기 (정보 전송)
 		case "/registerSt": {
-			try {
-				sendRegisterStudent(request,response,session);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			sendRegisterStudent(request,response,session);
 			break;
 		}
 		// 교수 등록하기 (정보 전송)
@@ -270,7 +269,7 @@ public class ManagementController extends HttpServlet {
 		}
 		// 교직원 등록하기 (정보 전송)
 		case "/registerSf": {
-			// TODO - 교직원 등록 기능 만들기
+			sendRegisterStaff(request,response,session);
 			break;
 		}
 		default:
@@ -278,15 +277,66 @@ public class ManagementController extends HttpServlet {
 		}
 	}
 
+	
 	/**
+	 * 교직원 등록(교직원 정보 전송)
 	 * 
 	 * @param request
 	 * @param response
 	 * @param session
+	 * @throws IOException 
 	 */
-	private void sendRegisterProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
+	private void sendRegisterStaff(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
+		String name=request.getParameter("name");
+		
+		String strBirthDate=request.getParameter("birthDate");
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
+		String gender=request.getParameter("gender");
+		String address=request.getParameter("address");
+		String tel=request.getParameter("tel");
+		String email=request.getParameter("email");
+		
+		StaffDTO staff=StaffDTO.builder().name(name).birth_date(birthDate).gender(gender)
+				.address(address).tel(tel).email(email).build();
+		staffRepository.addStaff(staff);
+		System.out.println(staff);
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerStaff");
+	}
+
+	/**
+	 * 교수 등록(교수 정보 전송)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 */
+	private void sendRegisterProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String name=request.getParameter("name");
+		
+		String strBirthDate=request.getParameter("birthDate");
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
+		String gender=request.getParameter("gender");
+		String address=request.getParameter("address");
+		String tel=request.getParameter("tel");
+		String email=request.getParameter("email");
+		int deptId=Integer.parseInt(request.getParameter("deptId"));
+		
+		ProfessorDTO professor=ProfessorDTO.builder().name(name).birthDate(birthDate).gender(gender).address(address)
+				.tel(tel).email(email).deptId(deptId).build();
+		professorRepository.addProfessor(professor);
+		System.out.println(professor);
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerProfessor");
 	}
 
 	/**
@@ -295,9 +345,10 @@ public class ManagementController extends HttpServlet {
 	 * @param request
 	 * @param response
 	 * @param session
+	 * @throws IOException 
 	 */
-	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
+	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		
 		
 	}
 
@@ -308,22 +359,31 @@ public class ManagementController extends HttpServlet {
 	 * @param response
 	 * @param session
 	 * @throws ParseException 
+	 * @throws IOException 
 	 */
-	private void sendRegisterStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ParseException {
+	private void sendRegisterStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
 		String name=request.getParameter("name");
+		
 		String strBirthDate=request.getParameter("birthDate");
-		Date birthDate=Date.valueOf(strBirthDate);
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
 		String gender=request.getParameter("gender");
 		String address=request.getParameter("address");
 		String tel=request.getParameter("tel");
 		String email=request.getParameter("email");
 		int deptId=Integer.parseInt(request.getParameter("deptId"));
-		String strEntranceDate=request.getParameter("hireDate");
-		Date entranceDate=Date.valueOf(strEntranceDate);
+		String strEntranceDate=request.getParameter("entranceDate");
+		LocalDate ldEntranceDate=LocalDate.parse(strEntranceDate,dtfm);
+		Date entranceDate=Date.valueOf(ldBirthDate);
 		
 		StudentDTO student=StudentDTO.builder().name(name).birthDate(birthDate).gender(gender)
 				.address(address).tel(tel).email(email).deptId(deptId).entranceDate(entranceDate).build();
-				
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerStudent");
+		
 	}
 
 }

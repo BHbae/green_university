@@ -14,7 +14,7 @@
 			<input type="text" id="name" name="name" value=""><br>
 			
 			<label for="birthDate">생년월일</label>
-			<input type="text" id="birthDate" name="birthDate" value=""><br>
+			<input type="date" id="birthDate" name="birthDate" value=""><br>
 			
 			<label for="gender">성별</label>
 			<input type="text" id="gender" name="gender" value=""><br>
@@ -31,8 +31,8 @@
 			<label for="deptId">과 ID</label>
 			<input type="text" id="deptId" name="deptId" value=""><br>
 			
-			<label for="entraceDate">입학일</label>
-			<input type="text" id="entraceDate" name="entraceDate" value=""><br>
+			<label for="entranceDate">입학일</label>
+			<input type="date" id="entranceDate" name="entranceDate" value=""><br>
 			
 			<input type="submit" value="입력" class="submit-btn">
 		</form>
