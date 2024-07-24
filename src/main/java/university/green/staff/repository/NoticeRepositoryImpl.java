@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import university.green.staff.model.Notice;
+import university.green.staff.model.NoticeDTO;
 import university.green.util.DBUtil;
 
 public class NoticeRepositoryImpl implements NoticeRepository {
@@ -21,7 +21,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	private static final String UPDATE_NOTICE_SQL = " UPDATE notice_tb SET title = ? , content = ?  WHERE id = ? ";
 
 	@Override // 등록
-	public int addNotice(Notice notice) {
+	public int addNotice(NoticeDTO notice) {
 		int rowCount = 0;
 		try (Connection conn = DBUtil.getConnection()) {
 
@@ -48,8 +48,8 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 	@Override // 제목 조회
-	public List<Notice> getNoticeBytitle(String title) {
-		List<Notice> titlelist = new ArrayList<>();
+	public List<NoticeDTO> getNoticeBytitle(String title) {
+		List<NoticeDTO> titlelist = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection()) {
 
 			// 트랜잭션
@@ -61,8 +61,8 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					Notice notice = new Notice();
-					notice = Notice.builder().id(rs.getInt("id"))
+					NoticeDTO notice = new NoticeDTO();
+					notice = NoticeDTO.builder().id(rs.getInt("id"))
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
@@ -84,8 +84,8 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 	@Override // 제목 + 내용 조회
-	public List<Notice> getNoticeBytitleAndcontent(String title, String content) {
-		List<Notice> titlelist = new ArrayList<>();
+	public List<NoticeDTO> getNoticeBytitleAndcontent(String title, String content) {
+		List<NoticeDTO> titlelist = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection()) {
 
 			try (PreparedStatement pstmt = conn.prepareStatement(SELECT_NOTICE_BY_TITLE_AND_CONTNET)) {
@@ -94,8 +94,8 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					Notice notice = new Notice();
-					notice = Notice.builder().id(rs.getInt("id"))
+					NoticeDTO notice = new NoticeDTO();
+					notice = NoticeDTO.builder().id(rs.getInt("id"))
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
@@ -141,9 +141,9 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 	@Override // 전체 조회
-	public List<Notice> getAllNotice() {
+	public List<NoticeDTO> getAllNotice() {
 
-		List<Notice> titlelist = new ArrayList<>();
+		List<NoticeDTO> noticelist = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection()) {
 
 			try (PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_NOTICE)) {
@@ -151,15 +151,15 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					Notice notice = new Notice();
-					notice = Notice.builder().id(rs.getInt("id"))
+					NoticeDTO notice = new NoticeDTO();
+					notice = NoticeDTO.builder().id(rs.getInt("id"))
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
 											 .creatdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
-					titlelist.add(notice);
+					noticelist.add(notice);
 				}
 
 			} catch (Exception e) {
@@ -170,11 +170,11 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 			e.printStackTrace();
 		}
 
-		return titlelist;
+		return noticelist;
 	}
 
 	@Override // 수정
-	public int updateNotice(Notice notice) {
+	public int updateNotice(NoticeDTO notice) {
 		int rowCount = 0;
 		try (Connection conn = DBUtil.getConnection()) {
 			conn.setAutoCommit(false);
@@ -200,3 +200,4 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 }
+

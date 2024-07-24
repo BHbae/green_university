@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Room {
+public class RoomDTO {
 
 	private String id;
 	private int collegeId;

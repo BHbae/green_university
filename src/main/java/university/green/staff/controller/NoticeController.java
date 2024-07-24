@@ -3,6 +3,7 @@ package university.green.staff.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import university.green.staff.model.NoticeDTO;
 import university.green.staff.repository.NoticeRepository;
 import university.green.staff.repository.NoticeRepositoryImpl;
 
@@ -19,23 +21,28 @@ public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NoticeRepository noticeRepository;
 
-	@Override
-	public void init() throws ServletException {
+	
+	public NoticeController() {
+		super();
 		noticeRepository = new NoticeRepositoryImpl();
 	}
+	
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getPathInfo();
-
+		HttpSession session=request.getSession();
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
-		// 공지사항 조회
+		// 공지사항 검색 조회
 		case "/notice":
 			handleNotice(request, response, session);
-
+			break;
+		// 공지사항 조회
+		case "/allnotice":	
+			showViewNotice(request, response, session);
 			break;
 		// 학사일정 조회
 		case "/schedule":
@@ -63,6 +70,17 @@ public class NoticeController extends HttpServlet {
 
 	}
 
+	// 공지사항 전체 조회
+	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		
+		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
+		
+		request.setAttribute("noticelist", noticelist);
+		System.out.println(noticelist);
+		//request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);
+		request.getRequestDispatcher("/notice.jsp").forward(request, response);
+	}
+
 	// 상세보기 페이지로 이동
 	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
@@ -85,8 +103,10 @@ public class NoticeController extends HttpServlet {
 	}
 
 	// 공지사항 검색 조회
-	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 
+		
+		
 //		request.getRequestDispatcher("").forward(request, response);
 	}
 

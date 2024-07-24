@@ -1,6 +1,11 @@
 package university.green.staff.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -12,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import university.green.professor.model.ProfessorDTO;
 import university.green.professor.repository.ProfessorRepositoryimpl;
 import university.green.professor.repositoryinterfaces.ProfessorRepository;
+import university.green.staff.model.StaffDTO;
 import university.green.staff.repository.BreakAppRepositoryImpl;
 import university.green.staff.repository.StaffRepositoryImpl;
 import university.green.staff.repository.StuSubRepositoryImpl;
@@ -62,30 +68,37 @@ public class ManagementController extends HttpServlet {
 		// TODO - 유효성 체크 (직원이 맞는지, null값은 아닌지)
 		System.out.println("get");
 		switch (action) {
+		// 학생 조회 페이지 이동
 		case "/selectStudent": {
 			SelectAllStudent(request,response,session);
 			break;
 		}
+		// 교수 조회 페이지 이동
 		case "/selectProfessor": {
 			selectAllProfessor(request,response,session);
 			break;
 		}
+		// 학생 등록 페이지 이동
 		case "/registerStudent": {
-			request.getRequestDispatcher("/WEB-INF/views/staff/registerStudent.jsp").forward(request, response);
+			registerStudent(request,response,session);
 			break;
 		}
+		// 교수 등록 페이지 이동
 		case "/registerProfessor": {
-			request.getRequestDispatcher("/WEB-INF/views/staff/registerProfessor.jsp").forward(request, response);
+			registerProfessor(request,response,session);
 			break;
 		}
+		// 직원 등록 페이지 이동
 		case "/registerStaff": {
-			request.getRequestDispatcher("/WEB-INF/views/staff/registerStaff.jsp").forward(request, response);
+			registerStaff(request,response,session);
 			break;
 		}
+		// 고지서 전송 페이지 이동
 		case "/sendBill": {
-			request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
+			sendBill(request,response,session);
 			break;
 		}
+		// 휴학 처리 페이지 이동
 		case "/absence": {
 			request.getRequestDispatcher("/WEB-INF/views/staff/breakApp.jsp").forward(request, response);
 			break;
@@ -99,6 +112,68 @@ public class ManagementController extends HttpServlet {
 		}}
 	}
 
+	/**
+	 * 등록금 고지서 발송
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void sendBill(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
+	}
+
+	/**
+	 * 교직원 등록
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void registerStaff(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/registerStaff.jsp").forward(request, response);
+		
+	}
+
+	/**
+	 * 교수 등록
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void registerProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/registerProfessor.jsp").forward(request, response);
+	}
+
+	/**
+	 * 학생 등록
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void registerStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/registerStudent.jsp").forward(request, response);
+	}
+
+	/**
+	 * 전체 교수 조회
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void selectAllProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		int page=1;
 		int pageSize=20;
@@ -130,7 +205,8 @@ public class ManagementController extends HttpServlet {
 	}
 
 	/**
-	 * 모든 학생 조회 기능
+	 * 전체 학생 조회
+	 * 
 	 * @param request
 	 * @param response
 	 * @param session
@@ -171,36 +247,29 @@ public class ManagementController extends HttpServlet {
 		HttpSession session=request.getSession(); // 세션 받아오기
 		
 		switch (action) {
-		case "/selectStudent": {
-			// TODO - 학생 명단 조회 기능 만들기
+		// 특정 학생 조회
+		case "/selecSpecifictStudent": {
+			selectSpecificStudent(request,response,session);
 			break;
 		}
-		case "/selectProfessor": {
-			// TODO - 교수 명단 조회 기능 만들기
+		// 특정 교수 조회
+		case "/selectSpecificProfessor": {
+			sendRegisterProfessor(request,response,session);
 			break;
 		}
+		// 학생 등록하기 (정보 전송)
 		case "/registerSt": {
-			regiterStudent(request,response,session);
+			sendRegisterStudent(request,response,session);
 			break;
 		}
+		// 교수 등록하기 (정보 전송)
 		case "/registerPr": {
-			// TODO - 교수 등록 기능 만들기
+			sendRegisterProfessor(request,response,session);
 			break;
 		}
+		// 교직원 등록하기 (정보 전송)
 		case "/registerSf": {
-			// TODO - 교직원 등록 기능 만들기
-			break;
-		}
-		case "/sendBill": {
-			// TODO - 등록금 고지서 발송
-			break;
-		}
-		case "/absence": {
-			// TODO - 휴학 처리 
-			break;
-		}
-		case "/setPeriod": {
-			// TODO - 수강 신청 기간 설정
+			sendRegisterStaff(request,response,session);
 			break;
 		}
 		default:
@@ -208,8 +277,112 @@ public class ManagementController extends HttpServlet {
 		}
 	}
 
-	private void regiterStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
+	
+	/**
+	 * 교직원 등록(교직원 정보 전송)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 */
+	private void sendRegisterStaff(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String name=request.getParameter("name");
+		
+		String strBirthDate=request.getParameter("birthDate");
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
+		String gender=request.getParameter("gender");
+		String address=request.getParameter("address");
+		String tel=request.getParameter("tel");
+		String email=request.getParameter("email");
+		
+		StaffDTO staff=StaffDTO.builder().name(name).birth_date(birthDate).gender(gender)
+				.address(address).tel(tel).email(email).build();
+		staffRepository.addStaff(staff);
+		System.out.println(staff);
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerStaff");
+	}
+
+	/**
+	 * 교수 등록(교수 정보 전송)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 */
+	private void sendRegisterProfessor(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String name=request.getParameter("name");
+		
+		String strBirthDate=request.getParameter("birthDate");
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
+		String gender=request.getParameter("gender");
+		String address=request.getParameter("address");
+		String tel=request.getParameter("tel");
+		String email=request.getParameter("email");
+		int deptId=Integer.parseInt(request.getParameter("deptId"));
+		
+		ProfessorDTO professor=ProfessorDTO.builder().name(name).birthDate(birthDate).gender(gender).address(address)
+				.tel(tel).email(email).deptId(deptId).build();
+		professorRepository.addProfessor(professor);
+		System.out.println(professor);
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerProfessor");
+	}
+
+	/**
+	 * 특정 학생 조회 (학과 번호, 학번 조회)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 */
+	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		
+		
+	}
+
+	/**
+	 * 학생 등록(학생 정보 전송)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ParseException 
+	 * @throws IOException 
+	 */
+	private void sendRegisterStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		DateTimeFormatter dtfm=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		String name=request.getParameter("name");
+		
+		String strBirthDate=request.getParameter("birthDate");
+		LocalDate ldBirthDate=LocalDate.parse(strBirthDate,dtfm);
+		Date birthDate=Date.valueOf(ldBirthDate);
+
+		String gender=request.getParameter("gender");
+		String address=request.getParameter("address");
+		String tel=request.getParameter("tel");
+		String email=request.getParameter("email");
+		int deptId=Integer.parseInt(request.getParameter("deptId"));
+		String strEntranceDate=request.getParameter("entranceDate");
+		LocalDate ldEntranceDate=LocalDate.parse(strEntranceDate,dtfm);
+		Date entranceDate=Date.valueOf(ldBirthDate);
+		
+		StudentDTO student=StudentDTO.builder().name(name).birthDate(birthDate).gender(gender)
+				.address(address).tel(tel).email(email).deptId(deptId).entranceDate(entranceDate).build();
+		
+		response.sendRedirect(request.getContextPath()+"/management/registerStudent");
 		
 	}
 

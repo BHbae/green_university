@@ -3,7 +3,7 @@ package university.green.staff.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import university.green.staff.model.Schedule;
+import university.green.staff.model.ScheduleDTO;
 import university.green.util.DBUtil;
 
 public class ScheduleRepositoryImpl implements ScheduleRepository{
@@ -13,7 +13,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository{
 	
 	
 	@Override
-	public int addSchedule(Schedule schedule) {
+	public int addSchedule(ScheduleDTO schedule) {
 		int rowCount = 0;
 		
 		try (Connection conn = DBUtil.getConnection()){

@@ -9,24 +9,24 @@
 </head>
 <body>
 	<h1>직원 등록</h1>
-		<form class="register-student-from" action="${pageContext.request.contextPath}/management/registerStaff" method="POST">
-			<label for="student-name">이름</label>
-			<input type="text" id="student-name" name="student-name" value=""><br>
+		<form class="register-staff-from" action="${pageContext.request.contextPath}/management/registerSf" method="POST">
+			<label for="name">이름</label>
+			<input type="text" id="name" name="name"><br>
 			
-			<label for="student-birth-date">생년월일</label>
-			<input type="text" id="student-birth-date" name="student-birth-date" value=""><br>
+			<label for="birthDate">생년월일</label>
+			<input type="date" id="birthDate" name="birthDate"><br>
 			
-			<label for="student-gender">성별</label>
-			<input type="text" id="student-gender" name="student-gender" value=""><br>
+			<label for="gender">성별</label>
+			<input type="text" id="gender" name="gender"><br>
 			
-			<label for="student-address">주소</label>
-			<input type="text" id="student-address" name="student-address" value=""><br>
+			<label for="address">주소</label>
+			<input type="text" id="address" name="address"><br>
 			
-			<label for="student-tel">전화번호</label>
-			<input type="text" id="student-tel" name="student-tel" value=""><br>
+			<label for="tel">전화번호</label>
+			<input type="text" id="tel" name="tel"><br>
 			
-			<label for="student-email">이메일</label>
-			<input type="text" id="student-email" name="student-email" value=""><br>
+			<label for="email">이메일</label>
+			<input type="text" id="email" name="email"><br>
 			
 			<input type="submit" value="입력" class="submit-btn">
 		</form>

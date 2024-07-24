@@ -39,7 +39,7 @@ public class StaffRepositoryImpl implements StaffRepository{
 	}
 
 	@Override
-	public void updateStaff(StaffDTO staffDTO) {
+	public void updateStaff(StaffDTO staff) {
 		// TODO Auto-generated method stub
 		
 	}

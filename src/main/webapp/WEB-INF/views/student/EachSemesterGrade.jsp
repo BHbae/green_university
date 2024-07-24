@@ -20,25 +20,30 @@
 		</select>
 		<button></button>
 	</form>
+	<c:choose>
+		<c:when test="${not empty user}">
+		<h2>과목별 성적</h2>
+			<table border='1'>
+				<tr>
+					<th>연도</th>
+					<th>학기</th>
+					<th>과목번호</th>
+					<th>과목명</th>
+					<th>강의구분</th>
+					<th>학점</th>
+				</tr>
+				<c:forEach var="grade" items="${gradeList}">
+				<tr>
+					<td>${grade.year}</td>
+					<td>${grade.semester}</td>
+					<td>${grade.subId}</td>
+					<td>${grade.type}</td>
+					<td>$grade.score}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</c:when>
+	</c:choose>
 	
-	<h2>과목별 성적</h2>
-	<table border='1'>
-		<tr>
-			<th>연도</th>
-			<th>학기</th>
-			<th>과목번호</th>
-			<th>과목명</th>
-			<th>강의구분</th>
-			<th>학점</th>
-		</tr>
-		<tr>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-	</table>
 </body>
 </html>
