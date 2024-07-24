@@ -45,10 +45,21 @@ public class StudentRepositoryimpl implements StudentRepository{
 
 	@Override
 	public List<StudentDTO> getStudentByDeptId(int deptId) {
-		final String SELECT_STUDENT_BY_DEPT_ID="";
-		List<StudentDTO> studentList=null;
-		try(Connection conn=DBUtil.getConnection()) {
-			
+		List<StudentDTO> studentList=new ArrayList<>();
+		StudentDTO student=null;
+		final String SELECT_STUDENT_BY_ID=" SELECT * FROM student_tb where dept_id = ? ";
+		try (Connection conn=DBUtil.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(SELECT_STUDENT_BY_ID)){
+			pstmt.setInt(1,deptId);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()) {
+				student=StudentDTO.builder().id(rs.getInt("id")).name(rs.getString("name")).
+						birthDate(rs.getDate("birthDate")).gender(rs.getString("gender"))
+						.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email"))
+						.deptId(deptId).grade(rs.getInt("grade")).semester(rs.getInt("semester"))
+						.entranceDate(rs.getDate("entranceDate")).graduationDate(rs.getDate("graduationDate")).build();
+				return studentList;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,11 +69,21 @@ public class StudentRepositoryimpl implements StudentRepository{
 	@Override
 	public StudentDTO getStudentById(int id) {
 		StudentDTO student=null;
-		final String SELECT_STUDENT_BY_ID="  ";
-		try (Connection conn=DBUtil.getConnection()){
-			
+		final String SELECT_STUDENT_BY_ID=" SELECT * FROM student_tb where id = ? ";
+		try (Connection conn=DBUtil.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(SELECT_STUDENT_BY_ID)){
+			pstmt.setInt(1,id);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()) {
+				student=StudentDTO.builder().id(rs.getInt("id")).name(rs.getString("name")).
+						birthDate(rs.getDate("birthDate")).gender(rs.getString("gender"))
+						.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email"))
+						.deptId(rs.getInt("deptId")).grade(rs.getInt("grade")).semester(rs.getInt("semester"))
+						.entranceDate(rs.getDate("entranceDate")).graduationDate(rs.getDate("graduationDate")).build();
+				return student;
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return student;
 	}
@@ -101,4 +122,26 @@ public class StudentRepositoryimpl implements StudentRepository{
 		
 	}
 
+	@Override
+	public StudentDTO getStudentByDeptidAndId(int deptId, int id) {
+		StudentDTO student=null;
+		final String SELECT_STUDENT_BY_DEPTID_AND_ID=" SELECT * FROM student_tb WHERE dept_id= ? and id= ? ";
+		try (Connection conn=DBUtil.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(SELECT_STUDENT_BY_DEPTID_AND_ID)){
+				pstmt.setInt(1,deptId);
+				pstmt.setInt(2, id);
+				ResultSet rs=pstmt.executeQuery();
+			if(rs.next()) {
+				student=StudentDTO.builder().id(id).name(rs.getString("name")).
+						birthDate(rs.getDate("birthDate")).gender(rs.getString("gender"))
+						.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email"))
+						.deptId(deptId).grade(rs.getInt("grade")).semester(rs.getInt("semester"))
+						.entranceDate(rs.getDate("entranceDate")).graduationDate(rs.getDate("graduationDate")).build();
+				return student;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return student;
+	}
 }

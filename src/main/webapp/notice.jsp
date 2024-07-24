@@ -80,9 +80,15 @@ border-bottom: 2px solid gray;
 	<tr>
 			<td>${notice.id}</td>
 			<td>${notice.category}</td>
+<<<<<<< HEAD
 			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
 
 			<td>${notice.creatdTime}</td>
+=======
+			<td>${notice.title}</td>
+			<td>${notice.content}</td>
+			<td>${notice.createdTime}</td>
+>>>>>>> dev1
 			<td>${notice.views}</td>
 	</tr>
 	</c:forEach>

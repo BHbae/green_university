@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import university.green.student.model.StudentDTO;
 
 import java.io.IOException;
 
@@ -25,25 +26,28 @@ public class StudentGradeController extends HttpServlet {
 		// TODO - 유저정보 받아오기
 		// TODO - 유효성 체크 (직원이 맞는지, null값은 아닌지)
 		
+		if(session==null||session.getAttribute("principal")==null) {
+			request.getRequestDispatcher("/Login.jsp").forward(request, response);
+			return;
+		}
+		System.out.println("유효성 검사 통과");
+		
+		System.out.println("get");
 		switch(action) {
 		// 이번 학기 성적 조회
-		case "/grade-of-this-semester": {
+		case "/gradeOfThisSemester": {
 			selectThisSemester(request,response,session);
 			break;
 		}
 		// 학기별 성적 조회
-		case "/grade-select": {
-			selectEachSemester(request,response,session);
+		case "/selectSemester": {
+			request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
 			break;
 		}
-		// 총 성적 누계
-		case "/grade-total": {
+		// 총 누계 성적 조회
+		case "/totalGrade": {
 			selectTotalGrade(request,response,session);
 			break;
-		}
-		// 강의 평가 창
-		case "/show-evaluation": {
-			showSubjectEvaluation(request,response,session);
 		}
 		default: {
 			break;
@@ -51,37 +55,72 @@ public class StudentGradeController extends HttpServlet {
 		}
 	}
 
-
-	private void showSubjectEvaluation(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * 총 누계 성적 조회
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void selectTotalGrade(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		if(student!=null) {
+			request.setAttribute("studentId",student.getId());
+		} 
 		request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
 	}
 
+	/**
+	 * 학기별 성적 조회
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void selectEachSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		if(student!=null) {
+			request.setAttribute("studentId",student.getId());
+		}
 		request.getRequestDispatcher("/WEB-INF/views/student/EachSemesterGrade.jsp").forward(request, response);
 	}
 
+	/**
+	 * 이번 학기 성적 조회
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void selectThisSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		if(student!=null) {
+			request.setAttribute("studentId",student.getId());
+		}
 		request.getRequestDispatcher("/WEB-INF/views/student/ThisSemesterGrade.jsp").forward(request, response);
 	}
 
+	
+	// doPost 포스트 방식 통신
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=request.getPathInfo();
 		HttpSession session=request.getSession();
 		// TODO - 유저정보 받아오기
 		// TODO - 유효성 체크 (직원이 맞는지, null값은 아닌지)
+		if(session==null||session.getAttribute("principal")==null) {
+			response.sendRedirect(request.getContextPath()+"/user/login");
+			return;
+		}
 		
 		switch(action) {
-		case "/grade-of-this-semester": {
-			// TODO - 금학기 성적 조회
-			break;
-		}
-		case "/grade-select": {
-			// TODO - 학기별 성적 조회 
+		case "/selectSepcificSubject": {
+			selectSpecificSubject(request,response,session);
 			break;
 		}
 		case "/send-subject-evaluation":{
@@ -91,6 +130,11 @@ public class StudentGradeController extends HttpServlet {
 			break;
 		}
 		}
+	}
+
+	private void selectSpecificSubject(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
