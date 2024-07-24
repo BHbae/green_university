@@ -65,7 +65,7 @@
                     <td><a href="/sugang/preApply">예비 수강 신청</a></td>
                 </tr>
                 <tr>
-                    <td><a href="/sugang/SugangApply" class="selected--menu">수강 신청</a></td>
+                    <td><a href="/sugang/SugangApply">수강 신청</a></td>
                 </tr>
                 <tr>
                     <td><a href="/sugang/ApplyInfo">수강 신청 내역 조회</a></td>
@@ -82,30 +82,27 @@
         <div class="d-flex justify-content-between align-items-start" style="margin-bottom: 50px;">
             <!-- 필터 및 검색 -->
             <div class="sub--filter">
-                <form action="/sugang/search" method="get">
+                <form action="${pageContext.request.contextPath}/sugang/search" method="get">
                     <div>
                         <label for="majorType">강의구분</label> 
                         <select name="majorType" id="majorType">
-                            <option value="전체">전체</option>
+                            <option value="">전체</option>
                             <option value="전공">전공</option>
                             <option value="교양">교양</option>
                         </select>
                         
                         <label for="department">개설학과</label> 
                         <select name="department" id="department">
-                            <option value="-1">전체</option>
-                            <c:forEach var="department" items="${deptList}">
-                                <option value="${department.id}">${department.name}</option>
-                            </c:forEach>
+                            <option value="">전체</option>
+                            <option value="컴퓨터공학과">컴퓨터공학과</option>
+                            <option value="신소재공학과">신소재공학과</option>
                         </select>
                         
                         <label for="subjectName">강의명</label> 
-                        <input type="text" name="name" list="subName">
-                        <datalist id="subjectName">
-                            <c:forEach var="subjectName" items="${subNameList}">
-                                <option value="${subjectName}">
-                            </c:forEach>
-                        </datalist>
+                        <input type="text" name="subjectName" id="subjectName">
+                        	
+                            
+               
                         
                         <button type="submit">
                             <ul class="d-flex justify-content-center" style="margin: 0;">
@@ -142,7 +139,6 @@
                             <th>요일시간 (강의실)</th>
                             <th>현재인원</th>
                             <th>정원</th>
-                            <th>수강신청</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,18 +163,6 @@
                                 </td>
                                 <td>${subject.currentStudent}</td>
                                 <td>${subject.capacity}</td>
-                                <td class="sub--list--button--row">
-                                    <c:choose>
-                                        <c:when test="${subject.currentStudent >= subject.capacity}">
-                                            <button type="button" style="background-color: white; color: gray" disabled>신청마감</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <form action="/sugang/insertApp/${subject.id}?type=0" method="post">
-                                                <button type="submit" style="background-color: #548AC2;">신청</button>
-                                            </form>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -187,7 +171,7 @@
                     <ul class="page--list">
                         <c:forEach var="i" begin="1" end="${totalPages}" step="1">
                             <li>
-                                <a href="/sugang/listBoards?page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a>
+                                <a href="${pageContext.request.contextPath}/sugang/listBoards?page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a>
                             </li>
                         </c:forEach>
                     </ul>

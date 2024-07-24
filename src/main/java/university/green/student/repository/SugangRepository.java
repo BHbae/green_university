@@ -8,6 +8,9 @@ public interface SugangRepository {
 	// 강의 시간표 조회
 	List<SugangDTO> listBoard(int limit, int offset);
 	
+	// 강의 시간표 구분 조회
+	List<SugangDTO> searchBoard(String majorType, String department, String subjectName, int limit, int offset);
+	
 	// 페이지 총 갯수
 	int getTotalBoardCount();
 	
