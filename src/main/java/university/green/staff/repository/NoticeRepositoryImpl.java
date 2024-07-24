@@ -64,12 +64,12 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				while (rs.next()) {
 					NoticeDTO notice = new NoticeDTO();
 					notice = NoticeDTO.builder().id(rs.getInt("id"))
-											 .category(rs.getString("category"))
-											 .title(rs.getString("title"))
-											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
-											 .views(rs.getInt("views"))
-											 .build();
+							 .category(rs.getString("category"))
+							 .title(rs.getString("title"))
+							 .content(rs.getString("content"))
+							 .createdTime(rs.getTimestamp("created_time"))
+							 .views(rs.getInt("views"))
+							 .build();
 					titlelist.add(notice);
 				}
 
@@ -97,12 +97,12 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				while (rs.next()) {
 					NoticeDTO notice = new NoticeDTO();
 					notice = NoticeDTO.builder().id(rs.getInt("id"))
-											 .category(rs.getString("category"))
-											 .title(rs.getString("title"))
-											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
-											 .views(rs.getInt("views"))
-											 .build();
+							 .category(rs.getString("category"))
+							 .title(rs.getString("title"))
+							 .content(rs.getString("content"))
+							 .createdTime(rs.getTimestamp("created_time"))
+							 .views(rs.getInt("views"))
+							 .build();
 					titlelist.add(notice);
 				}
 
@@ -154,12 +154,12 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 				while (rs.next()) {
 					NoticeDTO notice = new NoticeDTO();
 					notice = NoticeDTO.builder().id(rs.getInt("id"))
-											 .category(rs.getString("category"))
-											 .title(rs.getString("title"))
-											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
-											 .views(rs.getInt("views"))
-											 .build();
+							 .category(rs.getString("category"))
+							 .title(rs.getString("title"))
+							 .content(rs.getString("content"))
+							 .createdTime(rs.getTimestamp("created_time"))
+							 .views(rs.getInt("views"))
+							 .build();
 					noticelist.add(notice);
 				}
 

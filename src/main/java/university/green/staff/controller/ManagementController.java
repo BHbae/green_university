@@ -315,6 +315,7 @@ public class ManagementController extends HttpServlet {
 		staffRepository.addStaff(staff);
 		System.out.println(staff);
 		
+		
 		response.sendRedirect(request.getContextPath()+"/management/registerStaff");
 	}
 

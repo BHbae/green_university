@@ -19,6 +19,6 @@ public class NoticeDTO {
 	private String category;
 	private String title;
 	private String content;
-	private Timestamp creatㄷdTime;
+	private Timestamp createdTime;
 	private int views;
 }

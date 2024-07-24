@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import lombok.Builder;
 import university.green.professor.model.ProfessorDTO;
-import university.green.staff.model.Staff_tb;
+import university.green.staff.model.StaffDTO;
 import university.green.student.model.StudentDTO;
 import university.green.util.DBUtil;
 
@@ -97,14 +97,14 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public Staff_tb staffDtail(int id) {
-		Staff_tb dto = null;
+	public StaffDTO staffDtail(int id) {
+		StaffDTO dto = null;
 		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(SELECT_STAFF)){
 				pstmt.setInt(1, id);
 				ResultSet rs = pstmt.executeQuery();
 				if(rs.next()) {
-					dto = Staff_tb.builder()
+					dto = StaffDTO.builder()
 							.id(rs.getInt("id"))
 							.name(rs.getString("name"))
 							.birth_date(rs.getDate("birth_date"))
