@@ -15,7 +15,7 @@ import university.green.professor.repositoryinterfaces.ProfessorRepository;
 import university.green.staff.repository.BreakAppRepositoryImpl;
 import university.green.staff.repository.StaffRepositoryImpl;
 import university.green.staff.repository.StuSubRepositoryImpl;
-import university.green.staff.repository.StudentRepositoryImpl;
+import university.green.staff.repository.StudentRepositoryimpl;
 import university.green.staff.repository.TuitionRepositoryImpl;
 import university.green.staff.repository.interfaces.BreakAppRepository;
 import university.green.staff.repository.interfaces.StaffRepository;
@@ -45,7 +45,7 @@ public class ManagementController extends HttpServlet {
         breakAppRepository=new BreakAppRepositoryImpl();
         staffRepository=new StaffRepositoryImpl();
         professorRepository=new ProfessorRepositoryimpl();
-        studentRepository=new StudentRepositoryImpl();
+        studentRepository=new StudentRepositoryimpl();
         stuSubRepository=new StuSubRepositoryImpl();
         tuitionRepository=new TuitionRepositoryImpl();
     }

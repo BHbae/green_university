@@ -1,7 +1,7 @@
 package university.green;
 
 import university.green.professor.model.ProfessorDTO;
-import university.green.staff.model.StaffDTO;
+import university.green.staff.model.Staff_tb;
 import university.green.student.model.StudentDTO;
 
 public interface UserRepository {
@@ -17,7 +17,7 @@ public interface UserRepository {
 	ProfessorDTO professorDtail(int id);
 	
 	// 교직원
-	StaffDTO staffDtail(int id);
+	Staff_tb staffDtail(int id);
 	
 	
 }

@@ -10,8 +10,7 @@ import university.green.staff.repository.interfaces.StudentRepository;
 import university.green.student.model.StudentDTO;
 import university.green.util.DBUtil;
 
-
-public class StudentRepositoryImpl implements StudentRepository{
+public class StudentRepositoryimpl implements StudentRepository{
 
 	@Override
 	public void addStudent(StudentDTO studentDTO) {

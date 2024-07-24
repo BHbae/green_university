@@ -23,7 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 
-	public class StaffDTO {
+	public class Staff_tb {
 		private int id;
 		private String name;
 		private Date birth_date;

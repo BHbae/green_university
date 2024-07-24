@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import university.green.professor.model.ProfessorDTO;
-import university.green.staff.model.StaffDTO;
+import university.green.staff.model.Staff_tb;
 import university.green.student.model.StudentDTO;
 
 @WebServlet("/user/*")
@@ -64,7 +64,7 @@ public class UserController extends HttpServlet {
 						response.sendRedirect(request.getContextPath() + "/mainProfessor.jsp");
 
 					} else if (dto.getUser_role().equals("staff")) {
-						StaffDTO staffDitail = userRepository.staffDtail(dto.getId());
+						Staff_tb staffDitail = userRepository.staffDtail(dto.getId());
 						System.out.println(staffDitail);
 						HttpSession session = request.getSession();
 						session.setAttribute("principal", staffDitail);
