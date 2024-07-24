@@ -1,7 +1,6 @@
 package university.green.staff.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -26,11 +25,11 @@ public class NoticeController extends HttpServlet {
 		noticeRepository = new NoticeRepositoryImpl();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getPathInfo();
-
+		HttpSession session = request.getSession();
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
