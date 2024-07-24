@@ -43,11 +43,11 @@
 					</ul>
 		</nav>
 	</header>
-<!--  -->
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
 <body>
-
+<!-- 헤드 부분 -->
 <!-- 세부 메뉴 + 메인 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 

@@ -3,6 +3,7 @@ package university.green;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -92,9 +93,67 @@ public class UserController extends HttpServlet {
 
 			break;
 
+		case "findId" :
+			handleFindId(request, response);
+			break;
+			
+		case "findPassword" :
+			handleFindPassword(request, response);
+			break;
+			
+		case "findIdComplete" :
+			handleFindIdComplete(request, response);
+			break;
+			
+		case "findPasswordComplete" :
+			handleFindPasswordComplete(request, response);
+			break;
+			
+		case "PasswordPop" :
+			handlePasswordPop(request, response);
+			break;
+			
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
+	}
+
+	private void handlePasswordPop(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindPasswordComplete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindPassword(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+	    String email = request.getParameter("email");
+	    String userRole = request.getParameter("userRole"); 
+
+	    UserRepository userRepository = new UserRepositoryImpl();
+
+	    FindIdDto findIdDto = userRepository.findIdDtail(name, email, userRole);
+
+	    request.setAttribute("findIdDto", findIdDto);
+
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/findId.jsp");
+	    dispatcher.forward(request, response);
+		
+			
+		
 	}
 }
