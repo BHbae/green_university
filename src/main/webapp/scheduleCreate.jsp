@@ -125,6 +125,7 @@ width: 800px;
 	</tbody>
 	</table>
 	</div>
+	<a href="${pageContext.request.contextPath}/notice.jsp"  class="button">목록</a> 
 	<a href="/schedule/list?crud=insert" class="button">등록</a>
 	
     

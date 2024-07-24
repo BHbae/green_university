@@ -31,11 +31,8 @@ public class NoticeController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = request.getPathInfo();
-<<<<<<< HEAD
 		HttpSession session = request.getSession();
-=======
-		HttpSession session=request.getSession();
->>>>>>> a4377122a2f605faefc4de4a76ca68fdaab6cc89
+
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
@@ -75,8 +72,9 @@ public class NoticeController extends HttpServlet {
 
 	// 공지사항 전체 조회
 	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		
+		// 여기 수정
 		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
+		System.out.println(noticelist);
 		
 		request.setAttribute("noticelist", noticelist);
 		System.out.println(noticelist);
@@ -87,9 +85,14 @@ public class NoticeController extends HttpServlet {
 	// 상세보기 페이지로 이동
 	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
-
+		String idstr = (String) request.getAttribute("noticeid");
+		int id = Integer.parseInt(idstr);
+		System.out.println(idstr);
+		
 		try {
-
+			NoticeDTO noticeDTO = noticeRepository.detalNotice(id);
+			request.setAttribute("notice", noticeDTO);
+			System.out.println(noticeDTO);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -134,9 +137,10 @@ public class NoticeController extends HttpServlet {
 		}
 
 		int offset = (page - 1) * 10;
+		
 
-//		List<Notice> noticeList = noticeRepository.getAllNotice();
-//		int totalNotices = noticeRepository.getAllNotice();
+		List<NoticeDTO> noticeList = noticeRepository.getAllNotice();
+		int totalNotices = noticeList.size();
 
 //		request.getRequestDispatcher("").forward(request, response);
 
@@ -173,6 +177,8 @@ public class NoticeController extends HttpServlet {
 
 		}
 
+		
+		
 	}
 
 	// 학사일정 등록 처리

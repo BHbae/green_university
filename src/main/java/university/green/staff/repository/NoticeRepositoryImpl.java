@@ -19,6 +19,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	private static final String DELETE_NOTICE_SQL = "  DELETE FROM notice_tb WHERE id = ? ";
 	private static final String SELECT_ALL_NOTICE = " SELECT * FROM notice_tb ";
 	private static final String UPDATE_NOTICE_SQL = " UPDATE notice_tb SET title = ? , content = ?  WHERE id = ? ";
+	private static final String DATAL_NOTICE_SQL = " select * from notice_tb WHERE id = ? " ;
 
 	@Override // 등록
 	public int addNotice(NoticeDTO notice) {
@@ -197,6 +198,34 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 		}
 
 		return rowCount;
+	}
+
+	// 상세보기
+	@Override
+	public NoticeDTO detalNotice(int id) {
+		NoticeDTO notice = null;
+		try (Connection conn = DBUtil.getConnection()) {
+
+			try (PreparedStatement pstmt = conn.prepareStatement(DATAL_NOTICE_SQL)) {
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					notice = NoticeDTO.builder().id(rs.getInt("id"))
+											 .title(rs.getString("title"))
+											 .content(rs.getString("content"))
+											 .build();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return notice;
 	}
 
 }
