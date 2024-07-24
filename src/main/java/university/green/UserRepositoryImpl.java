@@ -81,13 +81,13 @@ public class UserRepositoryImpl implements UserRepository{
 					dto = ProfessorDTO.builder()
 							.id(rs.getInt("id"))
 							.name(rs.getString("name"))
-							.birth_date(rs.getDate("birth_date"))
+							.birthDate(rs.getDate("birth_date"))
 							.gender(rs.getString("gender"))
 							.address(rs.getString("address"))
 							.tel(rs.getString("tel"))
 							.email(rs.getString("email"))
-							.dept_int(rs.getInt("dept_id"))
-							.hire_date(rs.getDate("hire_date"))
+							.deptId(rs.getInt("dept_id"))
+							.hireDate(rs.getDate("hire_date"))
 							.build();
 				}
 		} catch (Exception e) {
