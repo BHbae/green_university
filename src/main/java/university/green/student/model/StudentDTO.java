@@ -14,16 +14,16 @@ import lombok.ToString;
 @ToString
 public class StudentDTO {
 
-	private Integer id;
+	private int id;
 	private String name;
 	private Date birthDate;
 	private String gender;
 	private String address;
 	private String tel;
 	private String email;
-	private Integer deptId;
-	private Integer grade;
-	private Integer semester;
+	private int deptId;
+	private int grade;
+	private int semester;
 	private Date entranceDate;
 	private Date graduationDate;
 }

@@ -114,8 +114,11 @@ margin-top: 100px;
 	 <td class="line">미등록자 일반 휴학 접수 마감/ 등록금 전액반환 마감</td>
 	</tr>
 	
+	
 	</tbody>
 	</table>
+	
+	<a href="${pageContext.request.contextPath}/notice/allnotice"  class="button">목록</a> 
 	</div>
 	</main>
 

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Notice {
+public class NoticeDTO {
 	private int id;
 	private String category;
 	private String title;

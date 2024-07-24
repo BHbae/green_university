@@ -16,7 +16,7 @@
 		<div class="sub--menu--top">
 			<h2>학사정보</h2>
 		</div>
-		<!-- 메뉴 -->--
+		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
@@ -54,9 +54,13 @@
 		
 
 
-		<!-- 공지 수정 -->
+		<!-- 공지 수정 and 삭제 -->
+		<!--  유저 동일하면 ... -->
+		<!-- <c:if test = "{}">
+		<a class="btn btn-edit" href="#">수정</a>
+		<a class="btn btn-delete" href="#">삭제</a>
+		</c:if> --> 
 		
-
 
 		<!-- 공지 등록 -->
 		
@@ -80,7 +84,7 @@
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .jpeg, .png"> <label class="custom-file-label" for="customFile">Choose file</label>
 					</div>
-					<a href="/notice" class="button">목록</a> 
+					<a href="${pageContext.request.contextPath}/notice.jsp"  class="button">목록</a> 
 					<input type="submit" class="button" value="등록">
 				</form>
 				<script>

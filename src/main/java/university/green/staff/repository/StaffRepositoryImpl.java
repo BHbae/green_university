@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import university.green.staff.model.Staff_tb;
+import university.green.staff.repository.interfaces.StaffDTO;
 import university.green.staff.repository.interfaces.StaffRepository;
 import university.green.util.DBUtil;
 
@@ -36,12 +37,6 @@ public class StaffRepositoryImpl implements StaffRepository{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void updateStaff(Staff_tb staffDTO) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -89,6 +84,12 @@ public class StaffRepositoryImpl implements StaffRepository{
 			e.printStackTrace();
 		}
 		return staffList;
+	}
+
+	@Override
+	public void addStaff(StaffDTO staff) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

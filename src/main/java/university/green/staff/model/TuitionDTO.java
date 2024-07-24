@@ -1,26 +1,20 @@
 package university.green.staff.model;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-// 학사일정(직원?)
+// 등록 -> 단대별 등록금 DTO
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class Schedule_tb {
+public class TuitionDTO {
+	
+	private int collegeId;
+	private int amount;
 
-	private int id;
-	private int staffId;
-	private Date startDay;
-	private Date endDay;
-	private String information;
-	
-	
 }

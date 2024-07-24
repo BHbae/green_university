@@ -73,11 +73,11 @@ public class StudentRepositoryimpl implements StudentRepository{
 		String SELECT_ALL_STUDENT=" SELECT * FROM student_tb ORDER BY id limit ? offset ?";
 		try (Connection conn=DBUtil.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(SELECT_ALL_STUDENT)){
-			pstmt.setInt(1,10);
+			pstmt.setInt(1,20);
 			pstmt.setInt(2, 5);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				StudentDTO student=StudentDTO.builder().name(rs.getString("name")).birthDate(rs.getDate("birth_date")).gender(rs.getString("gender"))
+				StudentDTO student=StudentDTO.builder().id(rs.getInt("id")).name(rs.getString("name")).birthDate(rs.getDate("birth_date")).gender(rs.getString("gender"))
 				.address(rs.getString("address")).tel(rs.getString("tel")).email(rs.getString("email")).deptId(rs.getInt("dept_id"))
 				.grade(rs.getInt("grade")).semester(rs.getInt("semester")).entranceDate(rs.getDate("entrance_date")).graduationDate(rs.getDate("graduation_date")).build();
 				studentList.add(student);
