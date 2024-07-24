@@ -37,7 +37,7 @@
 						<li><a href="/">MY</a>
 						<li><a href="/">학사관리</a>
 						<li><a href="/">등록</a>
-						<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
+						<li><a href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
 					</ul>
 		</nav>
 	</header>

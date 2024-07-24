@@ -39,7 +39,7 @@ public class NoticeController extends HttpServlet {
 			handleNotice(request, response, session);
 			break;
 		// 공지사항 조회
-		case "/allnotice":
+		case "/allnotice":	
 			showViewNotice(request, response, session);
 			break;
 		// 학사일정 조회
@@ -101,7 +101,7 @@ public class NoticeController extends HttpServlet {
 	}
 
 	// 공지사항 검색 조회
-	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 
 		
 		

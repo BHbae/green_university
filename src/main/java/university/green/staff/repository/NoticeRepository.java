@@ -21,3 +21,4 @@ public interface NoticeRepository {
 	// 상세 페이지 안에서 수정
 	int updateNotice(NoticeDTO notice);
 }
+
