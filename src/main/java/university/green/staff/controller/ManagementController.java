@@ -365,6 +365,10 @@ public class ManagementController extends HttpServlet {
 		
 		if(deptId==0 || id==0) {
 			studentList=studentRepository.getAllStudent();
+		} else if (deptId==0 || id!=0) {
+			studentList.add(studentRepository.getStudentById(id));
+		} else if (deptId!=0 || id==0 ) {
+			studentList=studentRepository.getStudentByDeptId(deptId);
 		}
 		return studentList;
 		

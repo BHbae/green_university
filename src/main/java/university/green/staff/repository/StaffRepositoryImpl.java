@@ -94,9 +94,24 @@ public class StaffRepositoryImpl implements StaffRepository{
 
 	@Override
 	public StaffDTO getStaffByIdAndDeptId(int id, int deptId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		StaffDTO staff=null;
+		final String SELECT_ALL_STAFF=" SELECT * FROM staff_tb where id = ? ORDER BY id limit ? offset ?";
+		try (Connection conn=DBUtil.getConnection();
+				PreparedStatement pstmt=conn.prepareStatement(SELECT_ALL_STAFF)){
+			pstmt.setInt(1,id);
+			pstmt.setInt(2,10);
+			pstmt.setInt(3,5);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()) {
+				staff=StaffDTO.builder().name(rs.getString("name")).birth_date(rs.getDate("birth_date"))
+						.gender(rs.getString("gender")).address(rs.getString("address")).tel(rs.getString("tel"))
+						.email(rs.getString("email")).hire_date(rs.getDate("hire_date")).build();
+				return staff;
+		} }catch (Exception e) {
+			e.printStackTrace();
+		}
+		return staff;
+		}
 
 
 }
