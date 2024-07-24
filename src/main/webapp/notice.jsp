@@ -1,5 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,50 +63,34 @@ border-bottom: 2px solid gray;
 	<br>
 	
 	
-	<table class="table2" border="1">
 
-		<tr class="first--tr">
-			<td>번호</td>
-			<td>말머리</td>
-			<td>제목</td>
-			<td>작성일</td>
-			<td>조회수</td>
-		</tr>
-
-		<%
-		ResultSet rs = (ResultSet) request.getAttribute("resultSet");
-		if ( rs != null) {
-		%>
+	<c:choose>
+	<c:when test="${not empty notice}">
 	<table class="table" border="1">
-
 		<tr class="first--tr">
-			<td>번호</td>
-			<td>말머리</td>
-			<td>제목</td>
-			<td>작성일</td>
-			<td>조회수</td>
+				<th>번호</th>
+				<th>말머리</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>조회수</th>
 		</tr>
-         <%
-         while (rs.next()) {
-         %>   
-         
-         <tr>
-         
-         <td><%=rs.getInt("id")%></td>
-         <td><a href="view-post?id=<%=rs.getInt("id") %>"><%=rs.getString("title") %></a></td>
-         <td><%=rs.getString("content") %></td>
-         <td><%=rs.getString("created_time") %></td>
-         
-         </tr>
-         
-         <%
-         }
-         %>
-         
-          <%
-         }
-         %>
-  
+	<tbody>
+	<c:forEach var="notice" items="${noticelist}">
+	<tr>
+			<td><c:out value="${notice.id}"/></td>
+			<td><c:out value="${notice.category}"/></td>
+			<td><c:out value="${notice.title}"/></td>
+			<td><c:out value="${notice.content}"/></td>
+			<td><c:out value="${notice.created_time}"/></td>
+			<td><c:out value="${notice.views}"/></td>
+	</tr>
+	</c:forEach>
+	</tbody>
+	</c:when>
+  <c:otherwise>
+  <p>등록된 사용자가 없습니다.</p>
+  </c:otherwise>
+  </c:choose>
     
 		<tr class="second--tr">
 			<td>4</td>
@@ -123,21 +108,7 @@ border-bottom: 2px solid gray;
 			<td>3</td>
 		</tr>
 
-		<tr class="second--tr">
-			<td>2</td>
-			<td>[장학]</td>
-			<td>2023학년도 보건장학회 연구지원장학생 선발 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td>2</td>
-		</tr>
 
-		<tr class="second--tr">
-			<td>1</td>
-			<td>[학사]</td>
-			<td>2023학년도 1학기 학생예비군 전입 신고 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td></td>
-		</tr>
 
 
 

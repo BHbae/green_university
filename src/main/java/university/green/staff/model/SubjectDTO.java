@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Subject_tb {
+public class SubjectDTO {
 
 	private int id;
 	private String name;
