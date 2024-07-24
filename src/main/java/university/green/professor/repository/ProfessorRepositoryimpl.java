@@ -20,13 +20,13 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 			conn.setAutoCommit(false);
 			try (PreparedStatement pstmt=conn.prepareStatement(ADD_PROFESSOR)){
 				pstmt.setString(1, professorDTO.getName());
-				pstmt.setDate(2,professorDTO.getBirth_date());
+				pstmt.setDate(2,professorDTO.getBirthDate());
 				pstmt.setString(3, professorDTO.getGender());
 				pstmt.setString(4,professorDTO.getAddress());
 				pstmt.setString(5,professorDTO.getTel());
 				pstmt.setString(6, professorDTO.getEmail());
-				pstmt.setInt(7, professorDTO.getDept_id());
-				pstmt.setDate(8, professorDTO.getHire_date());
+				pstmt.setInt(7, professorDTO.getDeptId());
+				pstmt.setDate(8, professorDTO.getHireDate());
 				pstmt.executeUpdate();
 				conn.commit();
 			} catch (Exception e) {
@@ -56,13 +56,13 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 		final String SELECT_ALL_PROFESSOR=" SELECT * FROM professor_tb ORDER BY id limit ? offset ?";
 		try (Connection conn=DBUtil.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(SELECT_ALL_PROFESSOR)){
-			pstmt.setInt(1,10);
+			pstmt.setInt(1,20);
 			pstmt.setInt(2, 5);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				ProfessorDTO professor=ProfessorDTO.builder().name(rs.getString("name")).birth_date(rs.getDate("Birth_date"))
+				ProfessorDTO professor=ProfessorDTO.builder().id(rs.getInt("id")).name(rs.getString("name")).birthDate(rs.getDate("Birth_date"))
 						.gender(rs.getString("gender")).address(rs.getString("address")).tel(rs.getString("tel"))
-						.email(rs.getString("email")).dept_id(rs.getInt("dept_id")).hire_date(rs.getDate("hire_date")).build();
+						.email(rs.getString("email")).deptId(rs.getInt("dept_id")).hireDate(rs.getDate("hire_date")).build();
 				professorList.add(professor);
 			}
 		} catch (Exception e) {

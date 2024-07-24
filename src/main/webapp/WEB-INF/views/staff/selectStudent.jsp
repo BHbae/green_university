@@ -1,13 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- 교직원 - 학생 명단 조회 페이지 -->
 <title>학생 명단 조회</title>
+<style>
+	
+.sub--list--table th {
+	padding: 3px 9px;
+	text-align: center;
+}
+
+.sub--list--table td {
+	padding: 1px 9px;
+	text-align: center;
+}
+
+.sub--list--name {
+	text-align: left !important;
+	padding-right: 20px !important;
+}
+
+.sub--filter {
+	margin-bottom: 50px;
+}
+
+.sub--filter form {
+	display: flex;
+}
+
+.sub--filter form div {
+	background-color: buttonshadow;
+	padding: 13px 13px 7px 10px;
+}
+
+.sub--filter input[type="number"] {
+	width: 57px;
+	padding-left: 3px;
+}
+
+.sub--filter select[name="deptId"] {
+	width: 173px;
+}
+
+.sub--filter label {
+	margin-right: 5px;
+}
+
+.sub--filter input, .sub--filter select {
+	margin-right: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+}
+
+.sub--filter button {
+	background-color: gray;
+	padding: 2px 6px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	height: 28px;
+}
+
+.sub--plan--view li a:hover {
+	color: black;
+}
+.paging--container {
+	display: flex;
+	justify-content: center;
+}
+	
+</style>
 </head>
 <body>
+<
 	<h1>학생 명단 조회</h1>
 	
 	<!--/green/management/selectStudent-->
@@ -19,7 +88,8 @@
 		<input type="text" id="stu_id" name="stu_id" value="">
 		<input type="button" value="조회하기">
 	</form>
-	<c:when test="${not empty studentList}">
+	<c:choose>
+		<c:when test="${not empty studentList}">
 	<h3>학생 목록</h3>
 		<table border="1">
 			<tr>
@@ -37,22 +107,23 @@
 			</tr>
 			<c:forEach var="StudentDTO" items="${studentList}">
 				<tr>
-					<td><c:out value="${studentDTO.id}"/></td>
-					<td><c:out value="${studentDTO.name}"/></td>
-					<td><c:out value="${studentDTO.birth_date}"/></td>
-					<td><c:out value="${studentDTO.gender}"/></td>
-					<td><c:out value="${studentDTO.address}"/></td>
-					<td><c:out value="${studentDTO.tel}"/></td>
-					<td><c:out value="${studentDTO.email}"/></td>
-					<td><c:out value="${studentDTO.dept_id}"/></td>
-					<td><c:out value="${studentDTO.grade}"/></td>
-					<td><c:out value="${studentDTO.semester}"/></td>
-					<td><c:out value="${studentDTO.entrance_date}"/></td>
-					<td><c:out value="${studentDTO.graduation_date}"/></td>
+					<td>${StudentDTO.id}</td>
+					<td>${StudentDTO.name}</td>
+					<td>${StudentDTO.birthDate}</td>
+					<td>${StudentDTO.gender}</td>
+					<td>${StudentDTO.address}</td>
+					<td>${StudentDTO.tel}</td>
+					<td>${StudentDTO.email}</td>
+					<td>${StudentDTO.deptId}</td>
+					<td>${StudentDTO.grade}</td>
+					<td>${StudentDTO.semester}</td>
+					<td>${StudentDTO.entranceDate}</td>
+					<td>${StudentDTO.graduationDate}</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:when>
+	</c:choose>
 	
 	
 </body>

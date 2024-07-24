@@ -20,16 +20,22 @@ public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NoticeRepository noticeRepository;
 
-	@Override
-	public void init() throws ServletException {
+	
+	public NoticeController() {
+		super();
 		noticeRepository = new NoticeRepositoryImpl();
 	}
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getPathInfo();
+<<<<<<< HEAD
 		HttpSession session = request.getSession();
+=======
+		HttpSession session=request.getSession();
+>>>>>>> a4377122a2f605faefc4de4a76ca68fdaab6cc89
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
