@@ -36,7 +36,7 @@
 						<li><a href="/">홈</a>
 						<li><a href="/">MY</a>
 						<li><a href="/">수업</a>
-						<li><a href="/">수강신청</a>
+						<li><a href="/">학사정보</a>
 					</ul>
 		</nav>
 	</header>
