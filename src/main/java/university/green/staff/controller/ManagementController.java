@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -66,7 +67,11 @@ public class ManagementController extends HttpServlet {
 		 */
 		// TODO - 유저정보 받아오기
 		// TODO - 유효성 체크 (직원이 맞는지, null값은 아닌지)
-		System.out.println("get");
+		//if(session==null || session.getAttribute("principal")==null) {
+		//	request.getRequestDispatcher("/Login.jsp").forward(request, response);
+		//	return;
+		//}
+		
 		switch (action) {
 		// 학생 조회 페이지 이동
 		case "/selectStudent": {
@@ -246,6 +251,11 @@ public class ManagementController extends HttpServlet {
 		String action=request.getPathInfo(); // 페이지 처리
 		HttpSession session=request.getSession(); // 세션 받아오기
 		
+		if(session==null || session.getAttribute("principal")==null) {
+			response.sendRedirect(request.getContextPath()+"/user/login");
+			return;
+		}
+		
 		switch (action) {
 		// 특정 학생 조회
 		case "/selecSpecifictStudent": {
@@ -347,8 +357,15 @@ public class ManagementController extends HttpServlet {
 	 * @param session
 	 * @throws IOException 
 	 */
-	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	private List<StudentDTO> selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		int deptId=Integer.parseInt(request.getParameter("deptId"));
+		int id=Integer.parseInt(request.getParameter("stuId"));
+		List<StudentDTO> studentList=new ArrayList<>();
 		
+		if(deptId==0 || id==0) {
+			studentList=studentRepository.getAllStudent();
+		}
+		return studentList;
 		
 	}
 

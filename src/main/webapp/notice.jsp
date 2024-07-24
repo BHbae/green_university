@@ -77,12 +77,12 @@ border-bottom: 2px solid gray;
 	<tbody>
 	<c:forEach var="notice" items="${noticelist}">
 	<tr>
-			<td><c:out value="${notice.id}"/></td>
-			<td><c:out value="${notice.category}"/></td>
-			<td><c:out value="${notice.title}"/></td>
-			<td><c:out value="${notice.content}"/></td>
-			<td><c:out value="${notice.created_time}"/></td>
-			<td><c:out value="${notice.views}"/></td>
+			<td>${notice.id}</td>
+			<td>${notice.category}</td>
+			<td>${notice.title}</td>
+			<td>${notice.content}</td>
+			<td>${notice.createdTime}</td>
+			<td>${notice.views}</td>
 	</tr>
 	</c:forEach>
 	</tbody>
