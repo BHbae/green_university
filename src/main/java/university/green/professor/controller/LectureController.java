@@ -60,19 +60,29 @@ public class LectureController extends HttpServlet {
 
 	private void LectureviewsAll(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		// TODO - 예외처리 추가
+		int page = 1;
+		int pageSize = 10;
+		String pageStr = request.getParameter("page");
 		try {
-			String offsetStr = request.getParameter("offset");
-			int offset = Integer.parseInt(offsetStr); 
+			 try {
+	        if(pageStr != null ) {
+		            page = Integer.parseInt(pageStr);}
+	        } catch (Exception e) {
+		        page = 1;
+		    }
+			  
+			 int offset = (page -1) * pageSize;
+			 
+			List<lectureDTO> list = lectureList.lectureAllList(pageSize, offset);
 			
-			String pageStr = request.getParameter("page");
-			int page = Integer.parseInt(pageStr);
+			int totalLeture = lectureList.getTotalLectyreCount();
 			
-			List<lectureDTO> list = lectureList.lectureAllList(page, offset);
+			int totalPage = (int) Math.ceil((double) totalLeture / pageSize);
 			
+			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("lectureList", list);
-			
-			// TODO - 경로 수정
-			request.getRequestDispatcher("/WEB-INF/views/professor/test.jsp").forward(request, response);
+			request.setAttribute("page", page);
+			request.getRequestDispatcher("/WEB-INF/views/professor/profesoorLecture.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

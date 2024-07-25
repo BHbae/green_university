@@ -19,4 +19,7 @@ public interface lectureList {
 	// 본인 강의 평가 
 	void myLectureScore();
 	
+	// 페이지조회
+	int getTotalLectyreCount();
+	
 }

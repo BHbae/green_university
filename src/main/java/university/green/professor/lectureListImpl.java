@@ -23,17 +23,18 @@ public class lectureListImpl implements lectureList {
 			+ " join college_tb as coll "
 			+ " on dep.college_id = coll.id "
 			+ " ORDER BY id asc "
-			+ "limit 20 offset ? ";
+			+ "limit ? offset ? ";
 	
 	private final String SELECT_MY_LECTURE  =  "SELECT * FROM subject_tb where professor_id = ? " ;
-	
+	private final String ALL_TOTAL_PAGE = " select count(*) as count from subject_tb ";
 	
 	@Override
 	public List<lectureDTO> lectureAllList(int limit, int offset) {
 		List<lectureDTO> list = new ArrayList<>(); 
 		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(ALL_LIST_LECTURE)){
-				pstmt.setInt(1, offset);
+				pstmt.setInt(1, limit);
+				pstmt.setInt(2, offset);
 				
 				ResultSet rs = pstmt.executeQuery();
 				
@@ -106,6 +107,21 @@ public class lectureListImpl implements lectureList {
 	public void myLectureScore() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public int getTotalLectyreCount() {
+		int count = 0;
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(ALL_TOTAL_PAGE)){
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }
