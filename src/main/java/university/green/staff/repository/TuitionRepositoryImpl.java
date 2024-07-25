@@ -12,9 +12,21 @@ import university.green.util.DBUtil;
 public class TuitionRepositoryImpl implements TuitionRepository{
 
 	@Override
-	public void addTuition(TuitionDTO tuitionDTO) {
-		// TODO Auto-generated method stub
-		
+	public void addTuition(int studentId) {
+		TuitionDTO tuition=new TuitionDTO();
+		final String ADD_TUITION=" INSERT INTO tuition_tb (student_id,tui_year,semester,tui_amount,sch_type,sch_amount,status) "
+				+ " values ( ? , ? , ? , ? , ? , ? , ? )";
+		try (Connection conn=DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt=conn.prepareStatement(ADD_TUITION)){
+				pstmt.setInt(1, studentId);
+				pstmt
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@Override

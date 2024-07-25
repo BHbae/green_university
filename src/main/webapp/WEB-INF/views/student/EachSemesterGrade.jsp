@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>   
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>학기별 학기 성적 조회</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
 <body>
 	
@@ -37,36 +42,49 @@
 					</ul>
 		</nav>
 	</header>
+	
+			<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/notice.jsp" class="selected--menu" >공지사항</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/schedule_tb.jsp">학사일정</a></td>				
+				</tr>
+				
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/scheduleCreate.jsp"> 학사일정 등록</a></td>
+					</tr>
+				
+			</table>
+		</div>
+	</div>
 <!--  -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
 <body>
-	<h1>학기별 학기별성적 조회</h1>
-	<form action="choose-semester">
+	<h1>학기별 성적 조회</h1>
+	<form action="choose-semester" action="${pageContext.request.contextPath}/studentGrade/selectSepcificSubject">
 		<select name="year" id="year">
-			<option>
+			<option>2021년</option>
+			<option>2022년</option>
+			<option>2023년</option>
+			<option>2024년</option>
 		</select>
 		<select name="semester" id="semester">
-			<option>
+			<option>1학기</option>
+			<option>2학기</option>
 		</select>
 		<select name="semester" id="semester">
-			<option>
+			<option>전체</option>
+			<option>전공</option>
+			<option>교양</option>
 		</select>
 		<button></button>
 	</form>
 	<c:choose>
 		<c:when test="${true}">
 		<h2>과목별 성적</h2>
-		<form class="select-period" action="${pageContext.request.contextPath}/studentGrade/selectSepcificSubject" method="POST">
-			<select size="3"> <!-- 연도 -->
-			</select>
-			<select size="3"> <!-- 학기 -->
-			</select>
-			<select size="3"> <!-- 전공/교양 -->
-			</select>
-			<input type="submit" value="조회" class="submit-btn">
-		</form>
-		
 			<table border='1'>
 				<tr>
 					<th>연도</th>
@@ -76,20 +94,22 @@
 					<th>강의구분</th>
 					<th>학점</th>
 				</tr>
-				<c:forEach var="grade" items="${gradeList}">
-				<tr>
-					<td>${grade.year}</td>
-					<td>${grade.semester}</td>
-					<td>${grade.subId}</td>
-					<td>${grade.type}</td>
-					<td>$grade.score}</td>
-				</tr>
+				<c:forEach>
+					<tr>
+						<td>${EachGradeDTO.subYear}</td>
+						<td>${EachGradeDTO.semester}</td>
+						<td>${EachGradeDTO.subjectId}</td>
+						<td>${EachGradeDTO.name}</td>
+						<td>${EachGradeDTO.type}</td>
+						<td>${EachGradeDTO.grade}</td>
+					</tr>
 				</c:forEach>
+			</table>
 		</c:when>
 	</c:choose>
 	<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
-		</footer>
+	</footer>
 	
 </body>
 </html>

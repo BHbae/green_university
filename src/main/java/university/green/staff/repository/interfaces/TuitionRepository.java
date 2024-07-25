@@ -9,7 +9,7 @@ public interface TuitionRepository {
 	// 전체 조회, 삭제는 혹시 몰라 만들었습니다.
 	
 	// 등록금 - 추가
-	void addTuition(TuitionDTO tuitionDTO);
+	void addTuition(int StudentId);
 	// 등록금 - 수정
 	void updateTuition(TuitionDTO tuitionDTO);
 	// 등록금 - 삭제
