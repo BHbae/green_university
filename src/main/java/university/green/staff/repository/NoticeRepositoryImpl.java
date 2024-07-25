@@ -66,7 +66,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					titlelist.add(notice);
@@ -99,7 +99,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					titlelist.add(notice);
@@ -156,7 +156,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					noticelist.add(notice);
