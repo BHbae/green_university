@@ -357,10 +357,14 @@ public class ManagementController extends HttpServlet {
 	 * @param response
 	 * @param session
 	 * @throws IOException 
+	 * @throws ServletException 
 	 */
-	private List<StudentDTO> selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
 		int deptId=Integer.parseInt(request.getParameter("deptId"));
 		int id=Integer.parseInt(request.getParameter("stuId"));
+		int page=1;
+		int pageSize=20;
+		
 		List<StudentDTO> studentList=new ArrayList<>();
 		
 		if(deptId==0 || id==0) {
@@ -370,7 +374,16 @@ public class ManagementController extends HttpServlet {
 		} else if (deptId!=0 || id==0 ) {
 			studentList=studentRepository.getStudentByDeptId(deptId);
 		}
-		return studentList;
+		// 전체 학생 수 조회
+		int totalStudentNumber=studentList.size();
+		//총 페이지 수 계산
+		int totalPages=(int)Math.ceil((double)totalStudentNumber/pageSize);
+		
+		request.setAttribute("studentList", studentList);
+		request.setAttribute("totalStudentNumber", totalStudentNumber);
+		request.setAttribute("currentPage", page);
+		
+		request.getRequestDispatcher("/WEB-INF/views/staff/selectStudent.jsp").forward(request, response);
 		
 	}
 
