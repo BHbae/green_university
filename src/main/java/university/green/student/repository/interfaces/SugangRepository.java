@@ -1,4 +1,4 @@
-package university.green.student.repository;
+package university.green.student.repository.interfaces;
 
 import java.util.List;
 

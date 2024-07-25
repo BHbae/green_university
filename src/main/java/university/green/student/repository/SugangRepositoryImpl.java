@@ -1,4 +1,4 @@
-package university.green.student;
+package university.green.student.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import university.green.student.model.SugangDTO;
-import university.green.student.repository.SugangRepository;
+import university.green.student.repository.interfaces.SugangRepository;
 import university.green.util.DBUtil;
 
 public class SugangRepositoryImpl implements SugangRepository {

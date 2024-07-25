@@ -8,9 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import university.green.student.SugangRepositoryImpl;
 import university.green.student.model.SugangDTO;
-import university.green.student.repository.SugangRepository;
+import university.green.student.repository.SugangRepositoryImpl;
+import university.green.student.repository.interfaces.SugangRepository;
 @WebServlet ("/sugang/*")
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
