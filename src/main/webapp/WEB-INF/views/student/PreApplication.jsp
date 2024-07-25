@@ -62,7 +62,7 @@
                     <td><a href="${pageContext.request.contextPath}/sugang/listBoards">강의 시간표 조회</a></td>
                 </tr>
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/sugang/listBoards">예비 수강 신청</a></td>
+                    <td><a href="${pageContext.request.contextPath}/sugang/preApply">예비 수강 신청</a></td>
                 </tr>
                 <tr>
                     <td><a href="/sugang/SugangApply">수강 신청</a></td>
@@ -82,7 +82,7 @@
         <div class="d-flex justify-content-between align-items-start" style="margin-bottom: 50px;">
             <!-- 필터 및 검색 -->
             <div class="sub--filter">
-                <form action="${pageContext.request.contextPath}/sugang/search" method="get">
+                <form action="${pageContext.request.contextPath}/sugang/preSearch" method="get">
                     <div>
                         <label for="majorType">강의구분</label> 
                         <select name="majorType" id="majorType">
@@ -121,7 +121,7 @@
         </div>
         
         <c:choose>
-            <c:when test="${not empty boardList}">
+            <c:when test="${not empty preBoardList}">
                 <h4>
                     <span style="font-weight: 600;">강의 목록</span>&nbsp; 
                     <span style="color: gray; font-size: 18px;">[총 ${totalBoards}건]</span>
@@ -139,10 +139,11 @@
                             <th>요일시간 (강의실)</th>
                             <th>현재인원</th>
                             <th>정원</th>
+                            <th>신청</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="subject" items="${boardList}">
+                        <c:forEach var="subject" items="${preBoardList}">
                             <tr>
                                 <td>${subject.college}</td>
                                 <td>${subject.department}</td>
@@ -183,7 +184,7 @@
                     <ul class="page--list">
                         <c:forEach var="i" begin="1" end="${totalPages}" step="1">
                             <li>
-                                <a href="${pageContext.request.contextPath}/sugang/listBoards?page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a>
+                                <a href="${pageContext.request.contextPath}/sugang/preApply?page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a>
                             </li>
                         </c:forEach>
                     </ul>

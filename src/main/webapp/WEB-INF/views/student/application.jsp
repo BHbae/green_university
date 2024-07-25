@@ -62,9 +62,9 @@
                     <td><a href="${pageContext.request.contextPath}/sugang/listBoards">강의 시간표 조회</a></td>
                 </tr>
                 <tr>
-                    <td><a href="/sugang/preApply">예비 수강 신청</a></td>
+                    <td><a href="${pageContext.request.contextPath}/sugang/preApply">예비 수강 신청</a></td>
                 </tr>
-                <tr>
+                <tr>	
                     <td><a href="/sugang/SugangApply">수강 신청</a></td>
                 </tr>
                 <tr>
