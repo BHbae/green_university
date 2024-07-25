@@ -3,6 +3,7 @@ package university.green;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,11 +25,6 @@ public class UserController extends HttpServlet {
 		userRepository = new UserRepositoryImpl();
 
 	}
-<<<<<<< HEAD
-	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-=======
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -75,7 +71,7 @@ public class UserController extends HttpServlet {
 						session.setAttribute("principal", staffDitail);
 
 						// TODO - 수정 교직원 전용 메인 페이지로 이동처리
-						System.out.println("Principal 데이터: " + session.getAttribute("principal")); // 디버그용 출력
+						System.out.println("Principal 데이터: " + session.getAttribute("principal")); 
 						response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
 
 					} else {
@@ -96,42 +92,68 @@ public class UserController extends HttpServlet {
 			}
 
 			break;
->>>>>>> dev1
 
+		case "findId" :
+			handleFindId(request, response);
+			break;
+			
+		case "findPassword" :
+			handleFindPassword(request, response);
+			break;
+			
+		case "findIdComplete" :
+			handleFindIdComplete(request, response);
+			break;
+			
+		case "findPasswordComplete" :
+			handleFindPasswordComplete(request, response);
+			break;
+			
+		case "PasswordPop" :
+			handlePasswordPop(request, response);
+			break;
+			
+		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			break;
+		}
 	}
-<<<<<<< HEAD
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String action = request.getPathInfo();
-		 
-		    switch (action) {
-		        case "/login":
-		            String userId = request.getParameter("id");
-		            String password = request.getParameter("password");
-		            
-		            System.out.println("성공?");
-		            
-		            // 예시: 간단한 아이디와 비밀번호 확인 예시
-		            if (userId.equals("admin") && password.equals("password")) {
-		                // 로그인 성공 시 세션에 사용자 정보 등을 저장할 수 있음
-		                HttpSession session = request.getSession();
-		                session.setAttribute("userId", userId);
-		                
-		                // 로그인 성공 후 다른 페이지로 리다이렉트 예시
-		                response.sendRedirect(request.getContextPath() + "/dashboard");
-		            } else {
-		                // 로그인 실패 시 처리
-		                request.setAttribute("error", "아이디 또는 비밀번호가 일치하지 않습니다.");
-		                request.getRequestDispatcher("Login.jsp").forward(request, response);
-		            }
-		            break;
-
-		        default:
-		            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		            break;
-		    }
+	private void handlePasswordPop(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
-=======
->>>>>>> dev1
+
+	private void handleFindPasswordComplete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindPassword(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleFindId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+	    String email = request.getParameter("email");
+	    String userRole = request.getParameter("userRole"); 
+
+	    UserRepository userRepository = new UserRepositoryImpl();
+
+	    FindIdDto findIdDto = userRepository.findIdDtail(name, email, userRole);
+
+	    request.setAttribute("findIdDto", findIdDto);
+
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/findId.jsp");
+	    dispatcher.forward(request, response);
+		
+			
+		
+	}
 }
