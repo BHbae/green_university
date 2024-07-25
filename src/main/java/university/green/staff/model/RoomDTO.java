@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-// 등록 -> 단과대학 DTO
+// 등록 -> 강의실 DTO
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class College_tb {
+public class RoomDTO {
 
-	private int id;
-	private String name;
+	private String id;
+	private int collegeId;
 	
 }

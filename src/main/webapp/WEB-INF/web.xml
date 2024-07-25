@@ -20,7 +20,7 @@
     <url-pattern>/User</url-pattern>
 
   </servlet-mapping>
-  
-  
-  
+
+
+
 </web-app>

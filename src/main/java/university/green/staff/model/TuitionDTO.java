@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-// 등록 -> 학과 DTO
+// 등록 -> 단대별 등록금 DTO
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class Department_tb {
-	private int id;
-	private String name;
+public class TuitionDTO {
+	
 	private int collegeId;
+	private int amount;
 
 }

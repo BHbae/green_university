@@ -81,13 +81,13 @@ public class UserRepositoryImpl implements UserRepository{
 					dto = ProfessorDTO.builder()
 							.id(rs.getInt("id"))
 							.name(rs.getString("name"))
-							.birth_date(rs.getDate("birth_date"))
+							.birthDate(rs.getDate("birth_date"))
 							.gender(rs.getString("gender"))
 							.address(rs.getString("address"))
 							.tel(rs.getString("tel"))
 							.email(rs.getString("email"))
-							.dept_int(rs.getInt("dept_id"))
-							.hire_date(rs.getDate("hire_date"))
+							.deptId(rs.getInt("dept_id"))
+							.hireDate(rs.getDate("hire_date"))
 							.build();
 				}
 		} catch (Exception e) {
@@ -118,6 +118,18 @@ public class UserRepositoryImpl implements UserRepository{
 			e.printStackTrace();
 		}
 		return dto;
+	}
+
+	@Override
+	public FindIdDto findIdDtail(String name, String email, String userRole) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FindPasswordDto findPasswordDtail(String name, int id, String email, String userRole) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

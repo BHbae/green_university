@@ -11,22 +11,21 @@ import lombok.ToString;
 // 교수 DTO
 
 @Data
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Builder
+
 public class ProfessorDTO {
 	private int id;
 	private String name;
-	private Date birth_date;
+	private Date birthDate;
 	private String gender;
 	private String address;
 	private String tel;
 	private String email;
-	private Integer deptId;
-	private int dept_int;
-	private int dept_id;
-	private Date hire_date;
+	private int deptId;
+	private Date hireDate;
 }
 
 //찐

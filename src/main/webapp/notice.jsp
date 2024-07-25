@@ -1,4 +1,6 @@
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +25,14 @@ border-bottom: 2px solid gray;
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="/notice" class="selected--menu">공지사항</a></td>
+					<td><a href="${pageContext.request.contextPath}/notice.jsp" class="selected--menu" >공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="/schedule">학사일정</a></td>				
+					<td><a href="${pageContext.request.contextPath}/schedule_tb.jsp">학사일정</a></td>				
 				</tr>
 				
 					<tr>
-						<td><a href="/schedule/list"> 학사일정 등록</a></td>
+						<td><a href="${pageContext.request.contextPath}/scheduleCreate.jsp"> 학사일정 등록</a></td>
 					</tr>
 				
 			</table>
@@ -59,19 +61,37 @@ border-bottom: 2px solid gray;
 		</select> <input type="text" name="keyword" class="input--box" placeholder="검색어를 입력하세요"> <input type="submit" class="button" value="검색">
 	</form>
 	<br>
+	
+	
+
+	<c:choose>
+	<c:when test="${not empty notice}">
 	<table class="table" border="1">
-
-
 		<tr class="first--tr">
-			<td>번호</td>
-			<td>말머리</td>
-			<td>제목</td>
-			<td>작성일</td>
-			<td>조회수</td>
+				<th>번호</th>
+				<th>말머리</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>조회수</th>
 		</tr>
-
-
-
+	<tbody>
+	<c:forEach var="notice" items="${noticelist}">
+	<tr>
+			<td>${notice.id}</td>
+			<td>${notice.category}</td>
+			<td>${notice.title}</td>
+			<td>${notice.content}</td>
+			<td>${notice.createdTime}</td>
+			<td>${notice.views}</td>
+	</tr>
+	</c:forEach>
+	</tbody>
+	</c:when>
+  <c:otherwise>
+  <p>등록된 사용자가 없습니다.</p>
+  </c:otherwise>
+  </c:choose>
+    
 		<tr class="second--tr">
 			<td>4</td>
 			<td>[일반]</td>
@@ -88,21 +108,7 @@ border-bottom: 2px solid gray;
 			<td>3</td>
 		</tr>
 
-		<tr class="second--tr">
-			<td>2</td>
-			<td>[장학]</td>
-			<td>2023학년도 보건장학회 연구지원장학생 선발 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td>2</td>
-		</tr>
 
-		<tr class="second--tr">
-			<td>1</td>
-			<td>[학사]</td>
-			<td>2023학년도 1학기 학생예비군 전입 신고 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td></td>
-		</tr>
 
 
 
@@ -110,7 +116,8 @@ border-bottom: 2px solid gray;
 	</table>
 	<div class="paging--container">
 
-		<a href="/notice/list/1"> 1</a> &nbsp;&nbsp; <a href="/notice?crud=write" class="button">등록</a>
+		<a href="/notice/list/1"> 1</a> &nbsp;&nbsp; 
+		<a href="${pageContext.request.contextPath}/noticeCreate.jsp" class="button">등록</a>
 
 	</div>
 
