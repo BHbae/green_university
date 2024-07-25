@@ -109,12 +109,15 @@
 	
 	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
-	<form action="select-student" action="${pageContext.request.contextPath}/management/selecSpecifictStudent" method="POST">
+	<form action="selecSpecifictStudent" action="${pageContext.request.contextPath}/management/selecSpecifictStudent" method="POST">
 		<label for="deptId">학과 번호</label>
 		<input type="text" id="deptId" name="deptId" value="">
 		<label for="stuId">학번</label>
 		<input type="text" id="stuId" name="stuId" value="">
-		<input type="button" value="조회하기">
+		<input type="submit" value="조회하기">
+	</form>
+	<form action="selectStudent" action="${pageContest.request.contextpath}/management/selectStudent" method="GET">
+		<input type="submit" value="새학기 업데이트">
 	</form>
 	<c:choose>
 		<c:when test="${not empty studentList}">

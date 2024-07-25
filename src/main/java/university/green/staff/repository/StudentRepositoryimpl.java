@@ -144,4 +144,11 @@ public class StudentRepositoryimpl implements StudentRepository{
 		}
 		return student;
 	}
+
+	@Override
+	public List<StudentDTO> getTuiStudent() {
+		List<StudentDTO> studentList=null;
+		final String SELECT_STUDENT_BY_SCH_TYPE="  ";
+		return null;
+	}
 }

@@ -15,7 +15,7 @@ public interface TuitionRepository {
 	// 등록금 - 삭제
 	void deleteTuition(int id);
 	// 등록금 - 전체 조회
-	List<TuitionDTO> getAllTuition(TuitionDTO tuitionDTO);
+	List<TuitionDTO> getAllTuition();
 	// 등록금 - 학생 ID로 조회
 	TuitionDTO getTuitionById(TuitionDTO tuitionDTO);
 }

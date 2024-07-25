@@ -29,7 +29,9 @@ import university.green.staff.repository.interfaces.StaffRepository;
 import university.green.staff.repository.interfaces.StuSubRepository;
 import university.green.staff.repository.interfaces.StudentRepository;
 import university.green.staff.repository.interfaces.TuitionRepository;
+import university.green.student.model.BreakAppDTO;
 import university.green.student.model.StudentDTO;
+import university.green.student.model.TuitionDTO;
 
 /**
  * 직원 - 학사 관리 콘트롤러
@@ -78,6 +80,10 @@ public class ManagementController extends HttpServlet {
 			SelectAllStudent(request,response,session);
 			break;
 		}
+		case "/newSemester":{
+			SelectAllStudent(request,response,session);
+			break;
+		}
 		// 교수 조회 페이지 이동
 		case "/selectProfessor": {
 			selectAllProfessor(request,response,session);
@@ -103,9 +109,13 @@ public class ManagementController extends HttpServlet {
 			sendBill(request,response,session);
 			break;
 		}
+		case "/sendBillLetter": {
+			sendBillLetter(request,response,session);
+			break;
+		}
 		// 휴학 처리 페이지 이동
 		case "/absence": {
-			request.getRequestDispatcher("/WEB-INF/views/staff/breakApp.jsp").forward(request, response);
+			handleBreakApp(request,response,session);
 			break;
 		}
 		case "/setPeriod": {
@@ -118,6 +128,33 @@ public class ManagementController extends HttpServlet {
 	}
 
 	/**
+	 * 고지서 보내기
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void sendBillLetter(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		List<TuitionDTO> tuitionList=tuitionRepository.getAllTuition();
+		request.setAttribute("tuitionList", tuitionList);
+		request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
+	}
+
+	private void handleBreakApp(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		
+		List<BreakAppDTO> breakAppList=breakAppRepository.getAllBreakApp();
+		request.setAttribute("breakList", breakAppList);
+		request.getRequestDispatcher("/WEB-INF/views/staff/breakApp.jsp").forward(request, response);
+	}
+
+	private void updateStudentList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
 	 * 등록금 고지서 발송
 	 * 
 	 * @param request
@@ -127,6 +164,8 @@ public class ManagementController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void sendBill(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		List<StudentDTO> sendBillList=studentRepository.getAllStudent();
+		
 		request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
 	}
 
@@ -251,10 +290,10 @@ public class ManagementController extends HttpServlet {
 		String action=request.getPathInfo(); // 페이지 처리
 		HttpSession session=request.getSession(); // 세션 받아오기
 		
-		if(session==null || session.getAttribute("principal")==null) {
-			response.sendRedirect(request.getContextPath()+"/user/login");
-			return;
-		}
+//		if(session==null || session.getAttribute("principal")==null) {
+//			response.sendRedirect(request.getContextPath()+"/user/login");
+//			return;
+//		}
 		
 		switch (action) {
 		// 특정 학생 조회
@@ -264,7 +303,7 @@ public class ManagementController extends HttpServlet {
 		}
 		// 특정 교수 조회
 		case "/selectSpecificProfessor": {
-			sendRegisterProfessor(request,response,session);
+			selectSpecificProfessor(request,response,session);
 			break;
 		}
 		// 학생 등록하기 (정보 전송)
@@ -287,7 +326,46 @@ public class ManagementController extends HttpServlet {
 		}
 	}
 
-	
+
+	/**
+	 * 특정 교수 조회
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void selectSpecificProfessor(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) throws ServletException, IOException {
+		int deptId=Integer.parseInt(request.getParameter("deptId"));
+		int id=Integer.parseInt(request.getParameter("proId"));
+		int page=1;
+		int pageSize=20;
+		
+		List<ProfessorDTO> professorList=new ArrayList<>();
+		
+		if(deptId==0 || id==0) {
+			professorList=professorRepository.getAllProfessor();
+		} else if (deptId==0 || id!=0) {
+			professorList.add(professorRepository.getProfessorById(id));
+		} else if (deptId!=0 || id==0 ) {
+			professorList=professorRepository.getProfessorByDeptNo(deptId);
+		}
+		// 전체 학생 수 조회
+		int totalProfessorNumber=professorList.size();
+		//총 페이지 수 계산
+		int totalPages=(int)Math.ceil((double)totalProfessorNumber/pageSize);
+		
+		request.setAttribute("professorList", professorList);
+		request.setAttribute("totalStudentNumber", professorList);
+		request.setAttribute("currentPage", page);
+		
+		System.out.println(professorList);
+		request.getRequestDispatcher("/WEB-INF/views/staff/selectProfessor.jsp").forward(request, response);
+		
+	}
+
 	/**
 	 * 교직원 등록(교직원 정보 전송)
 	 * 
@@ -383,6 +461,7 @@ public class ManagementController extends HttpServlet {
 		request.setAttribute("totalStudentNumber", totalStudentNumber);
 		request.setAttribute("currentPage", page);
 		
+		System.out.println(studentList);
 		request.getRequestDispatcher("/WEB-INF/views/staff/selectStudent.jsp").forward(request, response);
 		
 	}

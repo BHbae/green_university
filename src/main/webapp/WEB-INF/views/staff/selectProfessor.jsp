@@ -15,8 +15,8 @@
 	<form class="searchProfessor" action="${pageContext.request.contextPath}/management/selectSpecificProfessor" method="POST">
 		<label for="dept_id">학과 번호</label>
 		<input type="text" id="deptId" name="deptId">
-		<label for="stu_id">사번</label>
-		<input type="text" id="proid" name="proId">
+		<label for="proId">사번</label>
+		<input type="text" id="proId" name="proId">
 		<input type="button" value="조회하기">
 	</form>
 	<c:choose>
