@@ -69,10 +69,10 @@ input[type=number] {
 		</div>
 		
 			<ul class="login--info">
-				<li><a href="/find/id"
+				<li><a href="${pageContext.request.contextPath}/findId.jsp"
 					onclick="window.open(this.href, '_blank', 'width=500, height=300'); return false;">
 						ID 찾기 </a></li>
-				<li><a href="/find/password"
+				<li><a href="${pageContext.request.contextPath}/findPassword.jsp"
 					onclick="window.open(this.href, '_blank', 'width=500, height=350'); return false;">
 						비밀번호 찾기 </a></li>
 			</ul>
