@@ -19,5 +19,9 @@ public interface UserRepository {
 	// 교직원
 	StaffDTO staffDtail(int id);
 	
+	// 아이디 찾기
+	FindIdDto findIdDtail(String name, String email, String userRole);
 	
+	// 비밀번호 찾기
+	FindPasswordDto findPasswordDtail(String name, int id , String email, String userRole);
 }
