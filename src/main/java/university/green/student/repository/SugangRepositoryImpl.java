@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import university.green.student.model.SugangDTO;
+import university.green.student.model.SugangSubDTO;
 import university.green.student.repository.interfaces.SugangRepository;
 import university.green.util.DBUtil;
 
@@ -40,6 +41,18 @@ public class SugangRepositoryImpl implements SugangRepository {
 			+ "where sub.type like ? and dep.name like ? and sub.name like ? "
 			+ "ORDER BY id asc "
 			+ "limit ? offset ?";
+	
+	// 신청시 현재정원 plus
+	private static final String STUDENT_PLUS = " UPDATE subject_tb "
+			+ " SET num_of_student = num_of_student + 1 "
+			+ " WHERE id = ? ";
+	
+	// 신청시 현재정원 minus
+	private static final String STUDENT_MINUS = " UPDATE subject_tb "
+			+ " SET num_of_student = num_of_student - 1 "
+			+ " WHERE id = ? ";
+	
+	
 	@Override
 	public List<SugangDTO> listBoard(int limit, int offset) {
 		List<SugangDTO> boardsList = new ArrayList<>();
@@ -203,6 +216,27 @@ public class SugangRepositoryImpl implements SugangRepository {
 		return preSearchList;
 	}
 	
+	@Override
+	public void StudentPlus(int id) {
+		try (Connection conn = DBUtil.getConnection()) {
+	        PreparedStatement pstmt = conn.prepareStatement(STUDENT_PLUS);
+	        pstmt.setInt(1, id);
+	        pstmt.executeUpdate();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	@Override
+	public void StudentMinus(int id) {
+		try (Connection conn = DBUtil.getConnection()) {
+	        PreparedStatement pstmt = conn.prepareStatement(STUDENT_MINUS);
+	        pstmt.setInt(1, id);
+	        pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	@Override
 	public List<SugangDTO> SugangApply(int limit, int offset) {
