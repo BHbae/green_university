@@ -14,11 +14,7 @@
 		jdbcUrl="jdbc:mysql://192.168.0.129:3306/universitydb?serverTimezone=Asia/Seoul"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 
-<<<<<<< HEAD
-		username="user1"
-=======
-		username="user4"
->>>>>>> 3e15b8919acd1850fd6894c5fc5895fcf9902ad6
+		username="user3"
 		password="0000"/>
 </Context>
 
