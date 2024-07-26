@@ -15,7 +15,7 @@
 		driverClassName="com.mysql.cj.jdbc.Driver"
 <<<<<<< HEAD
 
-		username="user3"
+		username="user1"
 		password="0000"/>
 =======
 		username="user3"

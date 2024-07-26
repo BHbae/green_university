@@ -55,6 +55,34 @@ border-bottom: 2px solid gray;
 
 		<!-- 공지 상세 조회 -->
 		
+	<c:choose>
+	<c:when test="${not empty noticelist}">
+	<table class="table" border="1">
+		<tr class="first--tr">
+				<th>제목</th>
+				<th>내용</th>
+	
+		</tr>
+	<tbody>
+	<c:forEach var="notice" items="${noticelist}"  >
+	<tr>
+			<td>${notice.id}</td>
+			<td>${notice.category}</td>
+			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
+
+			<td>${notice.creatdTime}</td>
+			<td>${notice.views}</td>
+	</tr>
+	</c:forEach>
+	</tbody>
+	</c:when>
+  <c:otherwise>
+  <p>등록된 사용자가 없습니다.</p>
+  </c:otherwise>
+  </c:choose>
+		
+		
+		
 			<div class="container">
 				<table class="table">
 					<tr class="title">
@@ -84,7 +112,7 @@ border-bottom: 2px solid gray;
 
 				<div class="select--button">
 				
-						<a href="/notice" class="button">목록</a> 
+						<a href="${pageContext.request.contextPath}/notice.jsp"  class="button">목록</a> 
 					<input type="submit" class="button" value="수정">
 					<input type="submit" class="button btn-edit" value="삭제">
 					

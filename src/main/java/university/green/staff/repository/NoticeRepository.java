@@ -20,5 +20,8 @@ public interface NoticeRepository {
 	List<NoticeDTO> getAllNotice();
 	// 상세 페이지 안에서 수정
 	int updateNotice(NoticeDTO notice);
+	// 상세 페이지로 이동
+	NoticeDTO detalNotice(int id);
 }
+
 

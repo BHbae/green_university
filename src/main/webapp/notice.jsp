@@ -65,7 +65,7 @@ border-bottom: 2px solid gray;
 	
 
 	<c:choose>
-	<c:when test="${not empty notice}">
+	<c:when test="${not empty noticelist}">
 	<table class="table" border="1">
 		<tr class="first--tr">
 				<th>번호</th>
@@ -73,15 +73,22 @@ border-bottom: 2px solid gray;
 				<th>제목</th>
 				<th>작성일</th>
 				<th>조회수</th>
+	
 		</tr>
 	<tbody>
-	<c:forEach var="notice" items="${noticelist}">
+	<c:forEach var="notice" items="${noticelist}"  >
 	<tr>
 			<td>${notice.id}</td>
 			<td>${notice.category}</td>
+<<<<<<< HEAD
+			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
+
+			<td>${notice.creatdTime}</td>
+=======
 			<td>${notice.title}</td>
 			<td>${notice.content}</td>
 			<td>${notice.createdTime}</td>
+>>>>>>> dev1
 			<td>${notice.views}</td>
 	</tr>
 	</c:forEach>
@@ -92,21 +99,7 @@ border-bottom: 2px solid gray;
   </c:otherwise>
   </c:choose>
     
-		<tr class="second--tr">
-			<td>4</td>
-			<td>[일반]</td>
-			<td>2023학년도 장애 인식개선 교육(법정의무교육) 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td>11</td>
-		</tr>
 
-		<tr class="second--tr">
-			<td>3</td>
-			<td>[일반]</td>
-			<td>Gartner Research(IT 분야 시장분석) 서비스 지원 안내</td>
-			<td>2024-07-18 14:14:25</td>
-			<td>3</td>
-		</tr>
 
 
 
@@ -117,7 +110,7 @@ border-bottom: 2px solid gray;
 	<div class="paging--container">
 
 		<a href="/notice/list/1"> 1</a> &nbsp;&nbsp; 
-		<a href="${pageContext.request.contextPath}/noticeCreate.jsp" class="button">등록</a>
+		<a href="${pageContext.request.contextPath}/staff/noticeCreate.jsp" class="button">등록</a>
 
 	</div>
 
