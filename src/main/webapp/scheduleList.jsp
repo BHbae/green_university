@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <title>그린대학교 학사관리시스템</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main.css">
+	href`="${pageContext.request.contextPath}/resources/css/main.css">
 <style>
 table {
 	border-collapse: collapse;
