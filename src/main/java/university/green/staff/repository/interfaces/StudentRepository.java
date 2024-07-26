@@ -16,6 +16,8 @@ public interface StudentRepository {
 	StudentDTO getStudentByDeptidAndId(int deptId, int id);
 	// 학생 - 전체 학생 조회
 	List<StudentDTO> getAllStudent();
+	// 학생 - 재학 중인 학생 조회
+	List<StudentDTO> getTuiStudent();
 	// 학생 - 정보 수정
 	void updateStudent(StudentDTO studentDTO);
 	// 학생 - 정보 삭제

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,31 @@ border-bottom: 2px solid gray;
 
 		<!-- 공지 상세 조회 -->
 		
+	<c:choose>
+	<c:when test="${not empty noticelist}">
+	<table class="table" >
+		<tr class="first--tr">
+				<th>제목</th>
+				<th>내용</th>
+	
+		</tr>
+	<tbody>
+	<c:forEach var="notice" items="${noticelist}"  >
+	<tr>
+			<td>${notice.title}</td>
+			<td>${notice.category}</td>
+
+	</tr>
+	</c:forEach>
+	</tbody>
+	</c:when>
+  <c:otherwise>
+  <p>등록된 내용이 없습니다.</p>
+  </c:otherwise>
+  </c:choose>
+		
+		
+		
 			<div class="container">
 				<table class="table">
 					<tr class="title">
@@ -84,7 +110,7 @@ border-bottom: 2px solid gray;
 
 				<div class="select--button">
 				
-						<a href="/notice" class="button">목록</a> 
+						<a href="${pageContext.request.contextPath}/notice.jsp"  class="button">목록</a> 
 					<input type="submit" class="button" value="수정">
 					<input type="submit" class="button btn-edit" value="삭제">
 					

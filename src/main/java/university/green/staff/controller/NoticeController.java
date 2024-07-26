@@ -1,7 +1,6 @@
 package university.green.staff.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import university.green.staff.model.NoticeDTO;
+import university.green.staff.model.ScheduleDTO;
 import university.green.staff.repository.NoticeRepository;
 import university.green.staff.repository.NoticeRepositoryImpl;
 
@@ -21,18 +21,16 @@ public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NoticeRepository noticeRepository;
 
-	
 	public NoticeController() {
 		super();
 		noticeRepository = new NoticeRepositoryImpl();
 	}
-	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getPathInfo();
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
@@ -41,20 +39,19 @@ public class NoticeController extends HttpServlet {
 			handleNotice(request, response, session);
 			break;
 		// 공지사항 조회
-		case "/allnotice":	
+		case "/allnotice":
 			showViewNotice(request, response, session);
 			break;
+
 		// 학사일정 조회
 		case "/schedule":
 			handleSchedule(request, response, session);
-
+			break;
+		// 학사일정 등록
+		case "/addschedule":
+			//addschedule(request, response, session);
 			break;
 
-		// 페이징 처리
-		case "/list":
-			handleList(request, response, session);
-
-			break;
 		case "/createNotice": // 등록 누르면 이동 -> 등록 페이지로
 			showCreateNoticeForm(request, response, session);
 
@@ -71,27 +68,62 @@ public class NoticeController extends HttpServlet {
 	}
 
 	// 공지사항 전체 조회
-	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	
 		
-		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
-		
-		request.setAttribute("noticelist", noticelist);
-		System.out.println(noticelist);
-		//request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);
-		request.getRequestDispatcher("/notice.jsp").forward(request, response);
-	}
-
-	// 상세보기 페이지로 이동
-	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
 
+		int page = 1;
+		int pageSize = 5;
+		String pageStr = request.getParameter("page");
 		try {
+			try {
+				if (pageStr != null) {
+					page = Integer.parseInt(pageStr);
+				}
+			} catch (Exception e) {
+				page = 1;
+			}
+
+			int offset = (page - 1) * pageSize;
+
+			List<NoticeDTO> noticelist = noticeRepository.getAllNotice(pageSize, offset);
+
+			int totalLeture = noticeRepository.countNotice();
+
+			int totalPage = (int) Math.ceil((double) totalLeture / pageSize);
+
+			request.setAttribute("page", page);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("noticelist", noticelist);
+			request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-		request.getRequestDispatcher("/WEB-INF/views/staff/noticeView.jsp").forward(request, response);
+	}
+
+	// 상세보기 페이지로 이동
+	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
+//		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
+		String idstr = (String) request.getAttribute("noticeid");
+		int id = Integer.parseInt(idstr);
+		System.out.println(idstr);
+		
+
+		String noticeid = request.getParameter("noticeid");
+
+		try {
+			NoticeDTO noticeDTO = noticeRepository.detalNotice(id);
+			request.setAttribute("notice", noticeDTO);
+			System.out.println(noticeDTO);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);
 
 	}
 
@@ -103,41 +135,24 @@ public class NoticeController extends HttpServlet {
 	}
 
 	// 공지사항 검색 조회
-	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	private void handleNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
 
-		
-		
 //		request.getRequestDispatcher("").forward(request, response);
 	}
 
 	// 학사일정 조회
-	private void handleSchedule(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	private void handleSchedule(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
 
-//		request.getRequestDispatcher("").forward(request, response);
+		List<ScheduleDTO> scheduleList = noticeRepository.scheduleAll();
+		request.setAttribute("schedule", scheduleList);
+
+		request.getRequestDispatcher("/WEB-INF/views/staff/selectSchedule.jsp").forward(request, response);
 	}
 
-	// 페이징 처리
-	private void handleList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		int page = 1;
-		int pageSize = 10; // 게시글 수
+	
 
-		try {
-			String pageStr = request.getParameter("page");
-			if (pageStr != null) {
-				page = Integer.parseInt(pageStr);
-			}
-		} catch (Exception e) {
-			page = 1;
-		}
-
-		int offset = (page - 1) * 10;
-
-//		List<Notice> noticeList = noticeRepository.getAllNotice();
-//		int totalNotices = noticeRepository.getAllNotice();
-
-//		request.getRequestDispatcher("").forward(request, response);
-
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
@@ -170,6 +185,8 @@ public class NoticeController extends HttpServlet {
 
 		}
 
+		
+		
 	}
 
 	// 학사일정 등록 처리
@@ -180,11 +197,9 @@ public class NoticeController extends HttpServlet {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 		String startDay = request.getParameter("startDay");
-		Integer.parseInt(startDay); 
-		
-		
+		Integer.parseInt(startDay);
+
 		noticeRepository.addNotice(null);
-		
 
 		// TODO date 변환
 

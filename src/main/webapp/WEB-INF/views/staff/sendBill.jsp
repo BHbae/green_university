@@ -8,8 +8,13 @@
 </head>
 <body>
 	<h1>등록금 고지서 발송</h1>
-	<form action="" method="GET">
+	<h1>휴학 처리</h1>
+	<c:choose>
+		<!-- todo - 만약 휴학 신청이 있다면 테이블 생성 -->
+		<form action="sendBill" action="${pageContext.request.contextPath}/management/sendBillLetter" method="GET">
 		<input type="submit" value="등록금 고지서 발송">
-	</form>
+		</form>
+		
+	</c:choose>
 </body>
 </html>

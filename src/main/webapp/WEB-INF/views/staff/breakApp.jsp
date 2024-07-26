@@ -42,6 +42,28 @@
 	<h1>휴학 처리</h1>
 	<c:choose>
 		<!-- todo - 만약 휴학 신청이 있다면 테이블 생성 -->
+		<c: when test="${breakList!=null}">
+			<table border="1">
+			<tr>
+				<th>신청일자</th>
+				<th>신청자 학번</th>
+				<th>구분</th>
+				<th>시작학기</th>
+				<th>종료 학기</th>
+				<th>신청서 확인</th>
+			</tr>
+			<c:forEach var="BreakAppDTO" items="${breakAppList}">
+				<tr>
+					<td>${BreakAppDTO.appDate}</td>
+					<td>${ProfessorDTO.studentId}</td>
+					<td>${ProfessorDTO.type}</td>
+					<td>${ProfessorDTO.fromYear} 년도 ${ProfessorDTO.fromSemester}학기</td>
+					<td>${ProfessorDTO.toYear} 년도 ${ProfessorDTO.toSemester}학기</td>
+					<td><a href=#>Click</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+		</c:>
 		<c:otherwise>
 			<p>대기 중인 신청 내역이 없습니다.</p>
 		</c:otherwise>

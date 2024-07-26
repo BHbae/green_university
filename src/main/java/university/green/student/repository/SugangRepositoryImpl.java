@@ -133,9 +133,77 @@ public class SugangRepositoryImpl implements SugangRepository {
 	
 	@Override
 	public List<SugangDTO> preApply(int limit, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		List<SugangDTO> preBoardList = new ArrayList<>();
+		
+		 try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(ALL_SUGANG);
+			pstmt.setInt(1, limit);
+			pstmt.setInt(2, offset);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				preBoardList.add(SugangDTO.builder()
+					.id(rs.getInt("id"))
+					.college(rs.getString("college"))
+					.department(rs.getString("department"))
+					.majorType(rs.getString("majorType"))
+					.departNum(rs.getInt("departNum"))
+					.subjectName(rs.getString("subjectName"))
+					.professorName(rs.getString("professorName"))
+					.grades(rs.getInt("grades"))
+					.subjectDay(rs.getString("subjectDay"))
+					.subjectStart(rs.getInt("subjectStart"))
+					.subjectEnd(rs.getInt("subjectEnd"))
+					.room(rs.getString("room"))
+					.capacity(rs.getInt("capacity"))
+					.currentStudent(rs.getInt("currentStudent"))
+					.build());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return preBoardList;
 	}
+	
+	
+	@Override
+	public List<SugangDTO> preSearchBoard(String majorType, String department, String subjectName, int limit, int offset) {
+		List<SugangDTO> preSearchList = new ArrayList<>();
+		
+		 try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(SEARCH_SUGANG);
+			pstmt.setString(1, "%" + majorType + "%");
+	        pstmt.setString(2, "%" + department + "%");
+	        pstmt.setString(3, "%" + subjectName + "%");
+			pstmt.setInt(4, limit);
+			pstmt.setInt(5, offset);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				preSearchList.add(SugangDTO.builder()
+					.id(rs.getInt("id"))
+					.college(rs.getString("college"))
+					.department(rs.getString("department"))
+					.majorType(rs.getString("majorType"))
+					.departNum(rs.getInt("departNum"))
+					.subjectName(rs.getString("subjectName"))
+					.professorName(rs.getString("professorName"))
+					.grades(rs.getInt("grades"))
+					.subjectDay(rs.getString("subjectDay"))
+					.subjectStart(rs.getInt("subjectStart"))
+					.subjectEnd(rs.getInt("subjectEnd"))
+					.room(rs.getString("room"))
+					.capacity(rs.getInt("capacity"))
+					.currentStudent(rs.getInt("currentStudent"))
+					.build());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return preSearchList;
+	}
+	
+	
 	@Override
 	public List<SugangDTO> SugangApply(int limit, int offset) {
 		// TODO Auto-generated method stub

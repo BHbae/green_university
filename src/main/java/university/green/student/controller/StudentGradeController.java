@@ -6,18 +6,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import university.green.student.model.EachGradeDTO;
 import university.green.student.model.StudentDTO;
+import university.green.student.model.TotalGradeDTO;
+import university.green.student.repository.GradeRepositoryImpl;
+import university.green.student.repository.interfaces.GradeRepository;
 
 import java.io.IOException;
-//check
+import java.util.List;
+
 @WebServlet("/studentGrade/*")
 public class StudentGradeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	// TODO - 사용할 DAO 생성하기
+	private GradeRepository gradeRepository; // 과목별 성적
 	
     public StudentGradeController() {
         super();
-        // TODO - 사용할 DAO 초기화 처리 
+        gradeRepository=new GradeRepositoryImpl();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,13 +31,15 @@ public class StudentGradeController extends HttpServlet {
 		// TODO - 유저정보 받아오기
 		// TODO - 유효성 체크 (직원이 맞는지, null값은 아닌지)
 		
-		if(session==null||session.getAttribute("principal")==null) {
-			request.getRequestDispatcher("/Login.jsp").forward(request, response);
-			return;
-		}
+		/*
+		 * if(session==null||session.getAttribute("principal")==null) {
+		 * request.getRequestDispatcher("/Login.jsp").forward(request, response);
+		 * return; }
+		 */
 		System.out.println("유효성 검사 통과");
-		
 		System.out.println("get");
+		
+		
 		switch(action) {
 		// 이번 학기 성적 조회
 		case "/gradeOfThisSemester": {
@@ -41,8 +48,12 @@ public class StudentGradeController extends HttpServlet {
 		}
 		// 학기별 성적 조회
 		case "/selectSemester": {
-			request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
+			selectEachSemester(request,response,session);
 			break;
+		}
+		// 학기별 성적 조회 -> 검색 기능
+		case "/searchSelectsemester": {
+			searchEachGrade(request,response,session);
 		}
 		// 총 누계 성적 조회
 		case "/totalGrade": {
@@ -56,6 +67,20 @@ public class StudentGradeController extends HttpServlet {
 	}
 
 	/**
+	 * 학기별 성적 조회 - 검색 기능
+	 * 
+	 * @param request
+	 * @param response
+	 * @param session
+	 */
+	private void searchEachGrade(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		int year=Integer.parseInt(request.getParameter("year"));
+		int semester=Integer.parseInt(request.getParameter("semester"));
+		String type=request.getParameter("type");
+	}
+
+	/**
 	 * 총 누계 성적 조회
 	 * 
 	 * @param request
@@ -66,9 +91,12 @@ public class StudentGradeController extends HttpServlet {
 	 */
 	private void selectTotalGrade(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		StudentDTO student=(StudentDTO)request.getAttribute("principal");
-		if(student!=null) {
-			request.setAttribute("studentId",student.getId());
-		} 
+		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
+		 */
+		
+		// 누계 성적(학기별 total,avg)
+		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(student.getId(), 2023, 1);
+		request.setAttribute("totalGrade", totalGrade);
 		request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
 	}
 
@@ -83,9 +111,11 @@ public class StudentGradeController extends HttpServlet {
 	 */
 	private void selectEachSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		StudentDTO student=(StudentDTO)request.getAttribute("principal");
-		if(student!=null) {
-			request.setAttribute("studentId",student.getId());
-		}
+		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
+		 */
+		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(student.getId(),2024,1);
+		request.setAttribute("EachGradeList", EachGradeList);
+		
 		request.getRequestDispatcher("/WEB-INF/views/student/EachSemesterGrade.jsp").forward(request, response);
 	}
 
@@ -100,9 +130,16 @@ public class StudentGradeController extends HttpServlet {
 	 */
 	private void selectThisSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		StudentDTO student=(StudentDTO)request.getAttribute("principal");
-		if(student!=null) {
-			request.setAttribute("studentId",student.getId());
-		}
+		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
+		 */
+		// 과목별 성적 조회
+		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(student.getId(),2023,1);
+		request.setAttribute("gradeList", gradeList);
+		
+		// 누계 성적(학기별 total,avg)
+		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(student.getId(), 2023, 1);
+		request.setAttribute("totalGrade", totalGrade);
+		
 		request.getRequestDispatcher("/WEB-INF/views/student/ThisSemesterGrade.jsp").forward(request, response);
 	}
 
@@ -119,6 +156,7 @@ public class StudentGradeController extends HttpServlet {
 		}
 		
 		switch(action) {
+		// 특정 과목 검색
 		case "/selectSepcificSubject": {
 			selectSpecificSubject(request,response,session);
 			break;
@@ -133,7 +171,6 @@ public class StudentGradeController extends HttpServlet {
 	}
 
 	private void selectSpecificSubject(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
 		
 	}
 

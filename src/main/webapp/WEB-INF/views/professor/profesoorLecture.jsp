@@ -91,7 +91,7 @@ table {
 		</div>
 
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<ul>
 				<li><a href="/">홈</a>
@@ -117,7 +117,7 @@ table {
 					<td><a href="${pageContext.request.contextPath}/lecture/lectureAll" class="selected--menu">전체강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="/">내강의 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/lecture/mylecture">내강의 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/">내강의 평가</a></td>
