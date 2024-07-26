@@ -229,12 +229,20 @@ public class SugangController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo();
+		System.out.println("Requested action: " + action);
 		
 		switch (action) {
 		
 		case "/SugangApply":
 			SugangApply(request, response);
 			break;
+		case "/StudentPlus":
+			HandleStudentPlus(request, response);
+			break;
+		case "/StudentMinus":
+			HandleStudentMinus(request, response);
+			break;
+			
 
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -242,6 +250,37 @@ public class SugangController extends HttpServlet {
 		}
 		
 	}
+	
+	/**
+	 * 신청 취소시 현재정원 감소
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void HandleStudentMinus(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		int id = Integer.parseInt(request.getParameter("id"));
+        sugangRepository.StudentMinus(id);
+        request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+		
+	}
+
+	/**
+	 * 신청시 현재정원 증가
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void HandleStudentPlus(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		int id = Integer.parseInt(request.getParameter("id"));
+        sugangRepository.StudentPlus(id);
+       
+        request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+		
+	}
+
+
 	/**
 	 * 수강신청
 	 * @param request
