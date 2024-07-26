@@ -90,12 +90,12 @@ public class StudentGradeController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void selectTotalGrade(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		//StudentDTO student=(StudentDTO)request.getAttribute("principal");
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
 		
 		// 누계 성적(학기별 total,avg)
-		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(student.getId(), 2023, 1);
+		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(2023000201, 2023, 1);
 		request.setAttribute("totalGrade", totalGrade);
 		request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
 	}
@@ -110,10 +110,10 @@ public class StudentGradeController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void selectEachSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		//StudentDTO student=(StudentDTO)request.getAttribute("principal");
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
-		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(student.getId(),2024,1);
+		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(2023000201,2024,1);
 		request.setAttribute("EachGradeList", EachGradeList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/student/EachSemesterGrade.jsp").forward(request, response);
@@ -129,16 +129,16 @@ public class StudentGradeController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void selectThisSemester(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		StudentDTO student=(StudentDTO)request.getAttribute("principal");
+		//StudentDTO student=(StudentDTO)request.getAttribute("principal");
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
 		// 과목별 성적 조회
-		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(student.getId(),2023,1);
+		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(2023000201,2023,1);
 		request.setAttribute("gradeList", gradeList);
 		
 		// 누계 성적(학기별 total,avg)
-		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(student.getId(), 2023, 1);
-		request.setAttribute("totalGrade", totalGrade);
+		List<TotalGradeDTO> totalGradeList=gradeRepository.getAllTotalGrade(2023000201, 2023, 1);
+		request.setAttribute("totalGradeList", totalGradeList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/student/ThisSemesterGrade.jsp").forward(request, response);
 	}

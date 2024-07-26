@@ -17,6 +17,7 @@ import lombok.ToString;
 public class TuitionDTO {
 	private int student_id;
 	private int tui_year;
+	private int semester;
 	private int tui_amount;
 	private int sch_type;
 	private int sch_amount;

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>    
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
@@ -8,8 +10,7 @@
 <meta charset="UTF-8">
 <title>금학기 성적 조회</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
-
-<header class="d-flex flex-column">
+	<header class="d-flex flex-column">
 		
 		<div class="header--top">
 			<ul>
@@ -37,13 +38,29 @@
 		</nav>
 	</header>
 	
+			<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/notice.jsp" class="selected--menu" >공지사항</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/schedule_tb.jsp">학사일정</a></td>				
+				</tr>
+				
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/scheduleCreate.jsp"> 학사일정 등록</a></td>
+					</tr>
+				
+			</table>
+		</div>
+	</div>
 <!--  -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
 <body>
 
-	<c:choose>
-		<c:when test="${not empty user}">
+<h2>금학기 성적 조회</h2>
+	<c:if test="${not empty gradeList}">
 		<h2>과목별 성적</h2>
 			<table border='1'>
 				<tr>
@@ -56,15 +73,15 @@
 					<th>성적</th>
 					<th>강의평가</th>
 				</tr>
-				<c:forEach var="GradeDTO" items="${gradeList}">
+				<c:forEach var="EachGradeDTO" items="${gradeList}">
 				<tr>
-					<td>${GradeDTO.subYear}</td>
-					<td>${GradeDTO.semester}</td>
-					<td>${GradeDTO.subjectId}</td>
-					<td>${GradeDTO.name}</td>
-					<td>${GradeDTO.type}</td>
-					<td>${GradeDTO.grades}</td>
-					<td>${GradeDTO.grade}</td>
+					<td>${EachGradeDTO.subYear}</td>
+					<td>${EachGradeDTO.semester}</td>
+					<td>${EachGradeDTO.subjectId}</td>
+					<td>${EachGradeDTO.name}</td>
+					<td>${EachGradeDTO.type}</td>
+					<td>${EachGradeDTO.grades}</td>
+					<td>${EachGradeDTO.grade}</td>
 					<td><a href=#>Click</a></td>
 				</tr>
 				</c:forEach>
@@ -80,20 +97,23 @@
 				<th>취득학점</th>
 				<th>성적평균</th>
 				</tr>
-			</table>
-		</c:when>
-		<c:forEach var="GradeDTO" items="${gradeList}">
+			
+			<c:forEach var="TotalGradeDTO" items="${totalGradeList}">
 				<tr>
-					<td>${GradeDTO.subYear}</td>
-					<td>${GradeDTO.semester}</td>
-					<td>${GradeDTO.subjectId}</td>
-					<td>${GradeDTO.name}</td>
-					<td>${GradeDTO.type}</td>
-					<td>${GradeDTO.grades}</td>
-					<td>${GradeDTO.grade}</td>
+					<td>${TotalGradeDTO.subYear}</td>
+					<td>${TotalGradeDTO.semester}</td>
+					<td>${TotalGradeDTO.subjectId}</td>
+					<td>${TotalGradeDTO.name}</td>
+					<td>${TotalGradeDTO.type}</td>
+					<td>${TotalGradeDTO.grades}</td>
+					<td>${TotalGradeDTO.grade}</td>
 				</tr>
 				</c:forEach>
-	</c:choose>
+			</table>
+		</c:if>
+		<c:if test="${empty gradeList}">
+			<p>조회할 성적 내역이 없습니다.</p>
+		</c:if>
 <footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>

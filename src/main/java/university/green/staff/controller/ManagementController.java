@@ -19,17 +19,20 @@ import university.green.professor.model.ProfessorDTO;
 import university.green.professor.repository.ProfessorRepositoryimpl;
 import university.green.professor.repositoryinterfaces.ProfessorRepository;
 import university.green.staff.model.StaffDTO;
+import university.green.staff.model.StuStatDTO;
 import university.green.staff.repository.BreakAppRepositoryImpl;
 import university.green.staff.repository.StaffRepositoryImpl;
 import university.green.staff.repository.StuStatRepositoryImpl;
 import university.green.staff.repository.StuSubRepositoryImpl;
 import university.green.staff.repository.StudentRepositoryimpl;
+import university.green.staff.repository.SubPeriodRepositoryImpl;
 import university.green.staff.repository.TuitionRepositoryImpl;
 import university.green.staff.repository.interfaces.BreakAppRepository;
 import university.green.staff.repository.interfaces.StaffRepository;
 import university.green.staff.repository.interfaces.StuStatRepository;
 import university.green.staff.repository.interfaces.StuSubRepository;
 import university.green.staff.repository.interfaces.StudentRepository;
+import university.green.staff.repository.interfaces.SubPeriodRepository;
 import university.green.staff.repository.interfaces.TuitionRepository;
 import university.green.student.model.BreakAppDTO;
 import university.green.student.model.StudentDTO;
@@ -49,6 +52,7 @@ public class ManagementController extends HttpServlet {
 	private StuSubRepository stuSubRepository; // 수강신청기간 인터페이스
 	private TuitionRepository tuitionRepository; // 등록금 고지서 인터페이스
 	private StuStatRepository stuStatRepository; // 학생 학적 인터페이스
+	private SubPeriodRepository subPeriodRepository; // 수강신청 기간 인터페이스
 	
 	public static int StuSubStatus; // 수강신청 기간 설정 스테이터스
 	// 0=기간 전, 1=기간 중, 2=기간 종료
@@ -63,6 +67,7 @@ public class ManagementController extends HttpServlet {
         stuSubRepository=new StuSubRepositoryImpl();
         tuitionRepository=new TuitionRepositoryImpl();
         stuStatRepository=new StuStatRepositoryImpl();
+        subPeriodRepository=new SubPeriodRepositoryImpl();
         
         StuSubStatus=0; // 수강신청 기간 불가
     }
@@ -88,6 +93,7 @@ public class ManagementController extends HttpServlet {
 			SelectAllStudent(request,response,session);
 			break;
 		}
+		// 새학기 업데이트
 		case "/newSemester":{
 			SelectAllStudent(request,response,session);
 			break;
@@ -132,38 +138,47 @@ public class ManagementController extends HttpServlet {
 			setStuSubPeriod(request,response,session);
 			break;
 		}
-		// 수강 신청 기간 시작
-		case "/startStuSub" : {
-			startStuSub(request,response,session);
+		// 수강 신청 시작
+		case "/startStuSub" :{
+			startPeriod(request,response,session);
 			break;
 		}
-		// 수강 신청 기간 스톱
-		case "/StopStuSub" :{
-			stopStuSub(request,response,session);
+		// 수강 신청  종료
+		case "/stopStuSub" :{
+			stopPeriod(request,response,session);
 			break;
-		}
+				}
 		default: {
 			break;
 		}}
 	}
 
+
 	// 수강 신청 기간 종료
-	private void stopStuSub(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		StuSubStatus=2;
-		request.setAttribute("StuSubStatus", StuSubStatus);
+	private void stopPeriod(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		subPeriodRepository.startSubPeriod();
+		
+		int status=(subPeriodRepository.getSubPeriod()).getStatus();
+		
+		request.setAttribute("status", status);
 		request.getRequestDispatcher("/WEB-INF/views/staff/setStuSubPeriod.jsp").forward(request, response);
 	}
 
 	// 수강 신청 기간 시작
-	private void startStuSub(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		StuSubStatus=1;
-		request.setAttribute("StuSubStatus", StuSubStatus);
+	private void startPeriod(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		subPeriodRepository.startSubPeriod();
+		
+		int status=(subPeriodRepository.getSubPeriod()).getStatus();
+		
+		request.setAttribute("status", status);
 		request.getRequestDispatcher("/WEB-INF/views/staff/setStuSubPeriod.jsp").forward(request, response);
 	}
 
 	// 수강 신청 기간 페이지 진입
 	private void setStuSubPeriod(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		request.setAttribute("StuSubStatus", StuSubStatus);
+		int status=(subPeriodRepository.getSubPeriod()).getStatus();
+		
+		request.setAttribute("status", status);
 		request.getRequestDispatcher("/WEB-INF/views/staff/setStuSubPeriod.jsp").forward(request, response);
 	}
 
@@ -179,11 +194,14 @@ public class ManagementController extends HttpServlet {
 	private void sendBillLetter(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		
 		// 등록금 고지서 발송 대상인 학생들 리스트 뽑기
-		List<Integer> studentIdList=stuStatRepository.getAllStudentForBill();
+		List<Integer> studentStatList=stuStatRepository.getAllStudentForBill();
+		//System.out.println("학생 리스트 : "+studentStatList);
 		
 		// 학생 id, tuiYear, semester, tui_amount, sch_type, sch_amount, status
 		List<TuitionDTO> tuitionList=new ArrayList<>();
-		
+		//System.out.println("학생 ID :" + studentStatList.get(1));
+		System.out.println("tuitonDTO 출력:"+tuitionRepository.addTuition(2023000201));
+		//System.out.println("tuitonDTO 출력:"+tuitionRepository.getTuitionById(studentStatList.get(1)));
 		
 		// 학생들 수만큼 고지서 만들기
 		
@@ -198,11 +216,6 @@ public class ManagementController extends HttpServlet {
 		
 	}
 
-	private void updateStudentList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	/**
 	 * 등록금 고지서 발송
 	 * 
@@ -213,7 +226,7 @@ public class ManagementController extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void sendBill(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		List<StudentDTO> sendBillList=studentRepository.getAllStudent();
+		List<StudentDTO> sendBillList=studentRepository.getAllStudent(500,5);
 		
 		request.getRequestDispatcher("/WEB-INF/views/staff/sendBill.jsp").forward(request, response);
 	}
@@ -307,8 +320,8 @@ public class ManagementController extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	private void SelectAllStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		int page=1;
-		int pageSize=20;
+		int page=1; // 기본 페이지 번호
+		int pageSize=20; // 한 페이지당 학생 수
 		
 		try {
 			String pageStr=request.getParameter("page");
@@ -321,7 +334,7 @@ public class ManagementController extends HttpServlet {
 		}
 		
 		int offset=(page-1)*pageSize;
-		List<StudentDTO> studentList=studentRepository.getAllStudent();
+		List<StudentDTO> studentList=studentRepository.getAllStudent(pageSize,offset);
 		
 		// 전체 학생 수 조회
 		int totalStudentNumber=studentList.size();
@@ -335,6 +348,8 @@ public class ManagementController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/staff/selectStudent.jsp").forward(request, response);
 	}
 
+	
+	// Do-Post 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=request.getPathInfo(); // 페이지 처리
 		HttpSession session=request.getSession(); // 세션 받아오기
@@ -346,7 +361,7 @@ public class ManagementController extends HttpServlet {
 		
 		switch (action) {
 		// 특정 학생 조회
-		case "/selecSpecifictStudent": {
+		case "/selectSpecifictStudent": {
 			selectSpecificStudent(request,response,session);
 			break;
 		}
@@ -489,17 +504,21 @@ public class ManagementController extends HttpServlet {
 	private void selectSpecificStudent(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
 		int deptId=Integer.parseInt(request.getParameter("deptId"));
 		int id=Integer.parseInt(request.getParameter("stuId"));
+		String deptIdStr=request.getParameter("deptId");
+		String idStr=request.getParameter("stuId");
 		int page=1;
 		int pageSize=20;
-		
+		int offset=(page-1)*pageSize;
 		List<StudentDTO> studentList=new ArrayList<>();
 		
-		if(deptId==0 || id==0) {
-			studentList=studentRepository.getAllStudent();
+		if(deptId==0 || id==0 || deptIdStr.isEmpty() || idStr.isEmpty() ) {
+			studentList=studentRepository.getAllStudent(pageSize,offset);
 		} else if (deptId==0 || id!=0) {
 			studentList.add(studentRepository.getStudentById(id));
 		} else if (deptId!=0 || id==0 ) {
 			studentList=studentRepository.getStudentByDeptId(deptId);
+		} else {
+			studentList=null;
 		}
 		// 전체 학생 수 조회
 		int totalStudentNumber=studentList.size();

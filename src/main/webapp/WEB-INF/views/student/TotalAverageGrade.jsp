@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %> 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>총 누계 성적</title>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <header class="d-flex flex-column">
 		
 		<div class="header--top">
@@ -40,7 +46,7 @@
 
 	<h1>총 누계 성적</h1>
 	
-	<c:when test="${not empty totalList}">
+	<c:if test="${not empty totalList}">
 	<h3>평점 평균</h3>
 		<table border="1">
 			<tr>
@@ -50,16 +56,22 @@
 				<th>취득학점</th>
 				<th>평점평균</th>
 			</tr>
-			<c:forEach var="StudentDTO" items="${totalList}">
+			<c:forEach var="TotalGradeDTO" items="${totalGradeList}">
 				<tr>
-					<td><c:out value="${studentDTO.id}"/></td>
-					<td><c:out value="${studentDTO.name}"/></td>
-					<td><c:out value="${studentDTO.birth_date}"/></td>
-					<td><c:out value="${studentDTO.gender}"/></td>
-					<td><c:out value="${studentDTO.address}"/></td>
+					<td>${TotalGradeDTO.subYear}</td>
+					<td>${TotalGradeDTO.semester}</td>
+					<td>${TotalGradeDTO.subjectId}</td>
+					<td>${TotalGradeDTO.name}</td>
+					<td>${TotalGradeDTO.type}</td>
+					<td>${TotalGradeDTO.grades}</td>
+					<td>${TotalGradeDTO.grade}</td>
 				</tr>
-			</c:forEach>
+				</c:forEach>
 		</table>
-	</c:when>
+	</c:if>
+	
+	<c:if test="${empty totalList}">
+		<p>조회할 성적 내역이 없습니다.</p>
+	</c:if>
 </body>
 </html>

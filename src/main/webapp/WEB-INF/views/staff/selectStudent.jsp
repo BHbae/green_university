@@ -109,7 +109,7 @@
 	
 	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
-	<form action="selecSpecifictStudent" action="${pageContext.request.contextPath}/management/selecSpecifictStudent" method="POST">
+	<form action="selectSpecifictStudent" action="${pageContext.request.contextPath}/management/selectSpecifictStudent" method="POST">
 		<label for="deptId">학과 번호</label>
 		<input type="text" id="deptId" name="deptId" value="">
 		<label for="stuId">학번</label>

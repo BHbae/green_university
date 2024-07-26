@@ -64,6 +64,7 @@ public class ProfessorRepositoryimpl implements ProfessorRepository{
 						.gender(rs.getString("gender")).address(rs.getString("address")).tel(rs.getString("tel"))
 						.email(rs.getString("email")).deptId(rs.getInt("dept_id")).hireDate(rs.getDate("hire_date")).build();
 				professorList.add(professor);
+				System.out.println(professor);
 			}
 		} catch (Exception e) {
 			e.printStackTrace(); 
