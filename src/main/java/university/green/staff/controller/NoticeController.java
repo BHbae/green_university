@@ -85,6 +85,7 @@ public class NoticeController extends HttpServlet {
 	// 상세보기 페이지로 이동
 	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
+//		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
 		String idstr = (String) request.getAttribute("noticeid");
 		int id = Integer.parseInt(idstr);
 		System.out.println(idstr);

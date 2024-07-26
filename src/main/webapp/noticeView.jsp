@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@ border-bottom: 2px solid gray;
 		
 	<c:choose>
 	<c:when test="${not empty noticelist}">
-	<table class="table" border="1">
+	<table class="table" >
 		<tr class="first--tr">
 				<th>제목</th>
 				<th>내용</th>
@@ -66,18 +67,15 @@ border-bottom: 2px solid gray;
 	<tbody>
 	<c:forEach var="notice" items="${noticelist}"  >
 	<tr>
-			<td>${notice.id}</td>
+			<td>${notice.title}</td>
 			<td>${notice.category}</td>
-			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
 
-			<td>${notice.creatdTime}</td>
-			<td>${notice.views}</td>
 	</tr>
 	</c:forEach>
 	</tbody>
 	</c:when>
   <c:otherwise>
-  <p>등록된 사용자가 없습니다.</p>
+  <p>등록된 내용이 없습니다.</p>
   </c:otherwise>
   </c:choose>
 		
