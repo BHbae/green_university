@@ -1,5 +1,13 @@
-<!-- MY 페이지 휴학 신청 (학생) -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- MY 페이지 휴학 신청 (학생) -->
 <%@page import="java.util.Date"%>
 <%@page import="university.green.student.model.StudentDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -114,10 +122,10 @@ table {
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/lecture/lectureAll" class="selected--menu">전체강의 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/lecture/lectureAll">전체강의 조회</a></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/lecture/mylecture">내강의 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/lecture/mylecture" class="selected--menu">내강의 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/">내강의 평가</a></td>
@@ -129,65 +137,69 @@ table {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>전체강의 조회</h1>
+		<h1>내 강의 목록</h1>
 		<div class="split--div"></div>
 
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<form action="/break/application" method="post" class="d-flex flex-column align-items-center">
 				<div class="document--layout">
-					<h3>전체 강의 목록</h3>
+					<h3>계획서 조회</h3>
+					<c:if test="${detail != null && professor !=null}">
 					<table border="1">
 						<tr>
-							<th>단과학대</th>
-							<th>컴퓨터공학과</th>
-							<th>학수번호</th>
-							<th>강의구분</th>
-							<th>강의명</th>
 							<th>담당교수</th>
-							<th>학점</th>
-							<th>수강인원</th>
-							<th>정원</th>
-							<th>강의계획서</th>
-
+							<th>전화번호</th>
+							<th>이메일</th>
 						</tr>
-						<c:forEach var="lectureList" items="${lectureList}">
-							<tr>
-								<td><c:out value="${lectureList.id}" /></td>
-								<td><c:out value="${lectureList.college}" /></td>
-								<td><c:out value="${lectureList.departNum}" /></td>
-								<td><c:out value="${lectureList.majorType}" /></td>
-								<td><c:out value="${lectureList.subjectName}" /></td>
-								<td><c:out value="${lectureList.professorName}" /></td>
-								<td><c:out value="${lectureList.grades}" /></td>
-								<td><c:out value="${lectureList.subjectDay}" /></td>
-								<td><c:out value="${lectureList.subjectStart}" /></td>
-								<td><c:out value="${lectureList.subjectEnd}" /></td>
-								<td><c:out value="${lectureList.room}" /></td>
-								<td><c:out value="${lectureList.currentStudent}" /></td>
-								<td><c:out value="${lectureList.capacity}" /></td>
-							</tr>
-						</c:forEach>
+						
+						
+						<tr>
+							<td><c:out value="${professor.name}"/></td>
+							<td><c:out value="${professor.tel}" /></td>
+							<td><c:out value="${professor.email}" /></td>
+						</tr>
+					
+						<tr>
+							<th>학수번호</th>
+							<th>강의명</th>
+							<th>강의 시간(강의실)</th>
+						</tr>
+						
+						<tr>
+							<td><c:out value="${detail.id}"/></td>
+							<td><c:out value="${detail.name}" /></td>
+							<td><c:out value=" ${detail.subDay} ${detail.startTime}:00 - ${detail.endTime}:00 (${detail.roomId}) " /></td>
+						</tr>
+						
+						<tr>
+							<th>학점</th>
+							<th>수업학기</th>
+							<th>이수구분</th>
+						</tr>
+						
+						<tr>
+							<td><c:out value="${detail.greades}점"/></td>
+							<td><c:out value="${detail.semester}학기"/></td>
+							<td><c:out value="${detail.type}"/></td>
+						</tr>
+						<a href="${pageContext.request.contextPath}/lecture/mylecture"> 목록으로 돌아가기 </a>
+						
+							
+
+					</table>
+					</c:if>
 						<br>
 						<div class="pagination">
 							<!-- index for  -->
-							<c:forEach begin="1" end="${totalPage}" var="i">
-								<c:choose>
-									<c:when test="${ i == page }">
-										<span class="current-page">${i}</span>
-									</c:when>
-									<c:otherwise>
-										<span><a href="${pageContext.request.contextPath}/lecture/lectureAll?page=${i}">${i}</a></span>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+							
 						</div>
-
-					</table>
 				</div>
 
 			</form>
 		</div>
 	</main>
 </div>
+</body>
+</html>
 </body>
 </html>

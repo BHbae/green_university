@@ -19,7 +19,10 @@ public interface lectureList {
 	// 본인 강의 평가 
 	void myLectureScore();
 	
-	// 페이지조회
+	// 페이지조회 - o
 	int getTotalLectyreCount();
+	
+	// 상세 보기 페이지 전환
+	subjectDTO detailLecture(int lectureId, int professorId);
 	
 }
