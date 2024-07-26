@@ -15,6 +15,9 @@
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		username="user3"
 		password="0000"/>
+<<<<<<< HEAD
 		
+=======
+>>>>>>> flog
 </Context>
 

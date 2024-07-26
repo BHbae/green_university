@@ -24,9 +24,11 @@ public class lectureListImpl implements lectureList {
 			+ " on dep.college_id = coll.id "
 			+ " ORDER BY id asc "
 			+ "limit ? offset ? ";
+
 	
-	private final String SELECT_MY_LECTURE  =  "SELECT * FROM subject_tb where professor_id = ? " ;
 	private final String ALL_TOTAL_PAGE = " select count(*) as count from subject_tb ";
+	private final String SELECT_MY_LECTURE  =  "SELECT * FROM subject_tb where professor_id = ? " ;
+	private final String SELECT_DETAIL_LECTURE  =  " SELECT * FROM subject_tb where professor_id = ? and id = ? " ;
 	
 	@Override
 	public List<lectureDTO> lectureAllList(int limit, int offset) {
@@ -122,6 +124,41 @@ public class lectureListImpl implements lectureList {
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public subjectDTO detailLecture(int lectureId, int professorId) {
+		subjectDTO dto = null; 
+		
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_DETAIL_LECTURE)){
+			pstmt.setInt(1, lectureId);
+			pstmt.setInt(2, professorId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				 dto = subjectDTO.builder()
+						.id(rs.getInt("id"))
+						.name(rs.getString("name"))
+						.professor(rs.getInt("professor_id"))
+						.roomId(rs.getString("room_id"))
+						.deptId(rs.getInt("dept_id"))
+						.type(rs.getString("type"))
+						.subYear(rs.getInt("sub_year"))
+						.semester(rs.getInt("semester"))
+						.subDay(rs.getString("sub_day"))
+						.startTime(rs.getInt("start_time"))
+						.endTime(rs.getInt("end_time"))
+						.greades(rs.getInt("grades"))
+						.capacity(rs.getInt("capacity"))
+						.numOfStudent(rs.getInt("num_of_student"))
+						.build();
+			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 }

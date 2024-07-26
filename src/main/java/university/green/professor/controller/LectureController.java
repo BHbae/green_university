@@ -36,9 +36,34 @@ public class LectureController extends HttpServlet {
 		case "/mylecture":
 			LectureviewsMy(request, response, session);
 			break;
+		case "/detailLecture":
+			LectureDeteil(request, response, session);
+			break;
 		default:
 			break;
 		}
+		
+	}
+
+	private void LectureDeteil(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String lectureIdStr = request.getParameter("id");
+		int lectureId = Integer.parseInt(lectureIdStr); 
+		
+		
+		try {
+			ProfessorDTO professor = (ProfessorDTO)session.getAttribute("principal");
+			subjectDTO lecture = lectureList.detailLecture(professor.getId(), lectureId);
+			
+			request.setAttribute("professor", professor);
+			request.setAttribute("detail", lecture);
+			
+			// TODO - 경로 수정
+			request.getRequestDispatcher("/WEB-INF/views/professor/detailLecture.jsp").forward(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -51,7 +76,7 @@ public class LectureController extends HttpServlet {
 			request.setAttribute("lectureList", list);
 			
 			// TODO - 경로 수정
-			request.getRequestDispatcher("/WEB-INF/views/professor/test.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/professor/myLecture.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
