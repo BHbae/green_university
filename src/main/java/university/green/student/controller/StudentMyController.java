@@ -25,6 +25,19 @@ public class StudentMyController extends HttpServlet {
 		case "/my":
 			MyDitail(request, response, session);
 			break;
+		case "/mypassword":
+			MyDitail(request, response, session);
+			break;
+		case "/mybreakapp":
+			MyDitail(request, response, session);
+			break;
+		case "/mybreakapplist":
+			MyDitail(request, response, session);
+			break;
+		case "/mytuilist":
+			MyDitail(request, response, session);
+			break;
+			
 
 		default:
 			break;
