@@ -182,6 +182,7 @@ public class ManagementController extends HttpServlet {
 		List<Integer> studentIdList=stuStatRepository.getAllStudentForBill();
 		
 		// 학생 id, tuiYear, semester, tui_amount, sch_type, sch_amount, status
+		List<TuitionDTO> tuitionList=new ArrayList<>();
 		
 		
 		// 학생들 수만큼 고지서 만들기

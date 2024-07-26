@@ -19,8 +19,6 @@ public class TuitionRepositoryImpl implements TuitionRepository{
 		try (Connection conn=DBUtil.getConnection()){
 			conn.setAutoCommit(false);
 			try (PreparedStatement pstmt=conn.prepareStatement(ADD_TUITION)){
-				pstmt.setInt(1, studentId);
-				pstmt
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
