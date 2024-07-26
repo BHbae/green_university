@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import university.green.student.model.SugangDTO;
-import university.green.student.repository.SugangRepositoryImpl;
 import university.green.student.repository.interfaces.SugangRepository;
 @WebServlet ("/sugang/*")
 public class SugangController extends HttpServlet {

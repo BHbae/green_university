@@ -22,10 +22,8 @@ public interface NoticeRepository {
 	List<NoticeDTO> getAllNotice(int limit, int offset);
 	// 상세 페이지 안에서 수정
 	int updateNotice(NoticeDTO notice);
-<<<<<<< HEAD
 	// 상세 페이지로 이동
 	NoticeDTO detalNotice(int id);
-=======
 	// 공지사항 전체보기 페이징 카운트
 	int countNotice();
 	
@@ -40,7 +38,6 @@ public interface NoticeRepository {
 	
 	
 	
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 }
 
 

@@ -31,10 +31,6 @@ public class NoticeController extends HttpServlet {
 
 		String action = request.getPathInfo();
 		HttpSession session = request.getSession();
-<<<<<<< HEAD
-
-=======
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 		// 화면 이동, 조회(상세페이지)(조회수), 페어징 기능 // 상세보기 -> 세션 처리
 		// 상세 페이지 이동
 		switch (action) {
@@ -56,11 +52,6 @@ public class NoticeController extends HttpServlet {
 			//addschedule(request, response, session);
 			break;
 
-		// 페이징 처리
-		case "/list":
-			handleList(request, response, session);
-
-			break;
 		case "/createNotice": // 등록 누르면 이동 -> 등록 페이지로
 			showCreateNoticeForm(request, response, session);
 
@@ -77,17 +68,8 @@ public class NoticeController extends HttpServlet {
 	}
 
 	// 공지사항 전체 조회
-<<<<<<< HEAD
-	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		// 여기 수정
-		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
-		System.out.println(noticelist);
+	
 		
-		request.setAttribute("noticelist", noticelist);
-		System.out.println(noticelist);
-		//request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);
-		request.getRequestDispatcher("/notice.jsp").forward(request, response);
-=======
 	private void showViewNotice(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
 
@@ -120,23 +102,19 @@ public class NoticeController extends HttpServlet {
 			// TODO: handle exception
 		}
 
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 	}
 
 	// 상세보기 페이지로 이동
 	private void showViewPage(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
-<<<<<<< HEAD
 //		List<NoticeDTO> noticelist = noticeRepository.getAllNotice();
 		String idstr = (String) request.getAttribute("noticeid");
 		int id = Integer.parseInt(idstr);
 		System.out.println(idstr);
 		
-=======
 
 		String noticeid = request.getParameter("noticeid");
 
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 		try {
 			NoticeDTO noticeDTO = noticeRepository.detalNotice(id);
 			request.setAttribute("notice", noticeDTO);
@@ -173,29 +151,8 @@ public class NoticeController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/staff/selectSchedule.jsp").forward(request, response);
 	}
 
-	// 페이징 처리
-	private void handleList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		int page = 1;
-		int pageSize = 10; // 게시글 수
+	
 
-		try {
-			String pageStr = request.getParameter("page");
-			if (pageStr != null) {
-				page = Integer.parseInt(pageStr);
-			}
-		} catch (Exception e) {
-			page = 1;
-		}
-
-		int offset = (page - 1) * 10;
-		
-
-		List<NoticeDTO> noticeList = noticeRepository.getAllNotice();
-		int totalNotices = noticeList.size();
-
-//		request.getRequestDispatcher("").forward(request, response);
-
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {

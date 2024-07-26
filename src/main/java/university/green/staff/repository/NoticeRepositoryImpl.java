@@ -19,19 +19,15 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	private static final String DELETE_NOTICE_SQL = "  DELETE FROM notice_tb WHERE id = ? ";
 	private static final String SELECT_ALL_NOTICE = " SELECT * FROM notice_tb limit ? offset ? ";
 	private static final String UPDATE_NOTICE_SQL = " UPDATE notice_tb SET title = ? , content = ?  WHERE id = ? ";
-<<<<<<< HEAD
 	private static final String DATAL_NOTICE_SQL = " select * from notice_tb WHERE id = ? " ;
 
-=======
 	
 	private static final String COUNT_NOTICE_SQL = " select count(*) as count from notice_tb; ";
-	
 	private static final String SELECT_ALL_SCHEDULE = " select * from schedule_tb ";
 	private static final String INSERT_SCHEDULE = " INSERT INTO schedule_tb(staff_id,start_day,end_day,information) VALUES ( ? , ?, ?, ?) ";
 	
 	
 	
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 	@Override // 등록
 	public int addNotice(NoticeDTO notice) {
 		int rowCount = 0;
@@ -214,7 +210,6 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 		return rowCount;
 	}
 
-<<<<<<< HEAD
 	// 상세보기
 	@Override
 	public NoticeDTO detalNotice(int id) {
@@ -241,7 +236,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 		}
 		
 		return notice;
-=======
+	}
 	@Override
 	public int countNotice() {
 		int count = 0;
@@ -315,7 +310,6 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 			e.printStackTrace();
 		}
 		return rowCount;
->>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 	}
 
 }
