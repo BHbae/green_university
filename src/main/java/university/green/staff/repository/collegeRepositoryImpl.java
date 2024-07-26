@@ -10,6 +10,7 @@ import university.green.staff.model.CollegeDTO;
 import university.green.staff.repository.interfaces.collegeRepository;
 import university.green.util.DBUtil;
 
+// 등록 - 단과대학
 public class collegeRepositoryImpl implements collegeRepository {
 
 	private static final String SELECT_ALL_COLLEGE = " select * from college_tb ";

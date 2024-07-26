@@ -30,6 +30,7 @@
 			
 			<!-- 학과 조회 -->
 			
+			
 				<div class="total--container">
 				<table class="table--container">
 					<tbody><tr class="first--tr">
@@ -37,6 +38,18 @@
 						<td>학과명</td>
 						<td>단과대ID</td>
 					</tr>
+					
+					<c:forEach var="list" items="${list}">
+					<tr>
+						<td>${list.id}</td>
+						<td>${list.name}</td>
+						<td>${list.collegeId}</td>
+					</tr>
+					
+					</c:forEach>
+					
+					
+					
 					
 						<tr>
 							<td>101</td>

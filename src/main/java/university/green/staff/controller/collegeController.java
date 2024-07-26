@@ -31,16 +31,28 @@ public class collegeController extends HttpServlet {
 			collegelist(request, response);
 			break;
 		case "/collegeadd":
-
+			collegeadd(request, response);
 			break;
 		case "/collegedelete":
-
+			collegedelete(request, response);
 			break;
 
 		default:
 			break;
 		}
 
+	}
+
+	// 삭제
+	private void collegedelete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// 등록
+	private void collegeadd(HttpServletRequest request, HttpServletResponse response) {
+
+		 request.getRequestDispatcher("")
 	}
 
 	private void collegelist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

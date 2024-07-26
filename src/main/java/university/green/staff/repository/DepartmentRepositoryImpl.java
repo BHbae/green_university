@@ -10,6 +10,7 @@ import university.green.staff.model.DepartmentDTO;
 import university.green.staff.repository.interfaces.DepartmentRepository;
 import university.green.util.DBUtil;
 
+// 등록 - 학
 public class DepartmentRepositoryImpl implements DepartmentRepository {
 
 	private static final String SELECT_ALL_DEPARTMENT = " SELECT * FROM department_tb ";
@@ -21,25 +22,95 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 	public List<DepartmentDTO> departmentList() {
 		List<DepartmentDTO> list = new ArrayList<>();
 		
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_DEPARTMENT);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				DepartmentDTO dto = new DepartmentDTO();
+				dto = DepartmentDTO.builder()
+								   .id(rs.getInt("id"))
+								   .name(rs.getString("name"))
+								   .collegeId(rs.getInt("collegeId"))
+								   .build();
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return list;
 	}
 
-	@Override
-	public DepartmentDTO addDepartment() {
-		// TODO Auto-generated method stub
-		return null;
+	@Override //TODO
+	public void addDepartment(DepartmentDTO dto) {
+		
+		int rowCount = 0;
+		
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(INSERT_ADD_DEPARTMENT)){
+				pstmt.setString(1,dto.getName());
+				pstmt.setInt(2, dto.getCollegeId());
+				rowCount = pstmt.executeUpdate();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	@Override
-	public int updateDepartment() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateDepartment(DepartmentDTO dto) {
+		int rowCount = 0;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(UPDATE_DEPARTMENT)){
+				pstmt.setInt(1, dto.getId());
+				pstmt.setString(2, dto.getName());
+				pstmt.setInt(3, dto.getCollegeId());
+				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
 	}
 
 	@Override
-	public int deleteDepartment() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteDepartment(int id) {
+		int rowCount = 0;
+		
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_DEPARTMENT)){
+				pstmt.setInt(1,id);
+				rowCount = pstmt.executeUpdate();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
 	}
 
 	@Override
