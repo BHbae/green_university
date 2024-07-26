@@ -261,7 +261,7 @@ public class SugangController extends HttpServlet {
 	private void HandleStudentMinus(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
         sugangRepository.StudentMinus(id);
-        request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
 		
 	}
 
@@ -275,8 +275,8 @@ public class SugangController extends HttpServlet {
 	private void HandleStudentPlus(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
         sugangRepository.StudentPlus(id);
-       
-        request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+        
+        response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
 		
 	}
 
