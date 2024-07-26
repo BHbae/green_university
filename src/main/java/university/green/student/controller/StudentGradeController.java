@@ -103,9 +103,11 @@ public class StudentGradeController extends HttpServlet {
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
 		// 과목별 성적 조회
-		// 누계 성적(학기별 total,avg)
-		List<EachGradeDTO> gradeList=gradeRepository.getAllEachGrade(student.getId());
+		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(student.getId(),2023,1);
 		request.setAttribute("gradeList", gradeList);
+		
+		// 누계 성적(학기별 total,avg)
+		
 		request.getRequestDispatcher("/WEB-INF/views/student/ThisSemesterGrade.jsp").forward(request, response);
 	}
 
