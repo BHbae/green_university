@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/staff/noticeCreate.jsp=UTF-8
+=======
+>>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 encoding/<project>=UTF-8

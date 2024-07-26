@@ -1,13 +1,13 @@
 package university.green.staff.repository;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import university.green.staff.model.NoticeDTO;
+import university.green.staff.model.ScheduleDTO;
 import university.green.util.DBUtil;
 
 public class NoticeRepositoryImpl implements NoticeRepository {
@@ -17,10 +17,21 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	private static final String SELECT_NOTICE_BY_TITLE = " SELECT * FROM notice_tb WHERE title like %?% ";
 	private static final String SELECT_NOTICE_BY_TITLE_AND_CONTNET = " SELECT * FROM notice_tb WHERE title like %?% and content like %?% ";
 	private static final String DELETE_NOTICE_SQL = "  DELETE FROM notice_tb WHERE id = ? ";
-	private static final String SELECT_ALL_NOTICE = " SELECT * FROM notice_tb ";
+	private static final String SELECT_ALL_NOTICE = " SELECT * FROM notice_tb limit ? offset ? ";
 	private static final String UPDATE_NOTICE_SQL = " UPDATE notice_tb SET title = ? , content = ?  WHERE id = ? ";
+<<<<<<< HEAD
 	private static final String DATAL_NOTICE_SQL = " select * from notice_tb WHERE id = ? " ;
 
+=======
+	
+	private static final String COUNT_NOTICE_SQL = " select count(*) as count from notice_tb; ";
+	
+	private static final String SELECT_ALL_SCHEDULE = " select * from schedule_tb ";
+	private static final String INSERT_SCHEDULE = " INSERT INTO schedule_tb(staff_id,start_day,end_day,information) VALUES ( ? , ?, ?, ?) ";
+	
+	
+	
+>>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 	@Override // 등록
 	public int addNotice(NoticeDTO notice) {
 		int rowCount = 0;
@@ -67,7 +78,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					titlelist.add(notice);
@@ -100,7 +111,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					titlelist.add(notice);
@@ -142,13 +153,16 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 	@Override // 전체 조회
-	public List<NoticeDTO> getAllNotice() {
+	public List<NoticeDTO> getAllNotice(int limit, int offset) {
 
 		List<NoticeDTO> noticelist = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection()) {
 
 			try (PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_NOTICE)) {
-
+				
+				pstmt.setInt(1, limit);
+				pstmt.setInt(2, offset);
+				
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
@@ -157,7 +171,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 											 .category(rs.getString("category"))
 											 .title(rs.getString("title"))
 											 .content(rs.getString("content"))
-											 .creatdTime(rs.getTimestamp("created_time"))
+											 .createdTime(rs.getTimestamp("created_time"))
 											 .views(rs.getInt("views"))
 											 .build();
 					noticelist.add(notice);
@@ -200,6 +214,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 		return rowCount;
 	}
 
+<<<<<<< HEAD
 	// 상세보기
 	@Override
 	public NoticeDTO detalNotice(int id) {
@@ -226,6 +241,81 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 		}
 		
 		return notice;
+=======
+	@Override
+	public int countNotice() {
+		int count = 0;
+		
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(COUNT_NOTICE_SQL)){
+			
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public List<ScheduleDTO> scheduleAll() {
+		List<ScheduleDTO> scheduleDTO = new ArrayList<>();;
+		
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL_SCHEDULE)){
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ScheduleDTO dto = new ScheduleDTO();
+				dto = ScheduleDTO.builder()
+						.id(rs.getInt("id"))
+						.staffId(rs.getInt("staff_id"))
+						.startDay(rs.getDate("start_day"))
+						.endDay(rs.getDate("end_day"))
+						.information(rs.getString("information"))
+						.build();
+				scheduleDTO.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return scheduleDTO;
+	}
+
+
+	@Override
+	public int addSchedule(ScheduleDTO addaddSchedule, int staffId) {
+		int rowCount = 0;
+		
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(INSERT_SCHEDULE);
+				
+				pstmt.setInt(1, staffId);
+				pstmt.setDate(2, addaddSchedule.getStartDay());
+				pstmt.setDate(3, addaddSchedule.getEndDay());
+				pstmt.setString(4, addaddSchedule.getInformation());
+				
+				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rowCount;
+>>>>>>> d1291726cb407779e17498d58abb5cabc9940081
 	}
 
 }

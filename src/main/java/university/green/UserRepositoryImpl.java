@@ -120,4 +120,16 @@ public class UserRepositoryImpl implements UserRepository{
 		return dto;
 	}
 
+	@Override
+	public FindIdDto findIdDtail(String name, String email, String userRole) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FindPasswordDto findPasswordDtail(String name, int id, String email, String userRole) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
