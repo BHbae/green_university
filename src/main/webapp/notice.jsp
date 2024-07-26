@@ -81,6 +81,7 @@ border-bottom: 2px solid gray;
 			<td>${notice.id}</td>
 			<td>${notice.category}</td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
 
 			<td>${notice.creatdTime}</td>
@@ -89,6 +90,11 @@ border-bottom: 2px solid gray;
 			<td>${notice.content}</td>
 			<td>${notice.createdTime}</td>
 >>>>>>> dev1
+=======
+			<td><a href="${pageContext.request.contextPath}/notice/view?noticeid =${notice.id}">${notice.title}</a></td>
+
+			<td>${notice.creatdTime}</td>
+>>>>>>> 3e15b8919acd1850fd6894c5fc5895fcf9902ad6
 			<td>${notice.views}</td>
 	</tr>
 	</c:forEach>

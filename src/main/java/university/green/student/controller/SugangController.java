@@ -8,9 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import university.green.student.SugangRepositoryImpl;
 import university.green.student.model.SugangDTO;
-import university.green.student.repository.SugangRepository;
+import university.green.student.repository.SugangRepositoryImpl;
+import university.green.student.repository.interfaces.SugangRepository;
 @WebServlet ("/sugang/*")
 public class SugangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,11 +31,17 @@ public class SugangController extends HttpServlet {
 		
 		
 		switch (action) {
+		case "/listBoards":
+			handleListBoards(request, response);
+			break;
 		case "/search":
 			SearchSugangBoard(request, response);
 			break;
 		case "/preApply":
 			PreSugangApply(request, response);
+			break;
+		case "/preSearch":
+			preSearchBoard(request, response);
 			break;
 		case "/SugangApply":
 			SugangApply(request, response);
@@ -43,16 +49,53 @@ public class SugangController extends HttpServlet {
 		case "/ApplyInfo":
 			ApplyInfo(request, response);
 			break;
-		case "/listBoards":
-			handleListBoards(request, response);
-			break;
-
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 		
 	}
+	
+	/**
+	 * 예비 수강신청 검색
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void preSearchBoard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = 1;
+		int pageSize = 20;
+		String pageStr = request.getParameter("page");
+		String majorType = request.getParameter("majorType");
+		String department = request.getParameter("department");
+		String subjectName = request.getParameter("subjectName");
+		
+		try {
+			if(pageStr != null ) {
+				page = Integer.parseInt(pageStr);
+			}
+		} catch (Exception e) {
+			page = 1;
+		}
+		int offset = (page -1) * pageSize;
+		
+		
+		int totalBoards = sugangRepository.getTotalBoardCount();
+		
+		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
+		
+		
+		List<SugangDTO> preSearchBoard = sugangRepository.preSearchBoard(majorType, department, subjectName, pageSize, offset);
+		request.setAttribute("preBoardList", preSearchBoard);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("totalBoards", totalBoards);
+		System.out.println(preSearchBoard);
+		
+		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+	}
+		
 	
 
 	/**
@@ -101,7 +144,8 @@ public class SugangController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
 
 	/**
 	 * 수강신청 조회 기능
@@ -143,15 +187,51 @@ public class SugangController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/student/application.jsp").forward(request, response);
 	}
 	
-	
+	/**
+	 * 예비 수강신청
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void PreSugangApply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int page = 1;
+		int pageSize = 20;
+		String pageStr = request.getParameter("page");
+		
+		
+		try {
+			if(pageStr != null ) {
+				page = Integer.parseInt(pageStr);
+			}
+		} catch (Exception e) {
+			page = 1;
+		}
+		int offset = (page -1) * pageSize;
+		
+		
+		int totalBoards = sugangRepository.getTotalBoardCount();
+		
+		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
+		
+		
+		List<SugangDTO> preBoardList = sugangRepository.preApply(pageSize, offset);
+		request.setAttribute("preBoardList", preBoardList);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("totalBoards", totalBoards);
+		System.out.println(preBoardList);
+		
+		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+	}
+
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo();
 		
 		switch (action) {
-		case "/preApply":
-			PreSugangApply(request, response);
-			break;
+		
 		case "/SugangApply":
 			SugangApply(request, response);
 			break;
@@ -175,44 +255,5 @@ public class SugangController extends HttpServlet {
 		
 	}
 	
-	/**
-	 * 예비 수강신청
-	 * @param request
-	 * @param response
-	 * @throws IOException 
-	 * @throws ServletException 
-	 */
-	private void PreSugangApply(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int page = 1;
-		int pageSize = 20;
-		String pageStr = request.getParameter("page");
-		String majorType = request.getParameter("majorType");
-		String department = request.getParameter("department");
-		String subjectName = request.getParameter("subjectName");
-		
-		try {
-			if(pageStr != null ) {
-				page = Integer.parseInt(pageStr);
-			}
-		} catch (Exception e) {
-			page = 1;
-		}
-		int offset = (page -1) * pageSize;
-		
-		
-		int totalBoards = sugangRepository.getTotalBoardCount();
-		
-		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
-		
-		
-		List<SugangDTO> searchBoard = sugangRepository.searchBoard(majorType, department, subjectName, pageSize, offset);
-		request.setAttribute("boardList", searchBoard);
-		request.setAttribute("currentPage", page);
-		request.setAttribute("totalPages", totalPages);
-		request.setAttribute("totalBoards", totalBoards);
-		System.out.println(searchBoard);
-		
-		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
-	}
-
+	
 }

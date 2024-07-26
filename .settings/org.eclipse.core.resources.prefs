@@ -1,9 +1,10 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=dev1
 eclipse.preferences.version=1
 <<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/staff/noticeCreate.jsp=UTF-8
 =======
+<<<<<<< HEAD
 >>>>>>> dev1
+=======
+>>>>>>> d1291726cb407779e17498d58abb5cabc9940081
+>>>>>>> 3e15b8919acd1850fd6894c5fc5895fcf9902ad6
 encoding/<project>=UTF-8

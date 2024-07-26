@@ -1,12 +1,19 @@
-<!-- MY 페이지 휴학 신청 (학생) -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.Date"%>
-<%@page import="university.green.student.model.StudentDTO"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- MY 페이지 휴학 신청 (학생) -->
+	<%@page import="java.util.Date"%>
+	<%@page import="university.green.student.model.StudentDTO"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!DOCTYPE html>
 <html>
 <head>
 
@@ -96,8 +103,9 @@ table {
 			<ul>
 				<li><a href="/">홈</a>
 				<li><a href="/">MY</a>
-				<li><a href="${pageContext.request.contextPath}/lecture/lectureAll">수업</a>
-				<li><a href="">학사정보</a>
+				li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
+				<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
+				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
 			</ul>
 		</nav>
 	</header>
@@ -114,13 +122,13 @@ table {
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/lecture/lectureAll" class="selected--menu">전체강의 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/notice/allnotice" class="selected--menu">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/lecture/mylecture">내강의 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/notice/schedule">학사일정</a></td>
 				</tr>
 				<tr>
-					<td><a href="/">내강의 평가</a></td>
+					<td><a href="/">학사일정 등록</a></td>
 				</tr>
 
 			</table>
@@ -129,57 +137,44 @@ table {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>전체강의 조회</h1>
+		<h1>내 강의 목록</h1>
 		<div class="split--div"></div>
 
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<form action="/break/application" method="post" class="d-flex flex-column align-items-center">
 				<div class="document--layout">
-					<h3>전체 강의 목록</h3>
+					<h3>강의 목록</h3>
 					<table border="1">
 						<tr>
-							<th>단과학대</th>
-							<th>컴퓨터공학과</th>
-							<th>학수번호</th>
-							<th>강의구분</th>
-							<th>강의명</th>
-							<th>담당교수</th>
-							<th>학점</th>
-							<th>수강인원</th>
-							<th>정원</th>
-							<th>강의계획서</th>
-
+							<th>번호</th>
+							<th>말머리</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회수</th>
 						</tr>
-						<c:forEach var="lectureList" items="${lectureList}">
+						<c:forEach var="noticelist" items="${noticelist}">
 							<tr>
-								<td><c:out value="${lectureList.id}" /></td>
-								<td><c:out value="${lectureList.college}" /></td>
-								<td><c:out value="${lectureList.departNum}" /></td>
-								<td><c:out value="${lectureList.majorType}" /></td>
-								<td><c:out value="${lectureList.subjectName}" /></td>
-								<td><c:out value="${lectureList.professorName}" /></td>
-								<td><c:out value="${lectureList.grades}" /></td>
-								<td><c:out value="${lectureList.subjectDay}" /></td>
-								<td><c:out value="${lectureList.subjectStart}" /></td>
-								<td><c:out value="${lectureList.subjectEnd}" /></td>
-								<td><c:out value="${lectureList.room}" /></td>
-								<td><c:out value="${lectureList.currentStudent}" /></td>
-								<td><c:out value="${lectureList.capacity}" /></td>
+								<td>${noticelist.id}</td>
+								<td>${noticelist.category}</td>
+								<td><a href="${pageContext.request.contextPath}/notice/view?noticeid=${noticelist.id}">${noticelist.title}</a></td>
+								<td>${noticelist.createdTime}</td>
+								<td>${noticelist.views}</td>
 							</tr>
 						</c:forEach>
 						<br>
 						<div class="pagination">
 							<!-- index for  -->
-							<c:forEach begin="1" end="${totalPage}" var="i">
+						<c:forEach begin="1" end="${totalPage}" var="i">
 								<c:choose>
 									<c:when test="${ i == page }">
 										<span class="current-page">${i}</span>
 									</c:when>
 									<c:otherwise>
-										<span><a href="${pageContext.request.contextPath}/lecture/lectureAll?page=${i}">${i}</a></span>
+										<span><a href="${pageContext.request.contextPath}/notice/allnotice?page=${i}">${i}</a></span>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+							
 						</div>
 
 					</table>
@@ -189,5 +184,7 @@ table {
 		</div>
 	</main>
 </div>
+</body>
+</html>
 </body>
 </html>

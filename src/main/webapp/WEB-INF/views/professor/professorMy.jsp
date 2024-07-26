@@ -31,15 +31,13 @@
 		</div>
 		
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
-						<li><a href="/">홈</a>
-						<li><a href="/">MY</a>
-						<li><a href="/">수업</a>
-						<li><a href="/">수강신청</a>
-						<li><a href="/">성적</a>
-						<li><a href="/">학사 정보</a>
+				<li><a href="/">홈</a>
+				<li><a href="/">MY</a>
+				<li><a href="/">수업</a>
+				<li><a href="/">학사정보</a>
 					</ul>
 		</nav>
 	</header>
@@ -61,18 +59,7 @@
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
-				<tr>
-					<td><a href="/break/application">휴학 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/break/list">휴학 내역 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/tuition/list">등록금 내역 조회</a></td>
-				</tr>
-				<tr>
-					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
-				</tr>
+
 			</tbody></table>
 		</div>
 	</div>
@@ -89,22 +76,10 @@
 				<col class="col4">
 			</colgroup>
 				<tbody><tr>
-					<th>학번</th>
-					<td>2023000001</td>
-					<th>소속</th>
-					<td>공과대학&nbsp;컴퓨터공학과</td>
-				</tr>
-				<tr>
-					<th>학년</th>
-					<td>1</td>
-					<th>학기</th>
-					<td>1</td>
-				</tr>
-				<tr>
-					<th>입학일</th>
-					<td>2021-03-02</td>
-					<th>졸업일(졸업예정일)</th>
-					<td></td>
+					<th>ID</th>
+					<td>230001</td>
+					<th>입사 날짜</th>
+					<td>2023-01-01</td>
 				</tr>
 			</tbody></table>
 			<table border="1" class="input--table">
@@ -116,21 +91,21 @@
 			</colgroup>
 				<tbody><tr>
 					<th>성명</th>
-					<td>박시우</td>
+					<td>김근호</td>
 					<th>생년월일</th>
-					<td>2002-06-19</td>
+					<td>1985-08-01</td>
 				</tr>
 				<tr>
 					<th>성별</th>
 					<td>남성</td>
 					<th>주소</th>
-					<td>부산시 남구</td>
+					<td>부산시 부산진구</td>
 				</tr>
 				<tr>
 					<th>연락처</th>
-					<td>010-5267-1815</td>
+					<td>010-5277-0535</td>
 					<th>email</th>
-					<td>psw@green.com</td>
+					<td>tenco@green.com</td>
 				</tr>
 			</tbody></table>
 			<button type="button" onclick="location.href='/update'" class="btn btn-dark update--button">수정하기</button>
