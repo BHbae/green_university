@@ -70,8 +70,9 @@ public class GradeRepositoryImpl implements GradeRepository{
 
 	@Override
 	public TotalGradeDTO getTotalGrade(int id, int year, int semester) {
-		// TODO Auto-generated method stub
-		return null;
+		TotalGradeDTO totalGrade=new TotalGradeDTO();
+		final String GET_TOTAL_GRADE=" select * from "
+		return totalGrade;
 	}
 
 	@Override
