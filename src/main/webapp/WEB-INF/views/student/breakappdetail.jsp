@@ -57,7 +57,7 @@
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
 				<tbody><tr>
-					<td><a href="/info/student" class="selected--menu">내 정보 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/mystudent/my" >내 정보 조회</a></td>
 				</tr>
 				<tr>
 					<td><a href="/password">비밀번호 변경</a></td>
@@ -66,7 +66,7 @@
 						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapp" >휴학 신청</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapplist" >휴학 내역 조회</a></td>
+						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapplist" class="selected--menu">휴학 내역 조회</a></td>
 					</tr>
 				<tr>
 					<td><a href="/tuition/list">등록금 내역 조회</a></td>
@@ -80,7 +80,7 @@
 
 	<!-- 메인 div -->
 	<main>
-		<h1>내 정보 조회</h1>
+		<h1>휴학 상세 조회</h1>
 		<div class="split--div"></div>
 			<c:if test="${not empty principal}">
 			<table border="1" class="input--table">
