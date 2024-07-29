@@ -102,7 +102,7 @@ table {
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<ul>
 				<li><a href="/">홈</a>
-				<li><a href="/">MY</a>
+				<li><a href="${pageContext.request.contextPath}/professor/my">MY</a>
 				<li><a href="${pageContext.request.contextPath}/lecture/lectureAll">수업</a>
 				<li><a href="">학사정보</a>
 			</ul>
@@ -145,20 +145,20 @@ table {
 					<h3>강의 목록</h3>
 					<table border="1">
 						<tr>
-							<th>번호</th>
-							<th>말머리</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>조회수</th>
+							<th>학수번호</th>
+							<th>강의명</th>
+							<th>강의시간</th>
+							<th>강의 계획서</th>
+							<th>학생목록</th>
 
 						</tr>
-						<c:forEach var="noticelist" items="${noticelist}">
+						<c:forEach var="lectureList" items="${lectureList}">
 							<tr>
-								<td>${noticelist.id}</td>
-								<td>${noticelist.category}</td>
-								<td><a href="${pageContext.request.contextPath}/notice/view?noticeid=${noticelist.id}">${noticelist.title}</a></td>
-								<td>${noticelist.createdTime}</td>
-								<td>${noticelist.views}</td>
+								<td>${lectureList.id}</td>
+								<td>${lectureList.name}</td>
+								<td>${lectureList.subDay}${lectureList.startTime}:00 ~ ${lectureList.endTime}:00 (${lectureList.roomId})</td>
+								<td><a href="${pageContext.request.contextPath}/lecture/detailLecture">조회하기</a></td>
+								<td>조회 수성해야뎀</td>
 							</tr>
 						</c:forEach>
 						<br>
