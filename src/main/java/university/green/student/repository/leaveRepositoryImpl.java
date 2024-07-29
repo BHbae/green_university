@@ -17,6 +17,7 @@ public class leaveRepositoryImpl implements leaveRepository {
 	private static final String INSERT_LEAVE = " INSERT INTO break_app_tb(student_id,student_grade, from_year,from_semester,to_year,to_semester, type) VALUES(?, ?, ?, ?, ?, ?, ?); ";
 	private static final String SELECT_MY_LEAVE = " SELECT * FROM break_app_tb WHERE student_id = ? ";
 	private static final String DETAIL_LEAVE = " SELECT * FROM break_app_tb WHERE id = ? ";
+	private static final String DELETE_LEAVE = " DELETE FROM break_app_tb WHERE id = ? AND student_id  = ? ";
 	
 	@Override
 	public CoDeDTO searchCoDe(int studentid) {
@@ -131,8 +132,27 @@ public class leaveRepositoryImpl implements leaveRepository {
 
 	@Override
 	public int deleteBreakApp(int breakappId, int studentid) {
-		// TODO Auto-generated method stub
-		return 0;
+		int rowCount  = 0;
+		
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_LEAVE)){
+				pstmt.setInt(1, breakappId);
+				pstmt.setInt(2, studentid);
+				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rowCount;
 	}
 
 }

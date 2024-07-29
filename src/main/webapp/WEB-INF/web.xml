@@ -29,4 +29,24 @@
     <servlet-name>staffAddController</servlet-name>
     <url-pattern>/staffAddController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>professorMy</display-name>
+    <servlet-name>professorMy</servlet-name>
+    <servlet-class>university.green.professor.controller.professorMy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>professorMy</servlet-name>
+    <url-pattern>/professorMy</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StaffController</display-name>
+    <servlet-name>StaffController</servlet-name>
+    <servlet-class>university.green.staff.controller.StaffController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StaffController</servlet-name>
+    <url-pattern>/StaffController</url-pattern>
+  </servlet-mapping>
 </web-app>

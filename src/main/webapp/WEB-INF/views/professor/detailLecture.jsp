@@ -103,7 +103,7 @@ table {
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<ul>
 				<li><a href="/">홈</a>
-				<li><a href="/">MY</a>
+				<li><a href="${pageContext.request.contextPath}/professor/my">MY</a>
 				<li><a href="${pageContext.request.contextPath}/lecture/lectureAll">수업</a>
 				<li><a href="">학사정보</a>
 			</ul>

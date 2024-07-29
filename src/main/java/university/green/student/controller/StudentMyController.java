@@ -54,9 +54,16 @@ public class StudentMyController extends HttpServlet {
 	}
 
 	private void mybreakappdetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String idStr = request.getParameter("id");
+		int leaveID = Integer.parseInt(idStr);
+		StudentDTO studentDTO = (StudentDTO)session.getAttribute("principal");
 		
-		System.out.println(id);
+		CoDeDTO dto = leaveRepository.searchCoDe(studentDTO.getId());
+		BreakAppDTO leave = leaveRepository.detailBreakApp(leaveID);
+		
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("leave", leave);
 		request.getRequestDispatcher("/WEB-INF/views/student/breakappdetail.jsp").forward(request, response);
 	}
 
@@ -91,12 +98,25 @@ public class StudentMyController extends HttpServlet {
 		case "/appbreak":
 			appbreak(request, response, session);
 			break;
-
+		case "/deleteapp":
+			deleteapp(request, response, session);
+			break;
 		default:
 			break;
 		}
 		
 		
+	}
+
+	private void deleteapp(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		String idStr = request.getParameter("id");
+		int id = Integer.parseInt(idStr);
+		StudentDTO dto = (StudentDTO)session.getAttribute("principal");
+		
+		
+		leaveRepository.deleteBreakApp(id, dto.getId());
+		
+		response.sendRedirect(request.getContextPath()  + "/mystudent/mybreakapplist");
 	}
 
 	private void appbreak(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
@@ -106,6 +126,7 @@ public class StudentMyController extends HttpServlet {
 		
 		String fromYearStr = request.getParameter("fromYear");
 		int fromYear = Integer.parseInt(fromYearStr);
+		
 		String fromSemesterStr = request.getParameter("fromSemester");
 		int fromSemester = Integer.parseInt(fromSemesterStr);
 		
@@ -120,7 +141,7 @@ public class StudentMyController extends HttpServlet {
 				.studentId(stusentId)
 				.studentGrade(stusentGd)
 				.fromYear(fromYear)
-				.fromYear(fromYear)
+				.fromSemester(fromSemester)
 				.toYear(toYear)
 				.toSemester(toSemester)
 				.type(type)
