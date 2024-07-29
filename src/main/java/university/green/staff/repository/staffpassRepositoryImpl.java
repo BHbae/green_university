@@ -30,7 +30,6 @@ public class staffpassRepositoryImpl implements staffpassRepository {
 				conn.rollback();
 			}
 			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
