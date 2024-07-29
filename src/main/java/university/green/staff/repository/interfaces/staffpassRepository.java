@@ -8,3 +8,4 @@ public interface staffpassRepository {
 	LoginDto stafflogin(int id,int Password);
 	
 }
+//체크
