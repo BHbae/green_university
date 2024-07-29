@@ -6,18 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @ToString
-public class FindPasswordDto {
-
-	
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class FindIdDtoCom {
 	private String name;
 	private int id;
-	private String email;
-	private String userRole;
-	
 }

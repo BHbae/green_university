@@ -20,8 +20,11 @@ public interface UserRepository {
 	StaffDTO staffDtail(int id);
 	
 	// 아이디 찾기
-	FindIdDto findIdDtail(String name, String email, String userRole);
+	String findIdDtail(String name, String email, String userRole);
+	
+	// 아이디 찾기 complete
+	FindIdDtoCom FindIdCom(String name, int id);
 	
 	// 비밀번호 찾기
-	FindPasswordDto findPasswordDtail(String name, int id , String email, String userRole);
+	String findPasswordDtail(String name, int id , String email, String userRole);
 }
