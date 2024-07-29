@@ -49,7 +49,6 @@
   <servlet-mapping>
     <servlet-name>StaffController</servlet-name>
     <url-pattern>/StaffController</url-pattern>
-=======
     <display-name>DepartmentController</display-name>
     <servlet-name>DepartmentController</servlet-name>
     <servlet-class>university.green.staff.controller.DepartmentController</servlet-class>
@@ -67,6 +66,5 @@
   <servlet-mapping>
     <servlet-name>RoomController</servlet-name>
     <url-pattern>/RoomController</url-pattern>
->>>>>>> kim
   </servlet-mapping>
 </web-app>
