@@ -31,10 +31,10 @@ public class collegeController extends HttpServlet {
 			collegelist(request, response);
 			break;
 		case "/collegeadd":
-
+			collegelist(request, response);
 			break;
 		case "/collegedelete":
-
+			collegelist(request, response);
 			break;
 
 		default:
@@ -44,11 +44,11 @@ public class collegeController extends HttpServlet {
 	}
 
 	private void collegelist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CollegeDTO> collegeList = collegeRepository.listCollege();
+		List<CollegeDTO> college = collegeRepository.listCollege();
 		
 		
-		request.setAttribute("college", collegeList);
-		request.getRequestDispatcher("/WEB-INF/views/staff/registrationCollege.jsp").forward(request, response);
+		request.setAttribute("collegeList", college);
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
 		
 	}
 

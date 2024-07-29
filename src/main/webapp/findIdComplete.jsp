@@ -63,8 +63,13 @@
 			<br>
 		</div>
 		<div class="section--content">
-			${name}님의 아이디는<br> 
-			<span style="font-weight: bold;">${id}</span>입니다.
+		<c:if test="${not empty findId}">
+			${name}님의 아이디는<br>
+				<span style="font-weight: bold;">${findId}</span>입니다.
+			</c:if>
+			<c:if test="${empty findId}">
+				아이디를 찾을 수 없습니다.
+			</c:if>
 		</div>
 	</section>
 

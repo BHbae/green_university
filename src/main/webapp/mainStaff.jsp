@@ -33,10 +33,13 @@
 			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
-						<li><a href="/">홈</a>
+						<li><a href="${pageContext.request.contextPath}/mainStaff.jsp">홈</a>
 						<li><a href="/">MY</a>
+<<<<<<< HEAD
 						<li><a href="/">학사관리</a>
 						<li><a href="/">등록</a>
+=======
+>>>>>>> Hu
 						<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
 						<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
 						<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
@@ -44,8 +47,6 @@
 		</nav>
 	</header>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
-</head>
-<body>
 <!-- 헤드 부분 -->
 
 <!-- 세부 메뉴 + 메인 -->
@@ -178,8 +179,5 @@
   		<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>
-
-</div>
-
 </body>
 </html>

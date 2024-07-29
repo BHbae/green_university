@@ -4,7 +4,7 @@
     <%@page import="university.green.student.model.StudentDTO"%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="resources/css/myInfo.css">
+<link rel="stylesheet" href="../resources/css/myInfo.css">
 <!DOCTYPE html>
 <html>
 <head>

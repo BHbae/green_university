@@ -17,6 +17,11 @@ public class UserRepositoryImpl implements UserRepository{
 	private static final String SELECT_PROFESSOR = " select * from professor_tb WHERE id = ? ";
 	private static final String SELECT_STAFF = " select * from staff_tb WHERE id = ? ";
 	
+	String findSelectBeforeJoin = " SELECT a.id FROM user_tb AS u JOIN ";
+	String findSelectAfterJoin = " AS a ON u.id = a.id WHERE a.name = ? AND a.email = ? ";
+	
+	String findPwsSelectBeforeJoin = " SELECT u.password FROM user_tb AS u JOIN ";
+	String findPwsSelectAfterJoin = " AS a ON u.id = a.id WHERE a.name = ? AND a.email = ? ";
 	
 	@Override
 	public LoginDto userId(int id, String password) {
@@ -121,15 +126,74 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public FindIdDto findIdDtail(String name, String email, String userRole) {
-		// TODO Auto-generated method stub
+	public String findIdDtail(String name, String email, String userRole) {
+		String id = null;
+		String query = null;
+		String table = null;
+		
+		if(userRole.equalsIgnoreCase("student")) {
+			table = " student_tb ";
+			query = findSelectBeforeJoin + table + findSelectAfterJoin;
+		} else if(userRole.equalsIgnoreCase("staff")) {
+			table = " staff_tb ";
+			query = findSelectBeforeJoin + table + findSelectAfterJoin;
+		} else if(userRole.equalsIgnoreCase("professor")) {
+			table = " professor_tb ";
+			query = findSelectBeforeJoin + table + findSelectAfterJoin;
+		}
+		
+		System.out.println(query);
+		try(Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("a.id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	@Override
+	public FindIdDtoCom FindIdCom(String name, int id) {
+		FindIdDtoCom dto = null;
+		
 		return null;
 	}
 
 	@Override
-	public FindPasswordDto findPasswordDtail(String name, int id, String email, String userRole) {
-		// TODO Auto-generated method stub
-		return null;
+	public String findPasswordDtail(String name, int id, String email, String userRole) {
+		String password = null;
+		String query = null;
+		String table = null;
+		
+		if(userRole.equalsIgnoreCase("student")) {
+			table = " student_tb ";
+			query = findPwsSelectBeforeJoin + table + findPwsSelectAfterJoin;
+		} else if(userRole.equalsIgnoreCase("staff")) {
+			table = " staff_tb ";
+			query = findPwsSelectBeforeJoin + table + findPwsSelectAfterJoin;
+		} else if(userRole.equalsIgnoreCase("professor")) {
+			table = " professor_tb ";
+			query = findPwsSelectBeforeJoin + table + findPwsSelectAfterJoin;
+		}
+		try(Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				password = rs.getString("password");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(query);
+		System.out.println(password);
+		return password;
 	}
+
 
 }

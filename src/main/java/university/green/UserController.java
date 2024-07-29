@@ -16,144 +16,126 @@ import university.green.student.model.StudentDTO;
 
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private UserRepository userRepository;
 
-	private UserRepository userRepository;
+    @Override
+    public void init() throws ServletException {
+        userRepository = new UserRepositoryImpl();
+    }
 
-	@Override
-	public void init() throws ServletException {
-		userRepository = new UserRepositoryImpl();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // GET 요청 처리 로직을 추가할 수 있습니다.
+    }
 
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getPathInfo();
+        switch (action) {
+            case "/login":
+                handleLogin(request, response);
+                break;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+            case "/findId":
+                handleFindId(request, response);
+                break;
 
-	}
+            case "/findPassword":
+                handleFindPassword(request, response);
+                break;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getPathInfo();
-		switch (action) {
-		case "/login":
-			String userIdStr = request.getParameter("id");
-			int userId = Integer.parseInt(userIdStr);
-			
-			String password = request.getParameter("password");
-			
-			LoginDto dto = userRepository.userId(userId, password);
-			System.out.println(dto);
-			try {
-				if (userId == dto.getId() && password.equals(dto.getPassword())) {
-					
-					if (dto.getUser_role().equals("student")) {
-						StudentDTO studentDitail = userRepository.studentDtail(dto.getId());
-						System.out.println(studentDitail);
-						HttpSession session = request.getSession();
-						session.setAttribute("principal", studentDitail);
+            case "/findIdComplete":
+                handleFindIdComplete(request, response);
+                break;
 
-						// TODO - 수정 학생전용 메인 페이지로 이동처리
-						response.sendRedirect(request.getContextPath() + "/mainStudent.jsp");
-						
-					} else if (dto.getUser_role().equals("professor")) {
-						ProfessorDTO professorDitail = userRepository.professorDtail(dto.getId());
-						System.out.println(professorDitail);
-						HttpSession session = request.getSession();
-						session.setAttribute("principal", professorDitail);
+            case "/findPasswordComplete":
+                handleFindPasswordComplete(request, response);
+                break;
 
-						// TODO - 수정 교수전용 메인 페이지로 이동처리
-						response.sendRedirect(request.getContextPath() + "/mainProfessor.jsp");
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                break;
+        }
+    }
 
-					} else if (dto.getUser_role().equals("staff")) {
-						StaffDTO staffDitail = userRepository.staffDtail(dto.getId());
-						System.out.println(staffDitail);
-						HttpSession session = request.getSession();
-						session.setAttribute("principal", staffDitail);
+    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String userIdStr = request.getParameter("id");
+        int userId = Integer.parseInt(userIdStr);
+        String password = request.getParameter("password");
 
-						// TODO - 수정 교직원 전용 메인 페이지로 이동처리
-						System.out.println("Principal 데이터: " + session.getAttribute("principal")); 
-						response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
+        try {
+            LoginDto dto = userRepository.userId(userId, password);
+            if (userId == dto.getId() && password.equals(dto.getPassword())) {
+                HttpSession session = request.getSession();
+                if ("student".equals(dto.getUser_role())) {
+                    StudentDTO studentDetail = userRepository.studentDtail(dto.getId());
+                    session.setAttribute("principal", studentDetail);
+                    response.sendRedirect(request.getContextPath() + "/mainStudent.jsp");
+                } else if ("professor".equals(dto.getUser_role())) {
+                    ProfessorDTO professorDetail = userRepository.professorDtail(dto.getId());
+                    session.setAttribute("principal", professorDetail);
+                    response.sendRedirect(request.getContextPath() + "/mainProfessor.jsp");
+                } else if ("staff".equals(dto.getUser_role())) {
+                    StaffDTO staffDetail = userRepository.staffDtail(dto.getId());
+                    session.setAttribute("principal", staffDetail);
+                    response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
+                } else {
+                    showError(response, "유효하지 않은 방식입니다.");
+                }
+            } else {
+                showError(response, "아이디 또는 비밀번호가 틀렸습니다.");
+            }
+        } catch (Exception e) {
+            showError(response, "아이디 또는 비밀번호가 틀렸습니다.");
+        }
+    }
 
-					} else {
-						 response.setContentType("text/html; charset=UTF-8");
-						 PrintWriter out = response.getWriter();
-						 out.println("<script> alert('유효하지 않은 방식입니다.'); history.back();  </script>");
-					}
+    private void handleFindId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String userRole = request.getParameter("userRole");
 
-				} else {
-					 response.setContentType("text/html; charset=UTF-8");
-					 PrintWriter out = response.getWriter();
-					 out.println("<script> alert('아이디 또는 비밀번호가 틀렷습니다'); history.back();  </script>");
-				}
-			} catch (Exception e) {
-				 response.setContentType("text/html; charset=UTF-8");
-				 PrintWriter out = response.getWriter();
-				 out.println("<script> alert('아이디 또는 비밀번호가 틀렷습니다.'); history.back();  </script>");
-			}
+        String findId = userRepository.findIdDtail(name, email, userRole);
+        request.setAttribute("findId", findId);
+        request.setAttribute("name", name);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/findIdComplete.jsp");
+        dispatcher.forward(request, response);
+        System.out.println("아이디 찾기 들어오나!");
+    }
 
-			break;
+    private void handleFindPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String email = request.getParameter("email");
+        String userRole = request.getParameter("userRole");
 
-		case "findId" :
-			handleFindId(request, response);
-			break;
-			
-		case "findPassword" :
-			handleFindPassword(request, response);
-			break;
-			
-		case "findIdComplete" :
-			handleFindIdComplete(request, response);
-			break;
-			
-		case "findPasswordComplete" :
-			handleFindPasswordComplete(request, response);
-			break;
-			
-		case "PasswordPop" :
-			handlePasswordPop(request, response);
-			break;
-			
-		default:
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			break;
-		}
-	}
+        String findPassword = userRepository.findPasswordDtail(name, id, email, userRole);
+        request.setAttribute("findPassword", findPassword);
+        request.setAttribute("name", name);
 
-	private void handlePasswordPop(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/findPasswordComplete.jsp");
+        dispatcher.forward(request, response);
+        System.out.println("비밀번호 찾기 들어오나!!");
+    }
 
-	private void handleFindPasswordComplete(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+    private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // findIdComplete.jsp에서 findIdDto 속성을 사용하여 결과를 표시할 것입니다.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/findIdComplete.jsp");
+        dispatcher.forward(request, response);
+    }
 
-	private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+    private void handleFindPasswordComplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/findPasswordComplete.jsp");
+        dispatcher.forward(request, response);
+    }
 
-	private void handleFindPassword(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	private void handleFindId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-	    String email = request.getParameter("email");
-	    String userRole = request.getParameter("userRole"); 
 
-	    UserRepository userRepository = new UserRepositoryImpl();
-
-	    FindIdDto findIdDto = userRepository.findIdDtail(name, email, userRole);
-
-	    request.setAttribute("findIdDto", findIdDto);
-
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/findId.jsp");
-	    dispatcher.forward(request, response);
-		
-			
-		
-	}
+    private void showError(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('" + message + "'); history.back();</script>");
+    }
 }

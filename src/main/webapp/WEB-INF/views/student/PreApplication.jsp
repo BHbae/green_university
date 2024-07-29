@@ -34,12 +34,21 @@ table {
 		<nav class="main--menu">
 			<a href="/"><img class="logo" alt="" src="${pageContext.request.contextPath}/resources/ima/logo.png"></a>
 			<ul>
+<<<<<<< HEAD
 				<li><a href="/">홈</a></li>
 				<li><a href="/">MY</a></li>
 				<li><a href="/">수업</a></li>
 				<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a></li>
 				<li><a href="/">성적</a></li>
 				<li><a href="/">학사 정보</a></li>
+=======
+				<li><a href="/">홈</a>
+				<li><a href="${pageContext.request.contextPath}/mystudent/my">MY</a>
+				<li><a href="/">수업</a>
+				<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a>
+				<li><a href="/">성적</a>
+				<li><a href="/">학사 정보</a>
+>>>>>>> Hu
 			</ul>
 		</nav>
 	</header>
