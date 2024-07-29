@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import university.green.student.model.PreSugangListDTO;
 import university.green.student.model.SugangDTO;
 import university.green.student.model.SugangSubDTO;
 import university.green.student.repository.interfaces.SugangRepository;
@@ -51,6 +52,12 @@ public class SugangRepositoryImpl implements SugangRepository {
 	private static final String STUDENT_MINUS = " UPDATE subject_tb "
 			+ " SET num_of_student = num_of_student - 1 "
 			+ " WHERE id = ? ";
+	// 예비수강 리스트 체크
+	private static final String CHECK_PRESUBJECT = "SELECT * FROM pre_stu_sub_tb" ;
+	// 예비수강 수락 
+	private static final String ADD_PRESUBJECT = "INSERT INTO pre_stu_sub_tb (student_id, subject_id) values(?, ?) " ;
+	// 예비 수강 취소 
+	private static final String SUBTRACT_PRESUBJECT = "DELETE FROM pre_stu_sub_tb WHERE student_id = ?" ;
 	
 	
 	@Override
@@ -236,6 +243,45 @@ public class SugangRepositoryImpl implements SugangRepository {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	@Override
+	public List<PreSugangListDTO> AddPreSugang(int studentId, int subjectId) {
+		List<PreSugangListDTO> AddPreSugangList = new ArrayList<>();
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(ADD_PRESUBJECT);
+			pstmt.setInt(1, studentId);
+			pstmt.setInt(2, subjectId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return AddPreSugangList;
+		
+	}
+	
+	@Override
+	public void SubtractPreSugang(int studentId) {
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(SUBTRACT_PRESUBJECT);
+			pstmt.setInt(1, studentId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} 
+		
+	}
+	
+	@Override
+	public void CheckPreSugang(int studentId, int subjectId) {
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(CHECK_PRESUBJECT);
+			pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	@Override
