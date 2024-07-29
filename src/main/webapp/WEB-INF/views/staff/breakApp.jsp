@@ -40,9 +40,8 @@
 		</nav>
 	</header>
 	<h1>휴학 처리</h1>
-	<c:choose>
 		<!-- todo - 만약 휴학 신청이 있다면 테이블 생성 -->
-		<c: when test="${breakList!=null}">
+		<c:if test="${breakList!=null}">
 			<table border="1">
 			<tr>
 				<th>신청일자</th>
@@ -63,10 +62,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-		</c:>
-		<c:otherwise>
+		</c:if>
+		<c:if test="${breakList==null}">
 			<p>대기 중인 신청 내역이 없습니다.</p>
-		</c:otherwise>
-	</c:choose>
+		</c:if>
 </body>
 </html>
