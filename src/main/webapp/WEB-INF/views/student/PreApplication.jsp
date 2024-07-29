@@ -266,16 +266,30 @@ table {
 												<button type="button" style="background-color: white; color: gray" disabled>신청마감</button>
 											</c:when>
 											<c:otherwise>
-												<form action="${pageContext.request.contextPath}/sugang/StudentPlus" method="post">
-													<input type="hidden" name="id" value="${subject.id}">
-													<input type="hidden" name="action" value="StudentPlus">
-													<button type="submit" style="background-color: #548AC2;">신청</button>
-												</form>
-												<form action="${pageContext.request.contextPath}/sugang/StudentMinus" method="post">
-													<input type="hidden" name="id" value="${subject.id}">
-													<input type="hidden" name="action" value="StudentMinus">
-													<button type="submit" style="background-color: #FF5733;">취소</button>
-												</form>
+												<c:choose>
+													<c:when test="${not empty preSugangList}">
+														<c:forEach var="preSugang" items="${preSugangList}">
+															<c:if test="${preSugang.subjectId == subject.id}">
+																<form action="${pageContext.request.contextPath}/sugang/StudentMinus" method="post">
+																	<input type="hidden" name="id" value="${subject.id}"> <input type="hidden" name="action" value="StudentMinus">
+																	<button type="submit" style="background-color: #FF5733;">취소</button>
+																</form>
+															</c:if>
+														</c:forEach>
+														<c:if test="${empty preSugangList or preSugang.subjectId != subject.id}">
+															<form action="${pageContext.request.contextPath}/sugang/StudentPlus" method="post">
+																<input type="hidden" name="id" value="${subject.id}"> <input type="hidden" name="action" value="StudentPlus">
+																<button type="submit" style="background-color: #548AC2;">신청</button>
+															</form>
+														</c:if>
+													</c:when>
+													<c:otherwise>
+														<form action="${pageContext.request.contextPath}/sugang/StudentPlus" method="post">
+															<input type="hidden" name="id" value="${subject.id}"> <input type="hidden" name="action" value="StudentPlus">
+															<button type="submit" style="background-color: #548AC2;">신청</button>
+														</form>
+													</c:otherwise>
+												</c:choose>
 											</c:otherwise>
 										</c:choose></td>
 								</tr>

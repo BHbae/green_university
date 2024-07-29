@@ -1,6 +1,7 @@
 package university.green.student.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -9,6 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import university.green.student.model.PreSugangListDTO;
+import university.green.student.model.StudentDTO;
 import university.green.student.model.SugangDTO;
 import university.green.student.repository.SugangRepositoryImpl;
 import university.green.student.repository.interfaces.SugangRepository;
@@ -210,7 +213,7 @@ public class SugangController extends HttpServlet {
 		int page = 1;
 		int pageSize = 20;
 		String pageStr = request.getParameter("page");
-		
+		StudentDTO student = (StudentDTO)session.getAttribute("principal");
 		
 		try {
 			if(pageStr != null ) {
@@ -233,7 +236,10 @@ public class SugangController extends HttpServlet {
 		request.setAttribute("totalPages", totalPages);
 		request.setAttribute("totalBoards", totalBoards);
 		System.out.println(preBoardList);
-		
+		System.out.println(student.getId());
+		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckById(student.getId()); // 예비 수강신청
+		request.setAttribute("PreSugangList", PreSugangList);
+		System.out.println(PreSugangList);
 		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
 	}
 
@@ -255,6 +261,7 @@ public class SugangController extends HttpServlet {
 			HandleStudentMinus(request, response, session);
 			break;
 		case "/AddPreSugang":
+			System.out.println("프리수강");
 			HandleAddPreSugang(request, response, session);
 			break;
 		case "/SubtractPreSugang":
@@ -285,12 +292,42 @@ public class SugangController extends HttpServlet {
 	 * @param response
 	 * @param session
 	 * @throws IOException 
+	 * @throws ServletException 
 	 */
-	private void HandleAddPreSugang(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	private void HandleAddPreSugang(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-		sugangRepository.AddPreSugang(studentId, subjectId);
-		response.sendRedirect(request.getContextPath() + "sugang/AddPreSugang");
+		System.out.println(sugangRepository.AddPreSugang(studentId, subjectId));
+		int page = 1;
+		int pageSize = 20;
+		String pageStr = request.getParameter("page");
+		
+		
+		try {
+			if(pageStr != null ) {
+				page = Integer.parseInt(pageStr);
+			}
+		} catch (Exception e) {
+			page = 1;
+		}
+		int offset = (page -1) * pageSize;
+		
+		
+		int totalBoards = sugangRepository.getTotalBoardCount();
+		
+		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
+		
+		
+		List<SugangDTO> preBoardList = sugangRepository.preApply(pageSize, offset); // 전체
+		request.setAttribute("preBoardList", preBoardList);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("totalBoards", totalBoards);
+		
+		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckById(studentId); // 예비 수강신청
+		request.setAttribute("PreSugangList", PreSugangList);
+		System.out.println(PreSugangList);
+		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
 		
 	}
 

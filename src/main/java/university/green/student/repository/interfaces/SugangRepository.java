@@ -22,11 +22,11 @@ public interface SugangRepository {
 	// 예비 수강 시간표 검색
 	List<SugangDTO> preSearchBoard(String majorType, String department, String subjectName, int limit, int offset);
 	
-	// 예비수강 등록, 취소확인
-	List<PreSugangListDTO> AddPreSugang (int studentId, int subjectId);
+	// 예비수강 등록
+	int AddPreSugang (int studentId, int subjectId);
 	
 	// 예비수강 취소
-	void SubtractPreSugang (int studentId);
+	void SubtractPreSugang (int studentId, int subjectId);
 	
 	// 예비 확인  
 	void CheckPreSugang (int studentId, int subjectId); 
@@ -41,6 +41,8 @@ public interface SugangRepository {
 	
 	// 수강 신청 요구 확인
 	
+	// 학생 ID 기준 예비수강 조회 
+	List<PreSugangListDTO> CheckById(int studentId);
 	
 	
 	////////////////////////////////////////////////
