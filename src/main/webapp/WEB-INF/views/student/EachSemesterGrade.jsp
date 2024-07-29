@@ -64,6 +64,7 @@
 </head>
 <body>
 	<h1>학기별 성적 조회</h1>
+	<c:if test="${not empty EachGradeList}">
 	<form action="choose-semester" action="${pageContext.request.contextPath}/studentGrade/selectSepcificSubject">
 		<select name="year" id="year">
 			<option>2021년</option>
@@ -82,8 +83,6 @@
 		</select>
 		<button></button>
 	</form>
-	<c:choose>
-		<c:when test="${true}">
 		<h2>과목별 성적</h2>
 			<table border='1'>
 				<tr>
@@ -94,8 +93,8 @@
 					<th>강의구분</th>
 					<th>학점</th>
 				</tr>
-				<c:forEach>
-					<tr>
+				<c:forEach var="EachGradeDTO" items="${EachGradeList}">
+					<tr> 
 						<td>${EachGradeDTO.subYear}</td>
 						<td>${EachGradeDTO.semester}</td>
 						<td>${EachGradeDTO.subjectId}</td>
@@ -105,8 +104,11 @@
 					</tr>
 				</c:forEach>
 			</table>
-		</c:when>
-	</c:choose>
+	</c:if>
+	
+	<c:if test="${empty EachGradeList}">
+		<p>조회할 성적 내역이 존재하지 않습니다.</p>
+	</c:if>
 	<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 	</footer>

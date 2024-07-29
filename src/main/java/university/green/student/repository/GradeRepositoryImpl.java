@@ -49,13 +49,11 @@ public class GradeRepositoryImpl implements GradeRepository{
 				+ " from subject_tb as s "
 				+ " join stu_sub_tb as st "
 				+ " on s.id = st. subject_id "
-				+ " where st.student_id = ?, semester = ?  ORDER BY subject_id limit ? offset ?";
+				+ " where st.student_id = ? and semester = ?  ORDER BY st.subject_id";
 		try (Connection conn=DBUtil.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(SELECT_ALL_EACHGRADE)){
 			pstmt.setInt(1, id);
 			pstmt.setInt(2, semester);
-			pstmt.setInt(3, 10);
-			pstmt.setInt(4, 5);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
 				EachGradeDTO eachGrade=EachGradeDTO.builder().studentId(rs.getInt("student_id")).subYear(rs.getInt("sub_year")).semester(rs.getInt("semester"))
@@ -85,8 +83,8 @@ public class GradeRepositoryImpl implements GradeRepository{
 			pstmt.setInt(3, semester);
 			ResultSet rs=pstmt.executeQuery();
 			if(rs.next()) {
-				totalGrade=TotalGradeDTO.builder().year(rs.getInt("year")).semester(rs.getInt("semester")).registerdGrade(rs.getInt("registerdGrade"))
-						.getGrade(rs.getDouble("getGrade")).averageGrade(rs.getDouble("averageGrade")).build();
+				totalGrade=TotalGradeDTO.builder().year(rs.getInt("sub_year")).semester(rs.getInt("semester")).registerdGrade(rs.getInt("sum(s.grades)"))
+						.getGrade(rs.getDouble("sum(st.complete_grade)")).averageGrade(rs.getDouble("avg(st.complete_grade)")).build();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,8 +107,8 @@ public class GradeRepositoryImpl implements GradeRepository{
 			pstmt.setInt(3, semester);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				totalGrade.add(TotalGradeDTO.builder().year(rs.getInt("year")).semester(rs.getInt("semester")).registerdGrade(rs.getInt("registerdGrade"))
-						.getGrade(rs.getDouble("getGrade")).averageGrade(rs.getDouble("averageGrade")).build());
+				totalGrade.add(TotalGradeDTO.builder().year(rs.getInt("sub_year")).semester(rs.getInt("semester")).registerdGrade(rs.getInt("sum(s.grades)"))
+						.getGrade(rs.getDouble("sum(st.complete_grade)")).averageGrade(rs.getDouble("avg(st.complete_grade)")).build());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
