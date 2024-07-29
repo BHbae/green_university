@@ -12,14 +12,8 @@
 </head>
 <body>
 	<h1>등록금 고지서 발송</h1>
-	<h1>휴학 처리</h1>
-	<!-- todo - 만약 휴학 신청이 있다면 테이블 생성 -->
-		<form action="sendBillLetter" action="${pageContext.request.contextPath}/management/sendBillLetter" method="GET">
-			<input type="submit" value="등록금 고지서 발송">
+		<form class="sendBill" action="${pageContext.request.contextPath}/management/sendBillLetter" method="GET">
+			<input type="submit" value="등록금 고지서 발송" onclick="alert('${listSize}개의 고지서가 발송되었습니다.')">
 		</form>
-		
-		<c:if test="${numOfBill>0}">
-			alert("${numOfBill} 개의 고지서가 발송되었습니다.");
-		</c:if>
 </body>
 </html>

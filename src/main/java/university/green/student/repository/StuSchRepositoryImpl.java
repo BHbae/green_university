@@ -29,4 +29,31 @@ public class StuSchRepositoryImpl implements StuSchRepository{
 		return stuSch;
 	}
 
+	
+	// stu_sch_tb 추가하기
+	@Override
+	public int addStuSchById(int studentId) {
+		final String ADD_STU_SCH=" INSERT INTO stu_sch_tb (student_id,sch_year,semester, sch_type)"
+				+ " values ( ?, ?, ?, ?) ";
+		int a=0;
+		try (Connection conn=DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt=conn.prepareStatement(ADD_STU_SCH)){
+				pstmt.setInt(1, studentId);
+				pstmt.setInt(2,2024);
+				pstmt.setInt(3, 2);
+				pstmt.setInt(4,2);
+				a=pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+
 }

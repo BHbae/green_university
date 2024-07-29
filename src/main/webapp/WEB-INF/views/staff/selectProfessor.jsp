@@ -41,11 +41,11 @@
 	
 	<!-- 검색창 -->
 	<form class="searchProfessor" action="${pageContext.request.contextPath}/management/selectSpecificProfessor" method="POST">
-		<label for="dept_id">학과 번호</label>
+		<label for="deptId">학과 번호</label>
 		<input type="text" id="deptId" name="deptId">
 		<label for="proId">사번</label>
 		<input type="text" id="proId" name="proId">
-		<input type="button" value="조회하기">
+		<input type="submit" value="조회하기">
 	</form>
 	<c:choose>
 		<c:when test="${not empty professorList}">

@@ -57,6 +57,7 @@ public class StudentGradeController extends HttpServlet {
 		}
 		// 총 누계 성적 조회
 		case "/totalGrade": {
+			System.out.println("흠");
 			selectTotalGrade(request,response,session);
 			break;
 		}
@@ -78,6 +79,9 @@ public class StudentGradeController extends HttpServlet {
 		int year=Integer.parseInt(request.getParameter("year"));
 		int semester=Integer.parseInt(request.getParameter("semester"));
 		String type=request.getParameter("type");
+		
+		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(2023000201,2023,1);
+		request.setAttribute("EachGradeList", EachGradeList);
 	}
 
 	/**
@@ -95,8 +99,11 @@ public class StudentGradeController extends HttpServlet {
 		 */
 		
 		// 누계 성적(학기별 total,avg)
-		List<TotalGradeDTO> totalGrade=gradeRepository.getAllTotalGrade(2023000201, 2023, 1);
-		request.setAttribute("totalGrade", totalGrade);
+		System.out.println("총 누계 성적");
+		
+		// 누계 성적(학기별 total,avg)
+				List<TotalGradeDTO> totalGradeList=gradeRepository.getAllTotalGrade(2023000201, 2023, 1);
+				request.setAttribute("totalGradeList", totalGradeList);
 		request.getRequestDispatcher("/WEB-INF/views/student/TotalAverageGrade.jsp").forward(request, response);
 	}
 
@@ -113,7 +120,7 @@ public class StudentGradeController extends HttpServlet {
 		//StudentDTO student=(StudentDTO)request.getAttribute("principal");
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
-		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(2023000201,2024,1);
+		List<EachGradeDTO> EachGradeList=gradeRepository.getEachGradeBySemester(2023000201,2023,1);
 		request.setAttribute("EachGradeList", EachGradeList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/student/EachSemesterGrade.jsp").forward(request, response);
@@ -133,7 +140,7 @@ public class StudentGradeController extends HttpServlet {
 		 /* if(student!=null) { request.setAttribute("studentId",student.getId()); }
 		 */
 		// 과목별 성적 조회
-		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(2023000201,2023,1);
+		List<EachGradeDTO> gradeList=gradeRepository.getEachGradeBySemester(2023000201,1,1);
 		request.setAttribute("gradeList", gradeList);
 		
 		// 누계 성적(학기별 total,avg)

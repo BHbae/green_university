@@ -100,13 +100,11 @@
 			
 			<c:forEach var="TotalGradeDTO" items="${totalGradeList}">
 				<tr>
-					<td>${TotalGradeDTO.subYear}</td>
+					<td>${TotalGradeDTO.year}</td>
 					<td>${TotalGradeDTO.semester}</td>
-					<td>${TotalGradeDTO.subjectId}</td>
-					<td>${TotalGradeDTO.name}</td>
-					<td>${TotalGradeDTO.type}</td>
-					<td>${TotalGradeDTO.grades}</td>
-					<td>${TotalGradeDTO.grade}</td>
+					<td>${TotalGradeDTO.registerdGrade}</td>
+					<td>${TotalGradeDTO.getGrade}</td>
+					<td>${TotalGradeDTO.averageGrade}</td>
 				</tr>
 				</c:forEach>
 			</table>

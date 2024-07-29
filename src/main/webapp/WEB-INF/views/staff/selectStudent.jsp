@@ -109,11 +109,11 @@
 	
 	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
-	<form action="selectSpecifictStudent" action="${pageContext.request.contextPath}/management/selectSpecifictStudent" method="POST">
+	<form class="selectSpecifictStudent" action="${pageContext.request.contextPath}/management/selectSpecifictStudent" method="POST">
 		<label for="deptId">학과 번호</label>
-		<input type="text" id="deptId" name="deptId" value="">
+		<input type="text" id="deptId" name="deptId">
 		<label for="stuId">학번</label>
-		<input type="text" id="stuId" name="stuId" value="">
+		<input type="text" id="stuId" name="stuId">
 		<input type="submit" value="조회하기">
 	</form>
 	<form action="selectStudent" action="${pageContest.request.contextpath}/management/selectStudent" method="GET">
@@ -121,7 +121,7 @@
 	</form>
 	<c:choose>
 		<c:when test="${not empty studentList}">
-	<h3>학생 목록</h3>
+	<h3>학생 목록 </h3>
 		<table border="1">
 			<tr>
 				<th>학번</th>

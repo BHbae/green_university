@@ -14,4 +14,6 @@ import lombok.ToString;
 public class SubPeriodDTO {
 	int id;
 	int status;
+	int year;
+	int semester;
 }

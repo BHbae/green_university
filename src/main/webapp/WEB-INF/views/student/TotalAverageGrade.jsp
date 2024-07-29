@@ -46,7 +46,7 @@
 
 	<h1>총 누계 성적</h1>
 	
-	<c:if test="${not empty totalList}">
+	<c:if test="${not empty totalGradeList}">
 	<h3>평점 평균</h3>
 		<table border="1">
 			<tr>
@@ -58,13 +58,11 @@
 			</tr>
 			<c:forEach var="TotalGradeDTO" items="${totalGradeList}">
 				<tr>
-					<td>${TotalGradeDTO.subYear}</td>
+					<td>${TotalGradeDTO.year}</td>
 					<td>${TotalGradeDTO.semester}</td>
-					<td>${TotalGradeDTO.subjectId}</td>
-					<td>${TotalGradeDTO.name}</td>
-					<td>${TotalGradeDTO.type}</td>
-					<td>${TotalGradeDTO.grades}</td>
-					<td>${TotalGradeDTO.grade}</td>
+					<td>${TotalGradeDTO.registerdGrade}</td>
+					<td>${TotalGradeDTO.getGrade}</td>
+					<td>${TotalGradeDTO.averageGrade}</td>
 				</tr>
 				</c:forEach>
 		</table>
