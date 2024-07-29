@@ -8,16 +8,17 @@ public interface DepartmentRepository {
 	
 	// 학과 CRUD
 	// 전체 리스트
+	
 	List<DepartmentDTO> departmentList();
 	
 	// 등록
-	DepartmentDTO addDepartment();
+	 void addDepartment(DepartmentDTO dto);
 	
 	// 수정
-	int updateDepartment();
+	int updateDepartment(DepartmentDTO dto);
 	
 	// 삭제
-	int deleteDepartment();
+	int deleteDepartment(int id);
 	
 	// 리스트 처리
 	int getCounte();

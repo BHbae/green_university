@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="university.green.student.model.StudentDTO" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
@@ -59,10 +60,10 @@ table {
 						<td><a href="${pageContext.request.contextPath}/college/collegelist?action=form" class="selected--menu">단과대학</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/department/departmentlist">학과</a></td>
+						<td><a href="${pageContext.request.contextPath}/department/departmentlist?action=form">학과</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/room/roomlist">강의실</a></td>
+						<td><a href="${pageContext.request.contextPath}/college/">강의실</a></td>
 					</tr>
 					<tr>
 						<td><a href="${pageContext.request.contextPath}/college/">강의</a></td>
@@ -73,64 +74,78 @@ table {
 				</table>
 			</div>
 		</div>
-
-		<main>
-			<h1>단과대학</h1>
-			<div class="split--div"></div>
-			<div class="select--button">
-				<a href="${pageContext.request.contextPath}/college/collegelist?action=form" class="button">등록</a> 
-				<a href="${pageContext.request.contextPath}/college/collegelist?action=delete" class="button">삭제</a>
-			</div>
-
-			<!-- 기본적으로 보이는 등록 폼 -->
-			<div class="${param.action == 'delete' ? 'hidden' : ''}">
-				<form action="${pageContext.request.contextPath}/college/collegeadd" method="post" class="form--container">
-					<div class="insert--form">
-						<ul class="d-flex" style="margin: 0;">
-							<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span></li>
-							<li style="height: 24px;"><span class="insert">등록하기</span></li>
-						</ul>
-						<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
-						<input type="submit" value="입력" class="button">
-					</div>
-				</form>
-			</div>
+		</div>
+</head>
+<body>
+<main>
+		<h1>학과</h1>
+		<div class="split--div"></div>
+		<div class="select--button">
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=form" class="button">등록</a>
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=update" class="button">수정</a> 
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=delete" class="button">삭제</a>
+		</div>
 			
-			<h2>현재 단과 대학</h2>
-							<div class="total--container">
-					<table class="table--container">
-						<tr class="first--tr">
-							<td>ID</td>
-							<td>이름</td>
-						</tr>
-						<c:forEach var="college" items="${collegeList}">
-							<tr>
-								<td>${college.id}</td>
-								<td>${college.name}</td>
-							</tr>
-						</c:forEach>
-					</table>
+			<!-- 학과 등록 -->
+			<c:if test="${action.equals(\"form\")}">
+				<form action="${pageContext.request.contextPath}/" method="post">
+				<div class="">
+				<table>
+				<tr>
+				
+				<td></td>
+				
+				</tr>
+				</table>
 				</div>
+				<button type="submit">등록</button>
+				</form>		
 
-			<!-- 삭제 목록을 action이 'delete'일 때만 표시 -->
-			<div class="${param.action == 'delete' ? '' : 'hidden'}">
-				<span class="delete">삭제할 단과대학 이름을 클릭해주세요</span>
+			</c:if>
+
+			<!-- 학과 수정  -->
+			<c:if test="${action.equals(\"update\")}">
+				<form action="${pageContext.request.contextPath}" method="post">
+				
+				<button type="submit">수정</button>
+				</form>
+			</c:if>
+
+			<!-- 학과 삭제 -->
+			<c:if test="${action.equals(\"delete\")}">
+				<form action="" method="post">
+					<div class="$">
+					
+					<button type="submit">삭제</button>
+					</div>
+				</form>			
+
+			</c:if>
+			
+			<!-- 학과 조회 -->
+			
+			
 				<div class="total--container">
-					<table class="table--container">
-						<tr class="first--tr">
-							<td>ID</td>
-							<td>이름</td>
-						</tr>
-						<c:forEach var="college" items="${collegeList}">
-							<tr>
-								<td>${college.id}</td>
-								<td><a href="${pageContext.request.contextPath}/college/deletecollege?id=${college.id}">${college.name}</a></td>
-							</tr>
-						</c:forEach>
+				<table class="table--container">
+					<tbody><tr class="first--tr">
+						<td>ID</td>
+						<td>학과명</td>
+						<td>단과대ID</td>
+					</tr>
+					
+					<c:forEach var="department" items="${departmentList}">
+					<tr>
+						<td>${department.id}</td>
+						<td>${department.name}</td>
+						<td>${department.collegeId}</td>
+					</tr>
+					</c:forEach>
 					</table>
-				</div>
-			</div>
-		</main>
-	</div>
+					</div>
+					
+					
+				
+				
+	</main>
 </body>
 </html>
