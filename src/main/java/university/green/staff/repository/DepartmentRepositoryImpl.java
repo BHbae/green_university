@@ -10,7 +10,7 @@ import university.green.staff.model.DepartmentDTO;
 import university.green.staff.repository.interfaces.DepartmentRepository;
 import university.green.util.DBUtil;
 
-// 등록 - 학
+// 등록 - 학과
 public class DepartmentRepositoryImpl implements DepartmentRepository {
 
 	private static final String SELECT_ALL_DEPARTMENT = " SELECT * FROM department_tb ";
@@ -31,7 +31,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 				dto = DepartmentDTO.builder()
 								   .id(rs.getInt("id"))
 								   .name(rs.getString("name"))
-								   .collegeId(rs.getInt("collegeId"))
+								   .collegeId(rs.getInt("college_id")) // 똑같이
 								   .build();
 				list.add(dto);
 			}

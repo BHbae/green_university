@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>등록 - 강의실</title>
+<title>그린대학교 학사관리시스템</title>
 <style>
 table {
 	border-collapse: collapse;
@@ -63,7 +63,7 @@ table {
 						<td><a href="${pageContext.request.contextPath}/department/departmentlist?action=form">학과</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/roomlist?action=form">강의실</a></td>
+						<td><a href="${pageContext.request.contextPath}/college/">강의실</a></td>
 					</tr>
 					<tr>
 						<td><a href="${pageContext.request.contextPath}/college/">강의</a></td>
@@ -78,53 +78,74 @@ table {
 </head>
 <body>
 <main>
-		<h1>강의실</h1>
+		<h1>학과</h1>
 		<div class="split--div"></div>
 		<div class="select--button">
-			<a href="${pageContext.request.contextPath}/room/roomlist?action=form" class="button">등록</a> 
-			<a href="${pageContext.request.contextPath}/room/roomlist?action=delete" class="button">삭제</a>
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=form" class="button">등록</a>
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=update" class="button">수정</a> 
+			<a href="${pageContext.request.contextPath}/department/departmentlist?action=delete" class="button">삭제</a>
 		</div>
-
-
-			<!-- 강의 등록 -->
-				<c:if test="${action.equals(\"form\")}">
-				<form action="${pageContext.request.contextPath}" method="post">
-				<p>1</p>
-				</form>
 			
+			<!-- 학과 등록 -->
+			<c:if test="${action.equals(\"form\")}">
+				<form action="${pageContext.request.contextPath}/" method="post">
+				<div class="">
+				<table>
+				<tr>
+				
+				<td></td>
+				
+				</tr>
+				</table>
+				</div>
+				<button type="submit">등록</button>
+				</form>		
+
 			</c:if>
 
+			<!-- 학과 수정  -->
+			<c:if test="${action.equals(\"update\")}">
+				<form action="${pageContext.request.contextPath}" method="post">
+				
+				<button type="submit">수정</button>
+				</form>
+			</c:if>
 
-			<!-- 강의 삭제 -->
+			<!-- 학과 삭제 -->
 			<c:if test="${action.equals(\"delete\")}">
-				<form action="${pageContext.request.contextPath}" method="post">
-				<p>2</p>
-				</form>
-			
-			
+				<form action="" method="post">
+					<div class="$">
+					
+					<button type="submit">삭제</button>
+					</div>
+				</form>			
+
 			</c:if>
-
-
-			<!-- 강의 조회 -->
 			
-				<div class="form--container">
-					<table class="table--container">
+			<!-- 학과 조회 -->
+			
+			
+				<div class="total--container">
+				<table class="table--container">
 					<tbody><tr class="first--tr">
-						<td>강의실</td>
+						<td>ID</td>
+						<td>학과명</td>
 						<td>단과대ID</td>
 					</tr>
 					
-					<c:forEach var="room" items="${roomList}"> 
+					<c:forEach var="department" items="${departmentList}">
 					<tr>
-						<td>${room.id}</td>
-						<td>${room.collegeId}</td>
+						<td>${department.id}</td>
+						<td>${department.name}</td>
+						<td>${department.collegeId}</td>
 					</tr>
 					</c:forEach>
-
-					</tbody>
 					</table>
-				</div>
-			
+					</div>
+					
+					
+				
+				
 	</main>
 </body>
 </html>

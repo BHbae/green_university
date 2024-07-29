@@ -8,6 +8,7 @@ public interface DepartmentRepository {
 	
 	// 학과 CRUD
 	// 전체 리스트
+	
 	List<DepartmentDTO> departmentList();
 	
 	// 등록
