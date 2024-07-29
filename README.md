@@ -1,4 +1,4 @@
-## < JSP와 JSTL을 활용한 학사정보관리 웹사이트 >
+![Sitemap Example (1)](https://github.com/user-attachments/assets/0af0e1df-98e7-470b-9917-6c636eb9dfb5)## < JSP와 JSTL을 활용한 학사정보관리 웹사이트 >
 # < 🏫그린 대학교: 학사정보관리 사이트 >
 &nbsp; 
 &nbsp;
@@ -48,11 +48,23 @@
 
 ## 4️⃣ 사이트맵
 ### (1) 공통 기능
-### (2) 학생 기능
-### (3) 교직원 기능
-### (4) 교수 기능
+![Sitemap Example (5)](https://github.com/user-attachments/assets/ee100bab-b1d3-42dd-aea2-fd6dffe1291c)
 
-## 5️⃣
+### (2) 학생 기능
+![Sitemap Example](https://github.com/user-attachments/assets/25a5cc2a-b4d2-4d7f-ba09-0bd06e2d6f76)
+
+### (3) 교직원 기능
+![Sitemap Example (1)](https://github.com/user-attachments/assets/c54f478e-654a-4b04-bea0-0075a486a850)
+
+### (4) 교수 기능
+![Sitemap Example (2)](https://github.com/user-attachments/assets/67040582-2b99-43c6-97f3-2a09708628be)
+
+
+## 5️⃣ 시퀀스 다이어그램
+### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)
+![제목 없는 다이어그램 drawio](https://github.com/user-attachments/assets/64de70dc-b27e-437e-bd74-b1c1ab00955f)
+### (2) 예비 수강 신청 시퀀스
+### (3) 예비 수강 신청 -> 수강 신청 시퀀스
 ## 6️⃣
 ## 7️⃣
 ## 8️⃣
