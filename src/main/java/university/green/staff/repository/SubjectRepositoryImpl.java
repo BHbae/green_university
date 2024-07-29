@@ -33,20 +33,63 @@ public class SubjectRepositoryImpl implements SubjectRepository{
 			
 			while(rs.next()) {
 				SubjectDTO dto = new SubjectDTO();
+				dto = SubjectDTO.builder()
+								.id(rs.getInt("id"))
+								.name(rs.getString("name"))
+								.professorId(rs.getInt("professor_id"))
+								.roomId(rs.getString("room_id"))
+								.deptId(rs.getInt("dept_id"))
+								.type(rs.getString("type"))
+								.subYear(rs.getInt("sub_year"))
+								.semester(rs.getInt("semester"))
+								.subDay(rs.getString("sub_day"))
+								.startTime(rs.getInt("start_time"))
+								.endTime(rs.getInt("end_time"))
+								.grades(rs.getInt("grades"))
+								.capacity(rs.getInt("capacity"))
+								.numOfStudent(rs.getInt("num_of_student"))
+								.build();
+				list.add(dto);
 				
 			}
 			
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
-		return null;
+		return list;
 	}
 
 	@Override
 	public void addSubject(SubjectDTO dto) {
-		// TODO Auto-generated method stub
+		int rowCount = 0;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(INSERT_ADD_SUBJECT)){
+				pstmt.setString(1, dto.getName());
+				pstmt.setInt(2, dto.getProfessorId());
+				pstmt.setString(3, dto.getRoomId());
+				pstmt.setInt(4, dto.getDeptId());
+				pstmt.setString(5, dto.getType());
+				pstmt.setInt(6, dto.getSubYear());
+				pstmt.setInt(7, dto.getSemester());
+				pstmt.setString(8, dto.getSubDay());
+				pstmt.setInt(9, dto.getStartTime());
+				pstmt.setInt(10, dto.getEndTime());
+				pstmt.setInt(11, dto.getGrades());
+				pstmt.setInt(12, dto.getCapacity());
+				rowCount = pstmt.executeUpdate();
+				
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
