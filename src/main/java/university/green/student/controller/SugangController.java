@@ -239,7 +239,7 @@ public class SugangController extends HttpServlet {
 		System.out.println("내 id 확인: "+student.getId());
 		
 		// 내가 수강신청한 
-		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckById(student.getId()); // 예비 수강신청
+		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckPreSugang(); // 예비 수강신청
 		request.setAttribute("PreSugangList", PreSugangList);
 		System.out.println("내 수강신청 목록: "+PreSugangList);
 		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
@@ -327,7 +327,7 @@ public class SugangController extends HttpServlet {
         int stuId = dto.getId(); // stuId
         
         List<PreSugangListDTO> checkList=sugangRepository.CheckById(stuId);
-        for(int i=1; i<checkList.size()+1; i++) {
+        for(int i=0; i<checkList.size(); i++) {
         	PreSugangListDTO check= checkList.get(i);
         	if(check.getSubjectId()==id) {
         		System.out.println("수강 신청 취소 튕김");
@@ -357,9 +357,10 @@ public class SugangController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id")); // sub_id
 		StudentDTO dto = (StudentDTO)session.getAttribute("principal"); 
         int stuId = dto.getId(); // stuId
-        
-        List<PreSugangListDTO> checkList=sugangRepository.CheckById(stuId);
-        for(int i=1; i<checkList.size(); i++) {
+        System.out.println(stuId);
+        System.out.println(id);
+        List<PreSugangListDTO> checkList=sugangRepository.CheckPreSugang();
+        for(int i=0; i<checkList.size(); i++) {
         	System.out.println("for문 들어옴");
         	PreSugangListDTO check= checkList.get(i);
         	

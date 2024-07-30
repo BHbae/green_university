@@ -276,15 +276,20 @@ public class SugangRepositoryImpl implements SugangRepository {
 	}
 	
 	@Override
-	public void CheckPreSugang(int studentId, int subjectId) {
+	public List<PreSugangListDTO> CheckPreSugang() {
+		List<PreSugangListDTO>preSugangList = new ArrayList<>();
 		try (Connection conn = DBUtil.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(CHECK_PRESUBJECT);
-			pstmt.executeQuery();
-			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PreSugangListDTO preSugang = PreSugangListDTO.builder().studentId(rs.getInt("student_id"))
+				.subjectId(rs.getInt("subject_id")).build();
+				preSugangList.add(preSugang);
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-
+		return preSugangList;
 		
 	}
 	
