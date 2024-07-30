@@ -298,36 +298,17 @@ public class SugangController extends HttpServlet {
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
 		System.out.println(sugangRepository.AddPreSugang(studentId, subjectId));
-		int page = 1;
-		int pageSize = 20;
-		String pageStr = request.getParameter("page");
 		
-		
-		try {
-			if(pageStr != null ) {
-				page = Integer.parseInt(pageStr);
-			}
-		} catch (Exception e) {
-			page = 1;
-		}
-		int offset = (page -1) * pageSize;
-		
-		
-		int totalBoards = sugangRepository.getTotalBoardCount();
-		
-		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
-		
-		
-		List<SugangDTO> preBoardList = sugangRepository.preApply(pageSize, offset); // 전체
-		request.setAttribute("preBoardList", preBoardList);
-		request.setAttribute("currentPage", page);
-		request.setAttribute("totalPages", totalPages);
-		request.setAttribute("totalBoards", totalBoards);
 		
 		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckById(studentId); // 예비 수강신청
 		request.setAttribute("PreSugangList", PreSugangList);
+		
+		
 		System.out.println(PreSugangList);
-		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+	
+		
+//		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/sugang/preApply");
 		
 	}
 
@@ -355,7 +336,9 @@ public class SugangController extends HttpServlet {
 	private void HandleStudentPlus(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
         sugangRepository.StudentPlus(id);
-        
+        StudentDTO dto = (StudentDTO)session.getAttribute("principal"); 
+        int stuId = dto.getId();
+        sugangRepository.AddPreSugang(stuId, id);
         response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
 		
 	}
