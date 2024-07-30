@@ -2,7 +2,7 @@
 # < 🏫그린 대학교: 학사정보관리 사이트 >
 &nbsp; 
 &nbsp;
-![Uploading logo.png…]()
+![logo](https://github.com/user-attachments/assets/b923df9c-cade-4ea3-896d-0ff97033363e)
 
 &nbsp;
 ### 목차
