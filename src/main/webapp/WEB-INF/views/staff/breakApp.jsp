@@ -31,11 +31,11 @@
 			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
-						<li><a href="/">홈</a>
-						<li><a href="/">MY</a>
-						<li><a href="/">학사관리</a>
-						<li><a href="/">등록</a>
-						<li><a href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
+				<li><a href="/">홈</a>
+				<li><a href="/">MY</a>
+				<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
+				<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
+				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
 					</ul>
 		</nav>
 	</header>

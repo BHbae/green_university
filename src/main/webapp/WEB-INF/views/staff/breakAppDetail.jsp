@@ -138,7 +138,7 @@ table {
 					<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
 				</tr>
 			</table>
-		</div>
+	 	</div>
 	</div>
 
 	<!-- 메인 div -->

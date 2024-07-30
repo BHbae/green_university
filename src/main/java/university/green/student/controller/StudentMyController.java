@@ -29,6 +29,10 @@ public class StudentMyController extends HttpServlet {
 		String action = request.getPathInfo();
 		HttpSession session = request.getSession();
 		
+		if(session ==  null) {
+			response.sendRedirect(request.getContextPath()  + "Login.jsp");
+		}
+		
 		switch (action) {
 		case "/my":
 			MyDitail(request, response, session);
