@@ -130,7 +130,6 @@ public class UserController extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/findPasswordComplete.jsp");
         dispatcher.forward(request, response);
-        System.out.println("비밀번호 찾기 들어오나!!");
     }
 
     private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
