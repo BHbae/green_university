@@ -26,12 +26,24 @@ public class UserController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // GET 요청 처리 로직을 추가할 수 있습니다.
+    	 String action = request.getPathInfo();
+    	 
+    	switch (action) {
+                case "/signIn":
+                    enterLogIn(request, response);
+                break;
+    	}
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    private void enterLogIn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	response.sendRedirect(request.getContextPath() + "/Login.jsp");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo();
+        
+        
         switch (action) {
             case "/login":
                 handleLogin(request, response);
@@ -68,18 +80,19 @@ public class UserController extends HttpServlet {
             LoginDto dto = userRepository.userId(userId, password);
             if (userId == dto.getId() && password.equals(dto.getPassword())) {
                 HttpSession session = request.getSession();
+                
                 if ("student".equals(dto.getUser_role())) {
-                    StudentDTO studentDetail = userRepository.studentDtail(dto.getId());
-                    session.setAttribute("principal", studentDetail);
-                    response.sendRedirect(request.getContextPath() + "/mainStudent.jsp");
+                			StudentDTO studentDetail = userRepository.studentDtail(dto.getId());
+                			session.setAttribute("principal", studentDetail);
+                			response.sendRedirect(request.getContextPath() + "/mainStudent.jsp");
                 } else if ("professor".equals(dto.getUser_role())) {
-                    ProfessorDTO professorDetail = userRepository.professorDtail(dto.getId());
-                    session.setAttribute("principal", professorDetail);
-                    response.sendRedirect(request.getContextPath() + "/mainProfessor.jsp");
+                		ProfessorDTO professorDetail = userRepository.professorDtail(dto.getId());
+                        session.setAttribute("principal", professorDetail);
+                        response.sendRedirect(request.getContextPath() + "/mainProfessor.jsp");
                 } else if ("staff".equals(dto.getUser_role())) {
-                    StaffDTO staffDetail = userRepository.staffDtail(dto.getId());
-                    session.setAttribute("principal", staffDetail);
-                    response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
+                		StaffDTO staffDetail = userRepository.staffDtail(dto.getId());
+                        session.setAttribute("principal", staffDetail);
+                        response.sendRedirect(request.getContextPath() + "/mainStaff.jsp");
                 } else {
                     showError(response, "유효하지 않은 방식입니다.");
                 }
@@ -117,7 +130,6 @@ public class UserController extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/findPasswordComplete.jsp");
         dispatcher.forward(request, response);
-        System.out.println("비밀번호 찾기 들어오나!!");
     }
 
     private void handleFindIdComplete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -65,10 +65,10 @@ table {
 						<td><a href="${pageContext.request.contextPath}/room/roomlist">강의실</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/">강의</a></td>
+						<td><a href="${pageContext.request.contextPath}/subject/subjectlist">강의</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/">단대별 등록금</a></td>
+						<td><a href="${pageContext.request.contextPath}/colltuition/colllist">단대별 등록금</a></td>
 					</tr>
 				</table>
 			</div>

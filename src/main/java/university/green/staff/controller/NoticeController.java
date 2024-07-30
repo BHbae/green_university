@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import university.green.staff.model.NoticeDTO;
 import university.green.staff.model.ScheduleDTO;
-import university.green.staff.repository.NoticeRepository;
 import university.green.staff.repository.NoticeRepositoryImpl;
+import university.green.staff.repository.interfaces.NoticeRepository;
 
 // URL 매핑 수정
 @WebServlet("/notice/*")
@@ -120,7 +120,7 @@ public class NoticeController extends HttpServlet {
 			request.setAttribute("notice", noticeDTO);
 			System.out.println(noticeDTO);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 		request.getRequestDispatcher("/WEB-INF/views/staff/notice.jsp").forward(request, response);

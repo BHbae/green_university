@@ -12,7 +12,7 @@ public interface DepartmentRepository {
 	List<DepartmentDTO> departmentList();
 	
 	// 등록
-	 void addDepartment(DepartmentDTO dto);
+	 int addDepartment(DepartmentDTO dto);
 	
 	// 수정
 	int updateDepartment(DepartmentDTO dto);

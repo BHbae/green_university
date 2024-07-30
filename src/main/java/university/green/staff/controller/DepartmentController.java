@@ -54,15 +54,12 @@ public class DepartmentController extends HttpServlet {
 
 	// 목록 페이지
 	private void departmentlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<DepartmentDTO> department = departmentRepository.departmentList();
+		List<DepartmentDTO> departmentList = departmentRepository.departmentList();
 		
 		String action = request.getParameter("action");
-		System.out.println(action);
-		
-		
 		
 		request.setAttribute("action", action);
-		request.setAttribute("departmentList", department);
+		request.setAttribute("departmentList", departmentList);
 		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
 
 		
@@ -120,9 +117,7 @@ public class DepartmentController extends HttpServlet {
 										 .build();
 		departmentRepository.addDepartment(dto);
 		
-		List<DepartmentDTO> department = departmentRepository.departmentList(); // 조회
-		request.setAttribute("departmentList", department);
-		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/department/departmentlist");
 		
 	}
 
@@ -131,20 +126,26 @@ public class DepartmentController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		departmentRepository.deleteDepartment(id);
 		
-		List<DepartmentDTO> department = departmentRepository.departmentList(); 
-		request.setAttribute("departmentList", department);
-		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/department/departmentlist");
 		
 		
 	}
 
 	// 수정
 	private void updatedepartment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String name = request.getParameter("name");
+		int collegeId = Integer.parseInt(request.getParameter("collegeId"));
 		
-		List<DepartmentDTO> department = departmentRepository.departmentList(); 
-		request.setAttribute("departmentList", department);
-		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
+		DepartmentDTO dto = DepartmentDTO.builder()
+										 .name(name)
+										 .collegeId(collegeId)
+										 .build();
+		departmentRepository.updateDepartment(dto);
+		
+		
+		
+		
+		response.sendRedirect(request.getContextPath() + "/department/departmentlist");
 	}
 
 }
