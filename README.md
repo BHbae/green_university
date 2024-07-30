@@ -42,8 +42,8 @@
 ||jakarta.servlet.jsp.jstl 3.0.0| - |
 |Lombok|Lombok| 간편한 생성자 및 메서드 사용 |
 |MySQL Connector Java|MySQL Connector Java 8.0.21| MySQL 테이블, DAO&DTO, 검색 기능 및 페이징 기능 구현 |
-|SLF4J|SLF4J API 2.0.0| 다양한 로깅 프레임워크에 대한 추상화 및 연결 |
-|SLF4J|SLF4J simple 2.0.0| SLF4J 인터페이스를 로깅 구현체와 연결 |
+|SLF4J|SLF4J API 2.0.0| 다양한 로깅 프레임워크에 대한 추상화 및 연결 |-커스텀 라이브러리 구현체|
+|SLF4J|SLF4J simple 2.0.0| SLF4J 인터페이스를 로깅 구현체와 연결 |-커스텀 라이브러리 구현체 사용을 위한 인터페이스|
 
 ## 4️⃣ 사이트맵
 ### (1) 공통 기능
