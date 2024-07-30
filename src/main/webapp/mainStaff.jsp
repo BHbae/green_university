@@ -30,25 +30,6 @@
 
 		<nav class="main--menu">
 			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
-<<<<<<< HEAD
-			<!-- userRole에 따라 메뉴 다르게 표시 -->			
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/mainStaff.jsp">홈</a>
-						<li><a href="/">MY</a>
-						<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
-						<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
-						<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
-					</ul>
-		</nav>
-	</header>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
-<!-- 헤드 부분 -->
-			<!-- userRole에 따라 메뉴 다르게 표시 -->
-</head>
-<body>
-	<!-- 헤드 부분 -->
-
-=======
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/mainStaff.jsp">홈</a>
@@ -61,7 +42,6 @@
 	</header>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
->>>>>>> e3143d93132d064c89bf8d93bafe37d3dc795ad1
 	<!-- 세부 메뉴 + 메인 -->
 	<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 
