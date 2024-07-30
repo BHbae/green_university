@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class CollegeTuitionDTO {
+public class CollTuitionDTO {
 	private int collegeId;
 	private int amount;
 

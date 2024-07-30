@@ -8,6 +8,7 @@ import java.util.List;
 
 import university.green.staff.model.NoticeDTO;
 import university.green.staff.model.ScheduleDTO;
+import university.green.staff.repository.interfaces.NoticeRepository;
 import university.green.util.DBUtil;
 
 public class NoticeRepositoryImpl implements NoticeRepository {

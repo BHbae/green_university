@@ -15,56 +15,48 @@
     <servlet-name>User</servlet-name>
     <servlet-class>university.green.User</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>User</servlet-name>
-    <url-pattern>/User</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>staffAddController</display-name>
     <servlet-name>staffAddController</servlet-name>
     <servlet-class>university.green.staff.controller.staffAddController</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>staffAddController</servlet-name>
-    <url-pattern>/staffAddController</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>professorMy</display-name>
     <servlet-name>professorMy</servlet-name>
     <servlet-class>university.green.professor.controller.professorMy</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>professorMy</servlet-name>
-    <url-pattern>/professorMy</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>StaffController</display-name>
     <servlet-name>StaffController</servlet-name>
     <servlet-class>university.green.staff.controller.StaffController</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>StaffController</servlet-name>
-    <url-pattern>/StaffController</url-pattern>
-    <display-name>DepartmentController</display-name>
-    <servlet-name>DepartmentController</servlet-name>
-    <servlet-class>university.green.staff.controller.DepartmentController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DepartmentController</servlet-name>
-    <url-pattern>/DepartmentController</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>RoomController</display-name>
     <servlet-name>RoomController</servlet-name>
     <servlet-class>university.green.staff.controller.RoomController</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <display-name>SubjectController</display-name>
+    <servlet-name>SubjectController</servlet-name>
+    <servlet-class>university.green.staff.controller.SubjectController</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>RoomController</servlet-name>
-    <url-pattern>/RoomController</url-pattern>
+    <servlet-name>SubjectController</servlet-name>
+    <url-pattern>/SubjectController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CollTuitiionController</display-name>
+    <servlet-name>CollTuitiionController</servlet-name>
+    <servlet-class>university.green.staff.controller.CollTuitiionController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CollTuitiionController</servlet-name>
+    <url-pattern>/CollTuitiionController</url-pattern>
   </servlet-mapping>
 </web-app>

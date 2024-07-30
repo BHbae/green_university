@@ -11,7 +11,7 @@ public interface SubjectRepository {
 	List<SubjectDTO> subjectList();
 	
 	// 등록
-	void addSubject(SubjectDTO dto);
+	int addSubject(SubjectDTO dto);
 	
 	// 수정
 	int updateSubject(SubjectDTO dto);

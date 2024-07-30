@@ -61,7 +61,8 @@ public class SubjectRepositoryImpl implements SubjectRepository{
 	}
 
 	@Override
-	public void addSubject(SubjectDTO dto) {
+	public int addSubject(SubjectDTO dto) {
+		
 		int rowCount = 0;
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
@@ -90,20 +91,60 @@ public class SubjectRepositoryImpl implements SubjectRepository{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		return rowCount;
 	}
 
 	@Override
 	public int updateSubject(SubjectDTO dto) {
-		// TODO Auto-generated method stub
+		int rowCount = 0;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(UPDATE_SUBJECT)){
+				pstmt.setString(1, dto.getName());
+				pstmt.setString(2, dto.getRoomId());
+				pstmt.setString(3, dto.getSubDay());
+				pstmt.setInt(4, dto.getStartTime());
+				pstmt.setInt(5, dto.getEndTime());
+				pstmt.setInt(6, dto.getCapacity());
+				pstmt.setInt(7, dto.getId());
+				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
-		return 0;
+		return rowCount;
 	}
 
 	@Override
 	public int deleteSubject(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int rowCount = 0 ;
+		
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_SUBJECT)){
+				pstmt.setInt(1, id);
+				rowCount = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return rowCount;
 	}
 
 }

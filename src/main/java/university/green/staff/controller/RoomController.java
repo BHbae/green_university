@@ -103,9 +103,7 @@ public class RoomController extends HttpServlet {
 							 .build();
 		roomRepositroy.addRoom(dto);
 		
-		List<RoomDTO> room = roomRepositroy.roomList();
-		request.setAttribute("roomList", room);
-		request.getRequestDispatcher("/WEB-INF/views/staff/room.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/room/addroom");
 		
 	}
 
@@ -114,9 +112,7 @@ public class RoomController extends HttpServlet {
 		String id = request.getParameter("id");
 		roomRepositroy.deleteRoom(id);
 		
-		List<RoomDTO> room = roomRepositroy.roomList();
-		request.setAttribute("roomList", room);
-		request.getRequestDispatcher("/WEB-INF/views/staff/room.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/room/deleteroom");
 		
 	}
 
