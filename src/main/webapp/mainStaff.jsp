@@ -42,9 +42,6 @@
 	</header>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
-<body>
-	<!-- 헤드 부분 -->
-
 	<!-- 세부 메뉴 + 메인 -->
 	<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 
@@ -166,28 +163,15 @@
 								<!-- 페이지이동 -->
 								<a href="/logout"><button>로그아웃</button></a>
 							</div>
-
-
 						</div>
 					</c:if>
 					<br>
-
-
-
-
 				</div>
 			</div>
 		</div>
 	</div>
-
   		<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>
-	<footer>
-		COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
-	</footer>
-
-	</div>
-
 </body>
 </html>

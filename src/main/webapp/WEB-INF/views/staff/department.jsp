@@ -57,26 +57,25 @@ table {
 			<div class="sub--menu--mid">
 				<table class="sub--menu--table" border="1">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/collegelist?action=form" class="selected--menu">단과대학</a></td>
+						<td><a href="${pageContext.request.contextPath}/college/collegelist?action=form" >단과대학</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/department/departmentlist?action=form">학과</a></td>
+						<td><a href="${pageContext.request.contextPath}/department/departmentlist?action=form" class="selected--menu">학과</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/">강의실</a></td>
+						<td><a href="${pageContext.request.contextPath}/room/roomlist?action=form">강의실</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/">강의</a></td>
+						<td><a href="${pageContext.request.contextPath}/subject/subjectlist?action=form">강의</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/college/">단대별 등록금</a></td>
+						<td><a href="${pageContext.request.contextPath}/colltuition/colllist">단대별 등록금</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		</div>
-</head>
-<body>
+	
+
 <main>
 		<h1>학과</h1>
 		<div class="split--div"></div>
@@ -86,40 +85,55 @@ table {
 			<a href="${pageContext.request.contextPath}/department/departmentlist?action=delete" class="button">삭제</a>
 		</div>
 			
+		
+			
 			<!-- 학과 등록 -->
-			<c:if test="${action.equals(\"form\")}">
-				<form action="${pageContext.request.contextPath}/" method="post">
-				<div class="">
-				<table>
-				<tr>
-				
-				<td></td>
-				
-				</tr>
-				</table>
-				</div>
-				<button type="submit">등록</button>
+				<c:if test="${action.equals(\"form\")}">
+				<form action="${pageContext.request.contextPath}/department/adddepartment" method="post">
+				<div class="insert--form">
+						<ul class="d-flex" style="margin: 0;">
+							<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span></li>
+							<li style="height: 24px;"><span class="insert">등록하기</span></li>
+						</ul>
+					<select name="college">
+					<c:forEach var="college" items="${departmentList}">
+						<option value="">${college.collegeId}</option>
+					</c:forEach>
+					</select>
+						<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
+						<input type="submit" value="입력" class="button">
+					</div>
 				</form>		
 
 			</c:if>
 
 			<!-- 학과 수정  -->
 			<c:if test="${action.equals(\"update\")}">
-				<form action="${pageContext.request.contextPath}" method="post">
-				
-				<button type="submit">수정</button>
+			<form action="${pageContext.request.contextPath}/department/updatedepartment" method="post">
+			<select name="collegeId">
+				<c:forEach var="name" items="${departmentList}">
+					<option value="${name.id}">${name.name}</option>
+				</c:forEach>
+			</select>
+					<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
+					<input type="submit" value="입력" class="button">
 				</form>
 			</c:if>
 
 			<!-- 학과 삭제 -->
+			
 			<c:if test="${action.equals(\"delete\")}">
-				<form action="" method="post">
-					<div class="$">
-					
-					<button type="submit">삭제</button>
-					</div>
+				<form action="${pageContext.request.contextPath}/department/departmentlist" method="post">
+				<span class="delete">삭제할 학과 이름을 클릭해주세요</span>
+				<table class="table--container">
+				<c:forEach var="room" items="${roomList}">
+					<tr>
+						<td><a href="/department/roomDelete?id=${room.id}">${room.id}</a></td>
+						<td>${room.collegeId}</td>
+					</tr>
+				</c:forEach>
+			</table>
 				</form>			
-
 			</c:if>
 			
 			<!-- 학과 조회 -->
@@ -147,5 +161,6 @@ table {
 				
 				
 	</main>
+</div>
 </body>
 </html>

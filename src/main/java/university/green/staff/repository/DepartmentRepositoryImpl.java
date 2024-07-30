@@ -16,7 +16,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 	private static final String SELECT_ALL_DEPARTMENT = " SELECT * FROM department_tb ";
 	private static final String INSERT_ADD_DEPARTMENT = " INSERT INTO department_tb(name, college_id) VALUES (?, ?) ";
 	private static final String DELETE_DEPARTMENT = " DELETE FROM department_tb WHERE id = ? ";
-	private static final String UPDATE_DEPARTMENT = " UPDATE department_tb set name = ? WHERE name = ?; ";
+	private static final String UPDATE_DEPARTMENT = " UPDATE department_tb set name = ? WHERE id = ? ";
 	private static final String ALL_TOTAL_PAGE = " SELECT count(*) as count FROM department_tb ";
 	@Override
 	public List<DepartmentDTO> departmentList() {
@@ -42,8 +42,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		return list;
 	}
 
-	@Override //TODO
-	public void addDepartment(DepartmentDTO dto) {
+	@Override 
+	public int addDepartment(DepartmentDTO dto) {
 		
 		int rowCount = 0;
 		
@@ -63,6 +63,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 			e.printStackTrace();
 		}
 		
+		return rowCount;
 		
 	}
 
@@ -72,12 +73,12 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
 			try (PreparedStatement pstmt = conn.prepareStatement(UPDATE_DEPARTMENT)){
-				pstmt.setInt(1, dto.getId());
-				pstmt.setString(2, dto.getName());
-				pstmt.setInt(3, dto.getCollegeId());
+				pstmt.setString(1, dto.getName());
+				pstmt.setInt(2, dto.getCollegeId());
 				rowCount = pstmt.executeUpdate();
 				
 				conn.commit();
+				
 				
 				
 			} catch (Exception e) {
@@ -101,6 +102,9 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 			try (PreparedStatement pstmt = conn.prepareStatement(DELETE_DEPARTMENT)){
 				pstmt.setInt(1,id);
 				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
 			} catch (Exception e) {
 				conn.rollback();
 				e.printStackTrace();
@@ -120,7 +124,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 				PreparedStatement pstmt = conn.prepareStatement(ALL_TOTAL_PAGE)) {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				count = rs.getInt("countS");
+				count = rs.getInt("count");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

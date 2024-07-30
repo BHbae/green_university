@@ -54,7 +54,7 @@ public class collegeController extends HttpServlet {
 
 	
 	private void collegeadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
 	}
 
 	private void collegelist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -91,14 +91,15 @@ public class collegeController extends HttpServlet {
 		List<CollegeDTO> college = collegeRepository.listCollege();// 조회
 		
 		
-		request.setAttribute("collegeList", college);
-		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/college/collegelist");
+
 	}
 
 	// 삭제 (get 방식으로 던져 줌)
 	private void deletecollege(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		collegeRepository.deleteCollege(id);
+		
 		List<CollegeDTO> college = collegeRepository.listCollege();
 		request.setAttribute("collegeList", college);
 		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
