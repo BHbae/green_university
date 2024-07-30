@@ -41,6 +41,7 @@ public class collegeController extends HttpServlet {
 			break;
 
 		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 

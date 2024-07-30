@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지 사항 조회</title>
 </head>
 <body>
 	<!-- MY 페이지 휴학 신청 (학생) -->
@@ -103,7 +103,7 @@ table {
 			<ul>
 				<li><a href="/">홈</a>
 				<li><a href="/">MY</a>
-				li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
+				<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
 				<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
 				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
 			</ul>

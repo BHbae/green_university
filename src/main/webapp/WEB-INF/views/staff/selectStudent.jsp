@@ -4,6 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>    
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="../resources/css/myInfo.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,28 +99,28 @@
 		<nav class="main--menu">
 			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
-					<ul>
-						<li><a href="/">홈</a>
-						<li><a href="/">MY</a>
-						<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
-						<li><a href="/">등록</a>
-						<li><a href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
-					</ul>
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/mainStaff.jsp">홈</a>
+				<li><a href="${pageContext.request.contextPath}/staffmy/my">MY</a>
+				<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
+				<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
+				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
+			</ul>
 		</nav>
-	</header>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
+</header>
+
 	<!-- 헤드 부분 -->
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>학사 관리</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
 		<div class="sub--menu--mid">
 			<table class="sub--menu--table" border="1">
-				<tr>
-					<td><a href="${pageContext.request.contextPath}/management/selectStudent" >학사관리</a></td>
-				</tr>
+				<tbody>
 				<tr>
 					<td><a href="${pageContext.request.contextPath}/management/selectStudent" class="selected--menu">학생 명단 조회</a></td>
 				</tr>
@@ -142,12 +145,14 @@
 				<tr>
 					<td><a href="${pageContext.request.contextPath}/management/setPeriod">수강 신청 기간 설정</a></td>
 				</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
 	<main>
 		<h1>학생 명단 조회</h1>
-	
+	<div class="split--div"></div>
+	<div class="d-flex flex-column align-items-center" style="width: 100%">
 	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
 	<form class="selectSpecifictStudent" action="${pageContext.request.contextPath}/management/selectSpecifictStudent" method="POST">
@@ -155,10 +160,10 @@
 		<input type="text" id="deptId" name="deptId">
 		<label for="stuId">학번</label>
 		<input type="text" id="stuId" name="stuId">
-		<input type="submit" value="조회하기">
+		<input type="submit" value="조회하기"  class="button">
 	</form>
 	<form action="selectStudent" action="${pageContest.request.contextpath}/management/selectStudent" method="GET">
-		<input type="submit" value="새학기 업데이트">
+		<input type="submit" value="새학기 업데이트"  class="button">
 	</form>
 	<c:choose>
 		<c:when test="${not empty studentList}">
@@ -198,11 +203,8 @@
 	</c:when>
 	</c:choose>
 		</div>
+		</div>
 	</main>
-	<footer>
-		COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
-	</footer>
-	
 	
 </body>
 </html>
