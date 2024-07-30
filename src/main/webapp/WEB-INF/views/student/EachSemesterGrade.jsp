@@ -30,7 +30,7 @@
 		</div>
 		
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
 				<li><a href="/">홈</a>
@@ -60,6 +60,40 @@
 		</div>
 	</div>
 <!--  -->
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+	<!-- 세부 메뉴 div-->
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>MY</h2>
+		</div>
+		<!-- 메뉴 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tbody>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/mystudent/my">내 정보 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/password">비밀번호 변경</a></td>
+					</tr>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapp">휴학 신청</a></td>
+					</tr>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapplist" class="selected--menu">휴학 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/list">등록금 내역 조회</a></td>
+					</tr>
+					<tr>
+						<td><a href="/tuition/payment">등록금 납부 고지서</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
 <body>

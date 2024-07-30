@@ -76,7 +76,7 @@
 	display: flex;
 	justify-content: center;
 }
-	
+
 </style>
 </head>
 <body>
@@ -94,18 +94,59 @@
 		</div>
 
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
 						<li><a href="/">홈</a>
 						<li><a href="/">MY</a>
-						<li><a href="/">학사관리</a>
+						<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
 						<li><a href="/">등록</a>
 						<li><a href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
 					</ul>
 		</nav>
 	</header>
-	<h1>학생 명단 조회</h1>
+	<!-- 헤드 부분 -->
+<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+	<div class="sub--menu">
+		<div class="sub--menu--top">
+			<h2>MY</h2>
+		</div>
+		<!-- 메뉴 -->
+		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
+		<div class="sub--menu--mid">
+			<table class="sub--menu--table" border="1">
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/selectStudent" >학사관리</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/selectStudent" class="selected--menu">학생 명단 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/selectProfessor">교수 명단 조회</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/registerStudent">학생 등록</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/registerProfessor">교수 등록</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/registerStaff">직원 등록</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/sendBill">등록금 고지서 발송</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/handelBreakApp">휴학 처리</a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/management/setPeriod">수강 신청 기간 설정</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<main>
+		<h1>학생 명단 조회</h1>
 	
 	<!--/green/management/selectStudent-->
 	<!-- 검색창 -->
@@ -122,7 +163,8 @@
 	<c:choose>
 		<c:when test="${not empty studentList}">
 	<h3>학생 목록 </h3>
-		<table border="1">
+		<div class="container">
+			<table border="1">
 			<tr>
 				<th>학번</th>
 				<th>이름</th>
@@ -155,6 +197,11 @@
 		</table>
 	</c:when>
 	</c:choose>
+		</div>
+	</main>
+	<footer>
+		COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
+	</footer>
 	
 	
 </body>

@@ -15,7 +15,7 @@
 		<c:if test="${status==0 || status==1}">
 			<p>수강 신청 기간 전입니다.</p>
 			<form class="setStatus" action="${pageContext.request.contextPath}/management/startStuSub" method="GET">
-			<input type="button" id="setPeriod1" name="setPeriod1" value="수강 신청 기간 시작">
+			<button type="submit">수강 신청 기간 시작</button>
 			</form>
 		</c:if>
 		
@@ -23,9 +23,10 @@
 		<c:if test="${status==2}">
 			<p>현재 수강 신청 기간입니다.</p>
 			<form class="setStatus" action="${pageContext.request.contextPath}/management/stopStuSub" method="GET">
-			<input type="button" id="setPeriod2" name="setPeriod2" value="수강 신청 기간 종료">
+			<button type="submit">수강 신청 기간 종료</button>
 			</form>
 		</c:if>		
+		
 		<!-- 만약 수강 신청 기간이 끝났다면 -->
 		<c:if test="${status==3}">
 			<p>이번 학기 수강 신청 기간이 종료되었습니다.</p>

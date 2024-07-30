@@ -28,12 +28,12 @@
 		</div>
 
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="resources/ima/logo.png"></a>
+			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
 						<li><a href="/">홈</a>
 						<li><a href="/">MY</a>
-						<li><a href="/">학사관리</a>
+						<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
 						<li><a href="/">등록</a>
 						<li><a href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
 					</ul>
@@ -41,7 +41,7 @@
 	</header>
 	<h1>휴학 처리</h1>
 		<!-- todo - 만약 휴학 신청이 있다면 테이블 생성 -->
-		<c:if test="${breakList!=null}">
+		<c:if test="${breakAppList!=null}">
 			<table border="1">
 			<tr>
 				<th>신청일자</th>
@@ -54,16 +54,16 @@
 			<c:forEach var="BreakAppDTO" items="${breakAppList}">
 				<tr>
 					<td>${BreakAppDTO.appDate}</td>
-					<td>${ProfessorDTO.studentId}</td>
-					<td>${ProfessorDTO.type}</td>
-					<td>${ProfessorDTO.fromYear} 년도 ${ProfessorDTO.fromSemester}학기</td>
-					<td>${ProfessorDTO.toYear} 년도 ${ProfessorDTO.toSemester}학기</td>
-					<td><a href=#>Click</a></td>
+					<td>${BreakAppDTO.studentId}</td>
+					<td>${BreakAppDTO.type}</td>
+					<td>${BreakAppDTO.fromYear}년도 ${BreakAppDTO.fromSemester}학기</td>
+					<td>${BreakAppDTO.toYear}년도 ${BreakAppDTO.toSemester}학기</td>
+					<td><a href="${pageContext.request.contextPath}/management/handleBreakAppDetail?studentId=${BreakAppDTO.studentId}">Click</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 		</c:if>
-		<c:if test="${breakList==null}">
+		<c:if test="${breakAppList==null}">
 			<p>대기 중인 신청 내역이 없습니다.</p>
 		</c:if>
 </body>

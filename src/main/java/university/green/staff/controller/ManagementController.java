@@ -33,9 +33,11 @@ import university.green.staff.repository.interfaces.StudentRepositoryimpl;
 import university.green.staff.repository.interfaces.SubPeriodRepository;
 import university.green.staff.repository.interfaces.TuitionRepository;
 import university.green.student.model.BreakAppDTO;
+import university.green.student.model.CoDeDTO;
 import university.green.student.model.StudentDTO;
 import university.green.student.model.TuitionDTO;
 import university.green.student.repository.StuSchRepositoryImpl;
+import university.green.student.repository.leaveRepositoryImpl;
 
 /**
  * 직원 - 학사 관리 콘트롤러
@@ -53,9 +55,10 @@ public class ManagementController extends HttpServlet {
 	private StuStatRepository stuStatRepository; // 학생 학적 인터페이스
 	private SubPeriodRepository subPeriodRepository; // 수강신청 기간 인터페이스
 	private university.green.student.repository.interfaces.StuSchRepository stuSchRepository; // 학생 - 장학금 내역 인터페이스
+	private university.green.student.repository.interfaces.leaveRepository leaveRepositoryImple;
 	
 	public static int StuSubStatus; // 수강신청 기간 설정 스테이터스
-	// 0=기간 전, 1=기간 중, 2=기간 종료
+	// 1=기간 전, 2=기간 중, 3=기간 종료
 	
     public ManagementController() {
         super();
@@ -69,6 +72,7 @@ public class ManagementController extends HttpServlet {
         stuStatRepository=new StuStatRepositoryImpl();
         subPeriodRepository=new SubPeriodRepositoryImpl();
         stuSchRepository= new StuSchRepositoryImpl();
+        leaveRepositoryImple=new leaveRepositoryImpl();
         
         StuSubStatus=0; // 수강신청 기간 불가
     }
@@ -130,7 +134,7 @@ public class ManagementController extends HttpServlet {
 			break;
 		}
 		// 휴학 처리 페이지 이동
-		case "/absence": {
+		case "/handelBreakApp": {
 			handleBreakApp(request,response,session);
 			break;
 		}
@@ -139,26 +143,44 @@ public class ManagementController extends HttpServlet {
 			setStuSubPeriod(request,response,session);
 			break;
 		}
-		// 수강 신청 시작
+		// (수강 신청 시작) - 수강 신청 기간 설정 페이지 이동
 		case "/startStuSub" :{
 			startPeriod(request,response,session);
 			break;
 		}
-		// 수강 신청  종료
+		// (수강 신청 종료) - 수강 신청 기간 설정 페이지 이동
 		case "/stopStuSub" :{
 			stopPeriod(request,response,session);
 			break;
 				}
+		// 휴학 처리 디테일 페이지 이동
+		case "/handleBreakAppDetail" :{
+			handleBreakAppDetail(request,response,session);
+			break;
+		}
 		default: {
 			break;
 		}}
 	}
 
 
+	// 수강 신청 디테일 화면 
+	private void handleBreakAppDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+		String idStr = request.getParameter("studentId");
+		int leaveID = Integer.parseInt(idStr);
+		StudentDTO studentDTO = (StudentDTO)session.getAttribute("principal");
+		
+		CoDeDTO dto = leaveRepositoryImple.searchCoDe(studentDTO.getId());
+		BreakAppDTO leave = leaveRepositoryImple.detailBreakApp(leaveID);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("leave", leave);
+		request.getRequestDispatcher("/WEB-INF/views/staff/breakappdetail.jsp").forward(request, response);
+	}
+
 	// 수강 신청 기간 종료
 	private void stopPeriod(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-		subPeriodRepository.startSubPeriod(2024,2);
-		
+		subPeriodRepository.stopSubPeriod(2024,2);
 		int status=(subPeriodRepository.getSubPeriod(2024,2)).getStatus();
 		
 		request.setAttribute("status", status);
@@ -233,7 +255,7 @@ public class ManagementController extends HttpServlet {
 	private void handleBreakApp(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		
 		List<BreakAppDTO> breakAppList=breakAppRepository.getAllBreakApp();
-		request.setAttribute("breakList", breakAppList);
+		request.setAttribute("breakAppList", breakAppList);
 		request.getRequestDispatcher("/WEB-INF/views/staff/breakApp.jsp").forward(request, response);
 		
 	}
