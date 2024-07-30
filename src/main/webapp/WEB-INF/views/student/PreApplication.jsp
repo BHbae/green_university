@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
@@ -267,24 +268,32 @@ table {
 											</c:when>
 											<c:otherwise>
 												<c:choose>
-													<c:when test="${not empty preSugangList}">
-														<c:forEach var="preSugang" items="${preSugangList}">
-															<c:if test="${preSugang.subjectId == subject.id}">
-																<form action="${pageContext.request.contextPath}/sugang/AddPreSugang" method="post">
-																	<input type="hidden" name="id" value="${subject.id}"> 
-																	<input type="hidden" name="action" value="StudentMinus">
-																	<button type="submit" style="background-color: #FF5733;">취소</button>																	 
-																</form>
-															</c:if>															
+													<c:when test="${not empty PreSugangList}">
+													<%
+																int flag=0;
+															%>
+														<c:forEach var="PreSugang" items="${PreSugangList}">
+															<c:choose>
+																<c:when test="${PreSugang.subjectId==subject.departNum}">
+																	<% flag++; %>
+																</c:when>	
+																<c:otherwise>
+																</c:otherwise>
+															</c:choose>
 														</c:forEach>
-													</c:when>
-													<c:otherwise>
+														<% if(flag==1){ %>
+														<form action="${pageContext.request.contextPath}/sugang/StudentMinus" method="post">
+															<input type="hidden" name="id" value="${subject.id}"> 
+															<input type="hidden" name="stuId" value="${principal.id}"> 
+															<input type="hidden" name="action" value="StudentMinus">
+															<button type="submit" style="background-color: #FF5733;">취소</button>																	 
+														</form><%} else{%>
 														<form action="${pageContext.request.contextPath}/sugang/StudentPlus" method="post">
 															<input type="hidden" name="id" value="${subject.id}"> 
 															<input type="hidden" name="action" value="StudentPlus">
 															<button type="submit" style="background-color: #548AC2;">신청</button>
-														</form>
-													</c:otherwise>
+														</form> <%} %>
+													</c:when>
 												</c:choose>
 											</c:otherwise>
 										</c:choose></td>

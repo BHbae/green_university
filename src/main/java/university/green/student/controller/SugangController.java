@@ -229,17 +229,19 @@ public class SugangController extends HttpServlet {
 		
 		int totalPages = (int) Math.ceil((double)totalBoards / pageSize);
 		
-		
+		//  전체 과목 리스트
 		List<SugangDTO> preBoardList = sugangRepository.preApply(pageSize, offset);
 		request.setAttribute("preBoardList", preBoardList);
 		request.setAttribute("currentPage", page);
 		request.setAttribute("totalPages", totalPages);
 		request.setAttribute("totalBoards", totalBoards);
-		System.out.println(preBoardList);
-		System.out.println(student.getId());
+		System.out.println("전체강의 조회: "+preBoardList);
+		System.out.println("내 id 확인: "+student.getId());
+		
+		// 내가 수강신청한 
 		List<PreSugangListDTO> PreSugangList = sugangRepository.CheckById(student.getId()); // 예비 수강신청
 		request.setAttribute("PreSugangList", PreSugangList);
-		System.out.println(PreSugangList);
+		System.out.println("내 수강신청 목록: "+PreSugangList);
 		request.getRequestDispatcher("/WEB-INF/views/student/PreApplication.jsp").forward(request, response);
 	}
 
@@ -320,10 +322,28 @@ public class SugangController extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	private void HandleStudentMinus(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
-        sugangRepository.StudentMinus(id);
-        response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
-		
+		int id = Integer.parseInt(request.getParameter("id")); // sub_id
+		StudentDTO dto = (StudentDTO)session.getAttribute("principal"); 
+        int stuId = dto.getId(); // stuId
+        
+        List<PreSugangListDTO> checkList=sugangRepository.CheckById(stuId);
+        for(int i=1; i<checkList.size()+1; i++) {
+        	PreSugangListDTO check= checkList.get(i);
+        	if(check.getSubjectId()==id) {
+        		System.out.println("수강 신청 취소 튕김");
+        		System.out.println("중복 수강신청 취소 불가!!");
+
+                response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
+        		return;
+        	} else {
+        		System.out.println("수강 신청 취소 완료");
+        		 sugangRepository.StudentMinus(id);
+                 sugangRepository.SubtractPreSugang(stuId, id);
+                 response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
+                 return;
+        	}
+
+        }
 	}
 
 	/**
@@ -334,12 +354,28 @@ public class SugangController extends HttpServlet {
 	 * @throws ServletException 
 	 */
 	private void HandleStudentPlus(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
-		int id = Integer.parseInt(request.getParameter("id"));
-        sugangRepository.StudentPlus(id);
-        StudentDTO dto = (StudentDTO)session.getAttribute("principal"); 
-        int stuId = dto.getId();
-        sugangRepository.AddPreSugang(stuId, id);
-        response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
+		int id = Integer.parseInt(request.getParameter("id")); // sub_id
+		StudentDTO dto = (StudentDTO)session.getAttribute("principal"); 
+        int stuId = dto.getId(); // stuId
+        
+        List<PreSugangListDTO> checkList=sugangRepository.CheckById(stuId);
+        for(int i=1; i<checkList.size(); i++) {
+        	System.out.println("for문 들어옴");
+        	PreSugangListDTO check= checkList.get(i);
+        	
+        	if(check.getSubjectId()==id) {
+        		System.out.println("수강 신청 튕김");
+        		System.out.println("중복 수강신청 불가!!");
+                response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
+        		return;
+        	} else {
+        		System.out.println("수강 신청 완료");
+        		sugangRepository.StudentPlus(id);
+                sugangRepository.AddPreSugang(stuId, id);
+                response.sendRedirect(request.getContextPath()  + "/sugang/preApply");
+                return;
+        	}
+        }
 		
 	}
 
