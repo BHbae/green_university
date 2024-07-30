@@ -61,7 +61,7 @@
 
 ## 5️⃣ 시퀀스 다이어그램
 ### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)
-![제목 없는 다이어그램 drawio](https://github.com/user-attachments/assets/64de70dc-b27e-437e-bd74-b1c1ab00955f)
+![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)
 ### (2) 예비 수강 신청 시퀀스
 ### (3) 예비 수강 신청 -> 수강 신청 시퀀스
 ## 6️⃣ ERD 다이어그램 및 테이블 명세서
