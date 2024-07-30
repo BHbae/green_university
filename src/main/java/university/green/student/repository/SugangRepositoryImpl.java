@@ -57,8 +57,10 @@ public class SugangRepositoryImpl implements SugangRepository {
 	// 예비수강 수락 
 	private static final String ADD_PRESUBJECT = "INSERT INTO pre_stu_sub_tb (student_id, subject_id) values(?, ?) " ;
 	// 예비 수강 취소 
-	private static final String SUBTRACT_PRESUBJECT = "DELETE FROM pre_stu_sub_tb WHERE student_id = ?" ;
+	private static final String SUBTRACT_PRESUBJECT = "DELETE FROM pre_stu_sub_tb WHERE student_id = ? and subject_id = ?" ;
 	
+	// 학생 ID로 예비 수강 조회
+	private static final String CHECK_BY_STUDENT_ID = "SELECT * FROM pre_stu_sub_tb WHERE student_id = ?" ;
 	
 	@Override
 	public List<SugangDTO> listBoard(int limit, int offset) {
@@ -246,25 +248,26 @@ public class SugangRepositoryImpl implements SugangRepository {
 	}
 	
 	@Override
-	public List<PreSugangListDTO> AddPreSugang(int studentId, int subjectId) {
-		List<PreSugangListDTO> AddPreSugangList = new ArrayList<>();
+	public int AddPreSugang(int studentId, int subjectId) {
+		// List<PreSugangListDTO> AddPreSugangList = new ArrayList<>();
+		int flag=0;
 		try (Connection conn = DBUtil.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(ADD_PRESUBJECT);
 			pstmt.setInt(1, studentId);
 			pstmt.setInt(2, subjectId);
-			pstmt.executeUpdate();
+			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return AddPreSugangList;
-		
+		return flag;
 	}
 	
 	@Override
-	public void SubtractPreSugang(int studentId) {
+	public void SubtractPreSugang(int studentId, int subjectId) {
 		try (Connection conn = DBUtil.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(SUBTRACT_PRESUBJECT);
 			pstmt.setInt(1, studentId);
+			pstmt.setInt(2, subjectId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -281,7 +284,24 @@ public class SugangRepositoryImpl implements SugangRepository {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
 		
+	}
+	
+	@Override
+	public List<PreSugangListDTO> CheckById(int studentId) { 
+		List<PreSugangListDTO> CheckById = new ArrayList<>();
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(CHECK_BY_STUDENT_ID);
+			pstmt.setInt(1, studentId);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CheckById.add(PreSugangListDTO.builder().studentId(rs.getInt("student_id")).subjectId(rs.getInt("subject_id")).build());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return CheckById;
 	}
 	
 	@Override
