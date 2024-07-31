@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="icon" href="resources/ima/fabicon.png" type="image/x-icon">
 <meta charset="UTF-8">
 <title>Login</title>
 <link rel="stylesheet"

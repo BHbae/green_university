@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지 사항 조회</title>
 </head>
 <body>
 	<!-- MY 페이지 휴학 신청 (학생) -->

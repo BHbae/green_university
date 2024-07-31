@@ -42,7 +42,6 @@
 			</ul>
 		</nav>
 	</header>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 </head>
 	<!-- 세부 메뉴 + 메인 -->
 	<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
@@ -172,12 +171,12 @@
 			</div>
 		</div>
 	</div>
-
   		<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>
 
 
 
+>>>>>>> 30b21bd4994a7a3ce0d56473d73b23d088e13310
 </body>
 </html>
