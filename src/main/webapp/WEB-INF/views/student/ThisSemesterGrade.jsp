@@ -92,7 +92,7 @@ table {
 			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->
 			<ul>
-			<li><a href="/">홈</a>
+				<li><a href="/">홈</a>
 				<li><a href="${pageContext.request.contextPath}/mystudent/my">MY</a>
 				<li><a href="${pageContext.request.contextPath}">수업</a>
 				<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a>

@@ -40,7 +40,7 @@ table {
 				<li><a href="/">수업</a>
 				<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a>
 				<li><a href="${pageContext.request.contextPath}/studentGrade/gradeOfThisSemester">성적</a>
-				<li><a href="/">학사 정보</a>
+				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사 정보</a>
 			</ul>
 		</nav>
 	</header>
