@@ -114,7 +114,7 @@ table {
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>수업</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -157,8 +157,8 @@ table {
 								<td>${lectureList.id}</td>
 								<td>${lectureList.name}</td>
 								<td>${lectureList.subDay}${lectureList.startTime}:00 ~ ${lectureList.endTime}:00 (${lectureList.roomId})</td>
-								<td><a href="${pageContext.request.contextPath}/lecture/detailLecture">조회하기</a></td>
-								<td>조회 수성해야뎀</td>
+								<td><a href="${pageContext.request.contextPath}/lecture/detailLecture?id=${lectureList.id}">조회 하기</a></td>
+								<td>조회 하기</td>
 							</tr>
 						</c:forEach>
 						<br>
