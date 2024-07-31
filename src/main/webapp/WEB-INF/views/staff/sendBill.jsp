@@ -145,9 +145,7 @@ table {
 	</div>
 		<main>
 		<h1>등록금 고지서 발송</h1>
-		<div class="split--div"></div>
-
-		<div class="d-flex flex-column align-items-center" style="width: 100%">
+		
 			<form class="sendBill" action="${pageContext.request.contextPath}/management/sendBillLetter" method="GET">
 			<input type="submit" class="button" value="등록금 고지서 발송" onclick="alert('${listSize}개의 고지서가 발송되었습니다.')">
 			</form>
