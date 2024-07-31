@@ -67,7 +67,7 @@ table {
 						<td><a href="${pageContext.request.contextPath}/subject/subjectlist?action=form"  class="selected--menu">강의</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/colltuition/colllist">단대별 등록금</a></td>
+						<td><a href="${pageContext.request.contextPath}/colltuition/colllist?action=form">단대별 등록금</a></td>
 					</tr>
 				</table>
 			</div>
