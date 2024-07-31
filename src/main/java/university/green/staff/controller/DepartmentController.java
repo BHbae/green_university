@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import university.green.staff.model.CollegeDTO;
 import university.green.staff.model.DepartmentDTO;
 import university.green.staff.repository.DepartmentRepositoryImpl;
 import university.green.staff.repository.interfaces.DepartmentRepository;
@@ -55,11 +56,14 @@ public class DepartmentController extends HttpServlet {
 	// 목록 페이지
 	private void departmentlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<DepartmentDTO> departmentList = departmentRepository.departmentList();
+		// 카테고리
+		List<CollegeDTO> categoryList = departmentRepository.CategoryList();
 		
 		String action = request.getParameter("action");
 		
 		request.setAttribute("action", action);
 		request.setAttribute("departmentList", departmentList);
+		request.setAttribute("categoryList", categoryList);
 		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
 
 		

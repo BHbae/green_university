@@ -69,7 +69,7 @@ table {
 						<td><a href="${pageContext.request.contextPath}/subject/subjectlist?action=form">강의</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/colltuition/colllist">단대별 등록금</a></td>
+						<td><a href="${pageContext.request.contextPath}/colltuition/colllist?action=form">단대별 등록금</a></td>
 					</tr>
 				</table>
 			</div>
@@ -97,9 +97,10 @@ table {
 						</ul>
 						<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
 						<input type="submit" value="입력" class="button">
+					
 					<select name="college">
-					<c:forEach var="category" items="${category}">
-						<option value="">${category.name}</option>
+					<c:forEach var="category" items="${categoryList}">
+						<option>${category.name}</option>
 					</c:forEach>
 					</select>
 					</div>

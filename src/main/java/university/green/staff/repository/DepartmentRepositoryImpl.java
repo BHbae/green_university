@@ -83,6 +83,9 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 				pstmt.setString(1,dto.getName());
 				pstmt.setInt(2, dto.getCollegeId());
 				rowCount = pstmt.executeUpdate();
+				
+				conn.commit();
+				
 			} catch (Exception e) {
 				conn.rollback();
 				e.printStackTrace();

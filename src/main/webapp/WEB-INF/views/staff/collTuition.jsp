@@ -59,16 +59,16 @@ table {
 						<td><a href="${pageContext.request.contextPath}/college/collegelist?action=form" >단과대학</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/department/departmentlist">학과</a></td>
+						<td><a href="${pageContext.request.contextPath}/department/departmentlist?action=form">학과</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/room/roomlist">강의실</a></td>
+						<td><a href="${pageContext.request.contextPath}/room/roomlist?action=form">강의실</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/subject/subjectlist">강의</a></td>
+						<td><a href="${pageContext.request.contextPath}/subject/subjectlist?action=form">강의</a></td>
 					</tr>
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/colltuition/colllist" class="selected--menu">단대별 등록금</a></td>
+						<td><a href="${pageContext.request.contextPath}/colltuition/colllist?action=form" class="selected--menu">단대별 등록금</a></td>
 					</tr>
 				</table>
 			</div>
