@@ -3,6 +3,7 @@ package university.green.staff.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import university.green.staff.repository.interfaces.BreakAppRepository;
@@ -41,15 +42,15 @@ public class BreakAppRepositoryImpl implements BreakAppRepository{
 	@Override
 	public List<BreakAppDTO> getAllBreakApp() {
 		final String GET_ALL_BREAKAPP=" select * from break_app_tb ";
-		List<BreakAppDTO> breakAppList=null;
+		List<BreakAppDTO> breakAppList=new ArrayList<>();
 		try (Connection conn=DBUtil.getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(GET_ALL_BREAKAPP)){
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				BreakAppDTO breakApp=BreakAppDTO.builder().id(rs.getInt("id")).studentId(rs.getInt("studentId"))
-						.studentGrade(rs.getInt("studentGrade")).fromYear(rs.getInt("fromYear")).fromSemester(rs.getInt("fromSemester"))
-						.toYear(rs.getInt("toYear")).toSemester(rs.getInt("toSemester")).type(rs.getString("type"))
-						.appDate(rs.getDate("date")).status(rs.getString("status")).build();
+				BreakAppDTO breakApp=BreakAppDTO.builder().id(rs.getInt("id")).studentId(rs.getInt("student_Id"))
+						.studentGrade(rs.getInt("student_grade")).fromYear(rs.getInt("from_year")).fromSemester(rs.getInt("from_Semester"))
+						.toYear(rs.getInt("to_year")).toSemester(rs.getInt("to_semester")).type(rs.getString("type"))
+						.appDate(rs.getDate("app_date")).status(rs.getString("status")).build();
 				breakAppList.add(breakApp);
 			}
 		} catch (Exception e) {

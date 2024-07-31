@@ -25,4 +25,5 @@ public class BreakAppDTO {
 	private String type; // 신청 이유(일반휴학, 가사휴학...)
 	private Date appDate; // 휴학일
 	private String status; // 처리상태 (신청 확인)
+	
 }

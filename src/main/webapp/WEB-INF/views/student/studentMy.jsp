@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="university.green.student.model.StudentDTO"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="../resources/css/myInfo.css">
@@ -34,12 +35,12 @@
 			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
 			<!-- userRole에 따라 메뉴 다르게 표시 -->			
 					<ul>
-						<li><a href="/">홈</a>
+						<li><a href="${pageContext.request.contextPath}/mainStudent.jsp">홈</a>
 						<li><a href="${pageContext.request.contextPath}/mystudent/my">MY</a>
 						<li><a href="/">수업</a>
-						<li><a href="/">수강신청</a>
-						<li><a href="/">성적</a>
-						<li><a href="/">학사 정보</a>
+						<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a>
+						<li><a href="${pageContext.request.contextPath}/studentGrade/gradeOfThisSemester">성적</a>
+						<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사 정보</a>
 					</ul>
 		</nav>
 	</header>
@@ -62,11 +63,11 @@
 					<td><a href="/password">비밀번호 변경</a></td>
 				</tr>
 				<tr>
-					<td><a href="/break/application">휴학 신청</a></td>
-				</tr>
-				<tr>
-					<td><a href="/break/list">휴학 내역 조회</a></td>
-				</tr>
+						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapp" >휴학 신청</a></td>
+					</tr>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/mystudent/mybreakapplist" >휴학 내역 조회</a></td>
+					</tr>
 				<tr>
 					<td><a href="/tuition/list">등록금 내역 조회</a></td>
 				</tr>
@@ -81,6 +82,7 @@
 	<main>
 		<h1>내 정보 조회</h1>
 		<div class="split--div"></div>
+			<c:if test="${not empty principal}">
 			<table border="1" class="input--table">
 			<colgroup>
 				<col class="col1">
@@ -90,23 +92,24 @@
 			</colgroup>
 				<tbody><tr>
 					<th>학번</th>
-					<td>2023000001</td>
+					<td>${principal.id}</td>
 					<th>소속</th>
 					<td>공과대학&nbsp;컴퓨터공학과</td>
 				</tr>
 				<tr>
 					<th>학년</th>
-					<td>1</td>
+					<td>${principal.grade}</td>
 					<th>학기</th>
-					<td>1</td>
+					<td>${principal.semester}</td>
 				</tr>
 				<tr>
 					<th>입학일</th>
-					<td>2021-03-02</td>
+					<td>${principal.entranceDate}</td>
 					<th>졸업일(졸업예정일)</th>
 					<td></td>
 				</tr>
-			</tbody></table>
+			</tbody>
+			</table>
 			<table border="1" class="input--table">
 			<colgroup>
 				<col class="col1">
@@ -116,23 +119,25 @@
 			</colgroup>
 				<tbody><tr>
 					<th>성명</th>
-					<td>박시우</td>
+					<td>${principal.name}</td>
 					<th>생년월일</th>
-					<td>2002-06-19</td>
+					<td>${principal.birthDate}</td>
 				</tr>
 				<tr>
 					<th>성별</th>
-					<td>남성</td>
+					<td>${principal.gender}</td>
 					<th>주소</th>
-					<td>부산시 남구</td>
+					<td>${principal.address}</td>
 				</tr>
 				<tr>
 					<th>연락처</th>
-					<td>010-5267-1815</td>
+					<td>${principal.email}</td>
 					<th>email</th>
-					<td>psw@green.com</td>
+					<td>${principal.tel}</td>
 				</tr>
-			</tbody></table>
+			</tbody>
+			</table>
+			 </c:if>
 			<button type="button" onclick="location.href='/update'" class="btn btn-dark update--button">수정하기</button>
 			
 	</main>

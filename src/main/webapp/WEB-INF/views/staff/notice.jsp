@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지 사항 조회</title>
 </head>
 <body>
 	<!-- MY 페이지 휴학 신청 (학생) -->
@@ -103,7 +103,7 @@ table {
 			<ul>
 				<li><a href="/">홈</a>
 				<li><a href="/">MY</a>
-				li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
+				<li><a href="${pageContext.request.contextPath}/management/selectStudent">학사관리</a>
 				<li><a href="${pageContext.request.contextPath}/college/collegelist">등록</a>
 				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사정보</a>
 			</ul>
@@ -115,7 +115,7 @@ table {
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>학사정보</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->
@@ -137,13 +137,13 @@ table {
 
 	<!-- 메인 div -->
 	<main>
-		<h1>내 강의 목록</h1>
+		<h1>공지사항</h1>
 		<div class="split--div"></div>
 
 		<div class="d-flex flex-column align-items-center" style="width: 100%">
 			<form action="/break/application" method="post" class="d-flex flex-column align-items-center">
 				<div class="document--layout">
-					<h3>강의 목록</h3>
+					<h3>공지사항</h3>
 					<table border="1">
 						<tr>
 							<th>번호</th>

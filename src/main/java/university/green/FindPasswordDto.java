@@ -16,7 +16,7 @@ public class FindPasswordDto {
 
 	
 	private String name;
-	private Integer id;
+	private int id;
 	private String email;
 	private String userRole;
 	

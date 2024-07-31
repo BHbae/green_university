@@ -15,19 +15,28 @@
     <servlet-name>User</servlet-name>
     <servlet-class>university.green.User</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>User</servlet-name>
-    <url-pattern>/User</url-pattern>
-
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>staffAddController</display-name>
     <servlet-name>staffAddController</servlet-name>
     <servlet-class>university.green.staff.controller.staffAddController</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>staffAddController</servlet-name>
-    <url-pattern>/staffAddController</url-pattern>
-  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>professorMy</display-name>
+    <servlet-name>professorMy</servlet-name>
+    <servlet-class>university.green.professor.controller.professorMy</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>StaffController</display-name>
+    <servlet-name>StaffController</servlet-name>
+    <servlet-class>university.green.staff.controller.StaffController</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>RoomController</display-name>
+    <servlet-name>RoomController</servlet-name>
+    <servlet-class>university.green.staff.controller.RoomController</servlet-class>
+  </servlet>
 </web-app>

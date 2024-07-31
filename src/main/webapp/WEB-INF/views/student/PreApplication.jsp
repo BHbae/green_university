@@ -1,12 +1,12 @@
-<%@page import="university.green.student.model.StudentDTO"%>
+<%@ page import="university.green.student.model.StudentDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
 <html>
-<!-- header 부분 따로 include 만들어서 학생 스탭한테 넣어줘야함  -->
 <head>
 <meta charset="UTF-8">
 <title>그린대학교 학사관리시스템</title>
@@ -20,43 +20,38 @@ table {
 <body>
 
 	<header class="d-flex flex-column">
-
 		<div class="header--top">
 			<ul>
-				<li class="material--li"><span class="material-symbols-outlined"><i class="material-icons">account_circle</i></span> <c:if test="${not empty principal}">
-						<li>${principal.name}님 (${principal.id})님
-					</c:if>
-				<li style="margin: 0 15px;">
-				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined"><i class="material-icons">logout</i></span>
-				<li><a href="/green/Login.jsp">로그아웃</a>
+				<li class="material--li"><span class="material-symbols-outlined"> <i class="material-icons">account_circle</i>
+				</span> <c:if test="${not empty principal}">
+					${principal.name}님 (${principal.id})님
+				</c:if></li>
+				<li style="margin: 0 15px;"></li>
+				<li class="material--li"><span style="color: #9BD2EC;" class="material-symbols-outlined"> <i class="material-icons">logout</i>
+				</span></li>
+				<li><a href="${pageContext.request.contextPath}/Login.jsp">로그아웃</a></li>
 			</ul>
 		</div>
-
 		<nav class="main--menu">
-			<a href="/"><img class="logo" alt="" src="../resources/ima/logo.png"></a>
-			<!-- userRole에 따라 메뉴 다르게 표시 -->
+			<a href="/"><img class="logo" alt="" src="${pageContext.request.contextPath}/resources/ima/logo.png"></a>
 			<ul>
-				<li><a href="/">홈</a>
-				<li><a href="/">MY</a>
+				<li><a href="${pageContext.request.contextPath}/mainStudent.jsp">홈</a>
+				<li><a href="${pageContext.request.contextPath}/mystudent/my">MY</a>
 				<li><a href="/">수업</a>
 				<li><a href="${pageContext.request.contextPath}/sugang/listBoards">수강신청</a>
-				<li><a href="/">성적</a>
-				<li><a href="/">학사 정보</a>
+				<li><a href="${pageContext.request.contextPath}/studentGrade/gradeOfThisSemester">성적</a>
+				<li><a href="${pageContext.request.contextPath}/notice/allnotice">학사 정보</a>
 			</ul>
 		</nav>
 	</header>
-	<!--  -->
+
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainPage.css">
 
-
-	<!-- 세부 메뉴 + 메인 -->
 	<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
-		<!-- 세부 메뉴 div-->
 		<div class="sub--menu">
 			<div class="sub--menu--top">
 				<h2>수강신청</h2>
 			</div>
-			<!-- 메뉴 -->
 			<div class="sub--menu--mid">
 				<table class="sub--menu--table" border="1">
 					<tr>
@@ -66,22 +61,19 @@ table {
 						<td><a class="selected--menu" href="${pageContext.request.contextPath}/sugang/preApply">예비 수강 신청</a></td>
 					</tr>
 					<tr>
-						<td><a href="/sugang/SugangApply">수강 신청</a></td>
+						<td><a href="${pageContext.request.contextPath}/sugang/SugangApply">수강 신청</a></td>
 					</tr>
 					<tr>
-						<td><a href="/sugang/ApplyInfo">수강 신청 내역 조회</a></td>
+						<td><a href="${pageContext.request.contextPath}/sugang/ApplyInfo">수강 신청 내역 조회</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 
-		<!-- 메인 div -->
 		<main>
 			<h1>예비 수강 신청</h1>
 			<div class="split--div"></div>
-
 			<div class="d-flex justify-content-between align-items-start" style="margin-bottom: 50px;">
-				<!-- 필터 및 검색 -->
 				<div class="sub--filter">
 					<form action="${pageContext.request.contextPath}/sugang/preSearch" method="get">
 						<div>
@@ -130,6 +122,8 @@ table {
 								<option value="농업경영학과">농업경영학과</option>
 
 								<option value="무역학과">무역학과</option>
+
+
 							</select> <label for="subjectName">강의명</label> <input type="text" name="subjectName" list="subjectName">
 							<datalist id="subjectName">
 								<option value="데이터통신">
@@ -214,9 +208,6 @@ table {
 								<option value="한국무역법">
 							</datalist>
 
-
-
-
 							<button type="submit">
 								<ul class="d-flex justify-content-center" style="margin: 0;">
 									<li style="height: 24px; margin-right: 2px;">조회</li>
@@ -227,8 +218,7 @@ table {
 					</form>
 				</div>
 
-				<!-- 예비 수강 신청 내역으로 가기 -->
-				<a href="/sugang/ApplyInfo"><button class="preStuSubList--button">예비 수강 신청 내역</button></a>
+				<a href="${pageContext.request.contextPath}/sugang/ApplyInfo"><button class="preStuSubList--button">예비 수강 신청 내역</button></a>
 			</div>
 
 			<c:choose>
@@ -264,11 +254,11 @@ table {
 									<td>${subject.grades}</td>
 									<td><c:choose>
 											<c:when test="${subject.subjectStart < 10}">
-                                            ${subject.subjectDay} 0${subject.subjectStart}:00-${subject.subjectEnd}:00&nbsp;(${subject.room})
-                                        </c:when>
+											${subject.subjectDay} 0${subject.subjectStart}:00-${subject.subjectEnd}:00&nbsp;(${subject.room})
+										</c:when>
 											<c:otherwise>
-                                            ${subject.subjectDay} ${subject.subjectStart}:00-${subject.subjectEnd}:00&nbsp;(${subject.room})
-                                        </c:otherwise>
+											${subject.subjectDay} ${subject.subjectStart}:00-${subject.subjectEnd}:00&nbsp;(${subject.room})
+										</c:otherwise>
 										</c:choose></td>
 									<td>${subject.currentStudent}</td>
 									<td>${subject.capacity}</td>
@@ -277,10 +267,30 @@ table {
 												<button type="button" style="background-color: white; color: gray" disabled>신청마감</button>
 											</c:when>
 											<c:otherwise>
-												<form action="/sugang/insertApp/${subject.id}?type=0" method="post">
-													<button type="submit" style="background-color: #548AC2;">신청</button>
-												</form>
-											</c:otherwise>
+					<c:set var="isEnrolled" value="false"/>
+					<c:forEach var="preSugang" items="${PreSugangList}">
+						<c:if test="${subject.departNum == preSugang.subjectId && preSugang.studentId eq principal.id}">
+							<c:set var="isEnrolled" value="true"/>
+						</c:if>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${isEnrolled}">
+							<form action="${pageContext.request.contextPath}/sugang/StudentMinus" method="post">
+								<input type="hidden" name="id" value="${subject.id}"> 
+								<input type="hidden" name="stuId" value="${principal.id}"> 
+								<input type="hidden" name="action" value="StudentMinus">
+								<button type="submit" style="background-color: #FF5733;">취소</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<form action="${pageContext.request.contextPath}/sugang/StudentPlus" method="post">
+								<input type="hidden" name="id" value="${subject.id}"> 
+								<input type="hidden" name="action" value="StudentPlus">
+								<button type="submit" style="background-color: #548AC2;">신청</button>
+							</form>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
 										</c:choose></td>
 								</tr>
 							</c:forEach>
@@ -295,9 +305,10 @@ table {
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<p>강의 목록이 없습니다.</p>
+					<p>검색된 강의가 없습니다.</p>
 				</c:otherwise>
 			</c:choose>
 		</main>
 	</div>
 </body>
+</html>

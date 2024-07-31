@@ -57,7 +57,6 @@ public class LectureController extends HttpServlet {
 			request.setAttribute("professor", professor);
 			request.setAttribute("detail", lecture);
 			
-			// TODO - 경로 수정
 			request.getRequestDispatcher("/WEB-INF/views/professor/detailLecture.jsp").forward(request, response);
 			
 		} catch (Exception e) {

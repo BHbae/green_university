@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="icon" href="resources/ima/fabicon.png" type="image/x-icon">
 <meta charset="UTF-8">
 <title>Login</title>
 <link rel="stylesheet"
@@ -44,8 +46,6 @@ input[type=number] {
 		<span class="material-symbols-outlined">person</span></label> 
 		<input type="number" max="2147483647" name="id" id="userId"
 							placeholder="아이디를 입력하세요" required="" value="">
-
-
 		<div class="checkbox--id">
 		<input type="checkbox" name="rememberId">&nbsp;ID 저장
 		</div>

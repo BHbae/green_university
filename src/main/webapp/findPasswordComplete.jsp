@@ -63,9 +63,9 @@
 			<br>
 		</div>
 		<div class="section--content">
-			${name}님의 임시 비밀번호는<br> 
-			<span style="font-weight: bold;">${password}</span><br>
-			입니다. 보안을 위해 로그인 후 비밀번호를 변경해주세요.
+			${name}님의 비밀번호는<br> 
+			<span style="font-weight: bold;">${findPassword}</span><br>
+			입니다.
 		</div>
 	</section>
 

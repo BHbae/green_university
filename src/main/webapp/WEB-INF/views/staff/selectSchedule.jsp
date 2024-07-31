@@ -144,7 +144,7 @@ table {
 <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 	<div class="sub--menu">
 		<div class="sub--menu--top">
-			<h2>MY</h2>
+			<h2>학사정보</h2>
 		</div>
 		<!-- 메뉴 -->
 		<!-- 선택된 메뉴에 class="selected--menu" 추가해주세요 -->

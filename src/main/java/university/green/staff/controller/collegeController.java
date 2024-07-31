@@ -31,30 +31,80 @@ public class collegeController extends HttpServlet {
 			collegelist(request, response);
 			break;
 		case "/collegeadd":
-
+			collegeadd(request, response);
 			break;
 		case "/collegedelete":
-
+			collegedelete(request, response);
+			break;
+		case "/deletecollege":
+			deletecollege(request, response);
 			break;
 
 		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 
 	}
 
+	
+	private void collegedelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
+		
+	}
+
+	
+	private void collegeadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
+	}
+
 	private void collegelist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CollegeDTO> collegeList = collegeRepository.listCollege();
+		List<CollegeDTO> college = collegeRepository.listCollege();
 		
 		
-		request.setAttribute("college", collegeList);
-		request.getRequestDispatcher("/WEB-INF/views/staff/registrationCollege.jsp").forward(request, response);
+		request.setAttribute("collegeList", college);
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String action = request.getPathInfo();
 
+		switch (action) {
+		
+		case "/collegeadd":
+			addcollege(request, response);
+			break;
+		
+
+		default:
+			break;
+		}
+
+
+	}
+
+	// 추가
+	private void addcollege(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		collegeRepository.addCollege(name);
+		List<CollegeDTO> college = collegeRepository.listCollege();// 조회
+		
+		
+		response.sendRedirect(request.getContextPath() + "/college/collegelist");
+
+	}
+
+	// 삭제 (get 방식으로 던져 줌)
+	private void deletecollege(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		collegeRepository.deleteCollege(id);
+		
+		List<CollegeDTO> college = collegeRepository.listCollege();
+		request.setAttribute("collegeList", college);
+		request.getRequestDispatcher("/WEB-INF/views/staff/college.jsp").forward(request, response);
+		
 	}
 
 }
