@@ -67,6 +67,8 @@ public class DepartmentController extends HttpServlet {
 
 	// 등록 페이지
 	private void departmentadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		request.getRequestDispatcher("/WEB-INF/views/staff/department.jsp").forward(request, response);
 		
 		

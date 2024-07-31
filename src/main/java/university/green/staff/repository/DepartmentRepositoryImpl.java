@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import university.green.staff.model.CollegeDTO;
 import university.green.staff.model.DepartmentDTO;
 import university.green.staff.repository.interfaces.DepartmentRepository;
 import university.green.util.DBUtil;
@@ -18,6 +19,9 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 	private static final String DELETE_DEPARTMENT = " DELETE FROM department_tb WHERE id = ? ";
 	private static final String UPDATE_DEPARTMENT = " UPDATE department_tb set name = ? WHERE id = ? ";
 	private static final String ALL_TOTAL_PAGE = " SELECT count(*) as count FROM department_tb ";
+	
+	private static final String CATEGORY_SELECT_ALL = " select * from college_tb ";
+	
 	@Override
 	public List<DepartmentDTO> departmentList() {
 		List<DepartmentDTO> list = new ArrayList<>();
@@ -41,6 +45,31 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		
 		return list;
 	}
+	
+	// 카테고리 
+	@Override
+	public List<CollegeDTO> CategoryList() {
+		List<CollegeDTO> category = new ArrayList<>();
+		
+		try (Connection conn = DBUtil.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(CATEGORY_SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CollegeDTO dto = new CollegeDTO();
+				dto = CollegeDTO.builder()
+						.id(rs.getInt("id"))
+						.name(rs.getString("name"))
+						.build();
+				category.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return category;
+	}
+	
 
 	@Override 
 	public int addDepartment(DepartmentDTO dto) {
