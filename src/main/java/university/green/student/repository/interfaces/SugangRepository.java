@@ -29,7 +29,7 @@ public interface SugangRepository {
 	void SubtractPreSugang (int studentId, int subjectId);
 	
 	// 예비 확인  
-	void CheckPreSugang (int studentId, int subjectId); 
+	List<PreSugangListDTO> CheckPreSugang (); 
 	
 	
 	

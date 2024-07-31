@@ -83,7 +83,9 @@ table {
 			</div>
 
 			<!-- 기본적으로 보이는 등록 폼 -->
-			<div class="${param.action == 'delete' ? 'hidden' : ''}">
+	
+			<h2>현재 단과 대학</h2>
+					<div class="${param.action == 'delete' ? 'hidden' : ''}">
 				<form action="${pageContext.request.contextPath}/college/collegeadd" method="post" class="form--container">
 					<div class="insert--form">
 						<ul class="d-flex" style="margin: 0;">
@@ -96,8 +98,8 @@ table {
 				</form>
 			</div>
 			
-			<h2>현재 단과 대학</h2>
-							<div class="total--container">
+			
+					<div class="total--container">
 					<table class="table--container">
 						<tr class="first--tr">
 							<td>ID</td>

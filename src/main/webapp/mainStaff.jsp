@@ -174,5 +174,9 @@
   		<footer>
 			COPYRIGHT(C) 2023 <a href="https://github.com/BHbae/green_university.git">GREAN UNIVERSITY</a>. ALL RIGHTS RESERVED.
 		</footer>
+
+
+
+>>>>>>> 30b21bd4994a7a3ce0d56473d73b23d088e13310
 </body>
 </html>

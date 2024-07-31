@@ -95,13 +95,13 @@ table {
 							<li style="height: 24px; margin-right: 2px;"><span class="material-symbols-outlined">school</span></li>
 							<li style="height: 24px;"><span class="insert">등록하기</span></li>
 						</ul>
-					<select name="college">
-					<c:forEach var="college" items="${departmentList}">
-						<option value="">${college.collegeId}</option>
-					</c:forEach>
-					</select>
 						<input type="text" id="name" class="input--box" name="name" placeholder="단과대학을 입력해주세요">
 						<input type="submit" value="입력" class="button">
+					<select name="college">
+					<c:forEach var="category" items="${category}">
+						<option value="">${category.name}</option>
+					</c:forEach>
+					</select>
 					</div>
 				</form>		
 

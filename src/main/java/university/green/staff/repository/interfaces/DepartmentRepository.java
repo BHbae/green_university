@@ -2,6 +2,7 @@ package university.green.staff.repository.interfaces;
 
 import java.util.List;
 
+import university.green.staff.model.CollegeDTO;
 import university.green.staff.model.DepartmentDTO;
 
 public interface DepartmentRepository {
@@ -10,6 +11,9 @@ public interface DepartmentRepository {
 	// 전체 리스트
 	
 	List<DepartmentDTO> departmentList();
+	
+	// 카테고리
+	List<CollegeDTO> CategoryList();
 	
 	// 등록
 	 int addDepartment(DepartmentDTO dto);
