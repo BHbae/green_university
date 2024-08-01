@@ -66,13 +66,16 @@
 ### (2) 수강신청 시퀀스 (조회)
 ![시퀀스 다이어그램 - 수강신청 조회](https://github.com/user-attachments/assets/0a205c41-6601-4adf-b2c5-8ea595a36ada)
 ### (3) 수강신청 시퀀스 (신청)
-![Uploading 시퀀스 다이어그램 - 수강신청.png…]()
-
-## 6️⃣ ERD 다이어그램 및 테이블 명세서
-### (1) ERD 다이어그램
+![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69)
+## 6️⃣ ERD 다이어그램
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34)
+## 7️⃣ 화면 및 기능 설명
+(1) 공통 - 로그인
+![로그인](https://github.com/user-attachments/assets/bf23b481-f332-4d10-a428-905937ec026c)
+(1) 공통 - ID/PW 찾기
+![IDPW 찾기](https://github.com/user-attachments/assets/f46b5caa-868b-4114-82d4-2fb4fce620e5)
+(1) 공통 - 메인 화면
+![메인 화면](https://github.com/user-attachments/assets/d38c4d53-ff37-4873-8585-d330cacfa2a4)
 
-### (2) 테이블 명세서
-## 7️⃣
 ## 8️⃣
 
