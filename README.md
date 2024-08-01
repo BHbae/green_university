@@ -69,7 +69,7 @@
 ![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69) &nbsp;
 ## 6️⃣ ERD 다이어그램 &nbsp;
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
-## 7️⃣ 화면 및 기능 설명 &nbsp;
+## 7️⃣ 화면 및 기능 설명 
 (1) 공통 - 로그인 &nbsp;
 ![로그인](https://github.com/user-attachments/assets/bf23b481-f332-4d10-a428-905937ec026c) &nbsp;
 (1) 공통 - 메인 화면 &nbsp;
