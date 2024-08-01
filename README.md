@@ -1,4 +1,4 @@
-## < JSP와 JSTL을 활용한 학사정보관리 웹사이트 >
+![수강신청조회](https://github.com/user-attachments/assets/88ff439c-940a-4d81-8e0c-84144f72b7fd)## < JSP와 JSTL을 활용한 학사정보관리 웹사이트 >
 # < 🏫그린 대학교: 학사정보관리 사이트 >
 &nbsp; 
 &nbsp;
@@ -61,21 +61,23 @@
 
 
 ## 5️⃣ 시퀀스 다이어그램
-### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)
-![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)
-### (2) 수강신청 시퀀스 (조회)
-![시퀀스 다이어그램 - 수강신청 조회](https://github.com/user-attachments/assets/0a205c41-6601-4adf-b2c5-8ea595a36ada)
-### (3) 수강신청 시퀀스 (신청)
-![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69)
-## 6️⃣ ERD 다이어그램
-![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34)
-## 7️⃣ 화면 및 기능 설명
-(1) 공통 - 로그인
-![로그인](https://github.com/user-attachments/assets/bf23b481-f332-4d10-a428-905937ec026c)
-(1) 공통 - ID/PW 찾기
-![IDPW 찾기](https://github.com/user-attachments/assets/f46b5caa-868b-4114-82d4-2fb4fce620e5)
-(1) 공통 - 메인 화면
-![메인 화면](https://github.com/user-attachments/assets/d38c4d53-ff37-4873-8585-d330cacfa2a4)
+### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)&nbsp;
+![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)&nbsp;
+### (2) 수강신청 시퀀스 (조회)&nbsp;
+![시퀀스 다이어그램 - 수강신청 조회](https://github.com/user-attachments/assets/0a205c41-6601-4adf-b2c5-8ea595a36ada)&nbsp;
+### (3) 수강신청 시퀀스 (신청)&nbsp;
+![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69)&nbsp;
+## 6️⃣ ERD 다이어그램&nbsp;
+![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34)&nbsp;&nbsp;&nbsp;
+## 7️⃣ 화면 및 기능 설명&nbsp;
+(1) 공통 - 로그인&nbsp;
+![로그인](https://github.com/user-attachments/assets/bf23b481-f332-4d10-a428-905937ec026c)&nbsp;
+(1) 공통 - 메인 화면&nbsp;
+![메인 화면](https://github.com/user-attachments/assets/d38c4d53-ff37-4873-8585-d330cacfa2a4)&nbsp;
+(2) 학생 - 수강 신청 &nbsp;
+![수강신청조회](https://github.com/user-attachments/assets/869f4344-1d31-4d52-9814-7b4a413f17c4)&nbsp;
+(2) 학생 - 휴학 신청  &nbsp;
+![휴학 내역 조회](https://github.com/user-attachments/assets/7254cc85-4e67-4bbc-9b7c-f83ebf46305b) &nbsp;
 
 ## 8️⃣
 
