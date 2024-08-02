@@ -78,6 +78,8 @@
 ![수강신청조회](https://github.com/user-attachments/assets/869f4344-1d31-4d52-9814-7b4a413f17c4) &nbsp;
 (2) 학생 - 휴학 신청  &nbsp;
 ![휴학 내역 조회](https://github.com/user-attachments/assets/7254cc85-4e67-4bbc-9b7c-f83ebf46305b) &nbsp;
-
-## 8️⃣
+(3) 교직원 - 학생/교수 목록 조회 및 검색  &nbsp;
+![교수 명단 조회](https://github.com/user-attachments/assets/8f76c05c-d5e3-492c-9776-86c1d3d5696a)
+(4) 교수 - 강의 목록 조회  &nbsp;
+![전체 강의 조회](https://github.com/user-attachments/assets/7727d170-d178-4302-8899-02a619d8062b)
 
